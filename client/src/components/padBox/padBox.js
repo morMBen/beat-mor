@@ -1,12 +1,26 @@
-import { useState } from "react";
+import { useEffect } from "react"
 
-const PadBox = ({ boxTiming, id, thisClass, objectOfArrys }) => {
-    const [boxIsPressed, setBoxIsPressed] = useState(false)
+const PadBox = ({ id, thisClass, padIndex, setPadIndex, so, boxTiming, rythemObj }) => {
+    // const [soundIsOn, setSoundIsOn] = useState(false)
+
+    useEffect(() => {
+        if (rythemObj[`${id}`][boxTiming - 1] === true) {
+            so.pause()
+            so.currentTime = 0;
+            so.play().catch(e => `error:${e}`)
+        }
+    }, [boxTiming, rythemObj, id, so])
+
+
     return (
         <div
-            className={`${thisClass} ${boxIsPressed && 'box-pressed'}`}
-            onClick={() => setBoxIsPressed(!boxIsPressed)}
-        ></div>
+            className={`${thisClass} ${padIndex === id && 'box-pressed'}`}
+            onMouseDown={() => {
+                setPadIndex(id)
+                console.log(rythemObj[`${id}`])
+            }}
+        >
+        </div>
     )
 }
 

@@ -1,7 +1,11 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 
-const BeatBox = ({ boxTiming, id, thisClass, setArr, objectOfArrys }) => {
-    const [boxIsPressed, setBoxIsPressed] = useState(objectOfArrys[1][id - 1])
+const BeatBox = ({ boxTiming, id, thisClass, setRythemObj, rythemObj, padIndex }) => {
+    const [boxIsPressed, setBoxIsPressed] = useState(null)
+
+    useEffect(() => {
+        setBoxIsPressed(rythemObj[`${padIndex}`][id - 1])
+    }, [rythemObj, id, padIndex])
 
     return (
         <div
@@ -10,10 +14,12 @@ const BeatBox = ({ boxTiming, id, thisClass, setArr, objectOfArrys }) => {
             ${boxIsPressed && boxTiming === id && 'box-pressed-and-on'}
             `}
             onMouseDown={() => {
-                setArr(1, id - 1, !objectOfArrys[1][id - 1])
                 setBoxIsPressed(!boxIsPressed)
-                // console.log(objectOfArrys)
-                // console.log(id)
+                const tempObj = { ...rythemObj }
+                const tempArr = tempObj[padIndex]
+                tempArr[id - 1] = !tempArr[id - 1]
+                setRythemObj(tempObj)
+
             }}
         >
         </div>
