@@ -7,11 +7,11 @@ import PadBox from '../../components/padBox/padBox'
 
 import Sounds from '../../components/sounds/Sounds'
 const PlayModePage = () => {
-    const [bpm, setBpm] = useState(140)
-    const [realBpm, setRealBpm] = useState(140)
+    const [bpm, setBpm] = useState(120)
+    const [realBpm, setRealBpm] = useState(120)
     const [enabled, setEnabled] = useState(false)
     const [beat, setBeat] = useState(0)
-    const [sequencerBeat, setSequencerBeat] = useState(1)
+    const [sequencerBeat, setSequencerBeat] = useState(0)
     const [restart, setRestart] = useState(false)
 
     const [rythemObj, setRythemObj] = useState({})
@@ -59,7 +59,7 @@ const PlayModePage = () => {
                         setPadIndex={setPadIndex}
                         boxTiming={sequencerBeat}
                         rythemObj={rythemObj}
-                        so={so}
+                        so={so[fromNum + i - 1]}
                     />
                 )
             })}
@@ -71,7 +71,7 @@ const PlayModePage = () => {
     const start = () => {
         if (enabled) {
             setBeat(0)
-            setSequencerBeat(1)
+            setSequencerBeat(0)
         }
         setEnabled(!enabled)
     }
@@ -79,6 +79,22 @@ const PlayModePage = () => {
         setRestart(!restart)
         start()
     }
+
+    const checkIfSoundIsLoaded = () => {
+        if (so) {
+            if (so[0].myAudio?.HAVE_ENOUGH_DATA &&
+                so[1].myAudio?.HAVE_ENOUGH_DATA &&
+                so[2].myAudio?.HAVE_ENOUGH_DATA &&
+                so[3].myAudio?.HAVE_ENOUGH_DATA &&
+                so[4].myAudio?.HAVE_ENOUGH_DATA&&
+                so[5].myAudio?.HAVE_ENOUGH_DATA
+            ) {
+                return true
+            }
+        }
+        return false
+    }
+
     return (
         <>
             <ReactInterval timeout={60000 / realBpm / 4} enabled={enabled}
@@ -87,7 +103,7 @@ const PlayModePage = () => {
                     setSequencerBeat(sequencerBeat < 32 ? sequencerBeat + 1 : 1)
                 }}
             />
-            { so?.HAVE_ENOUGH_DATA &&
+            {checkIfSoundIsLoaded() &&
 
                 <div className='play-mode-container'>
                     <div className='sequencer-container'>
