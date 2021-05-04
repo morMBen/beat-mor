@@ -17,12 +17,15 @@ const PlayModePage = () => {
     const [rythemObj, setRythemObj] = useState({})
     const [padIndex, setPadIndex] = useState(1)
     const [so, setSo] = useState(null)
+    const [currentColor, setCurrentColor] = useState('ligth-blue')
+
 
     useEffect(() => {
         let temp = {}
         for (let i = 0; i < 24; i++) {
-            temp[i + 1] = new Array(32).fill(false)
+            temp[i + 1] = new Array(33).fill(false)
         }
+        temp.padsStatus = new Array(24).fill(true)
         setRythemObj(temp)
         setSo(Sounds())
     }, [restart])
@@ -32,6 +35,17 @@ const PlayModePage = () => {
             setRealBpm(bpm)
         }, 0)
     }, [bpm])
+
+    const setMyRythemObj = (arr, index) => {
+        const tempObj = { ...rythemObj, [index]: arr }
+        setRythemObj({ ...tempObj })
+    }
+    const setMyPadsStatus = (pad, bool) => {
+        const tempArr = [...rythemObj.padsStatus]
+        tempArr[pad - 1] = bool
+        const tempObj = { ...rythemObj, padsStatus: tempArr }
+        setRythemObj({ ...tempObj })
+    }
 
     const insertDivs = (rowLength, girdClass, singleClass, fromNum) => {
         const tempMap = new Array(rowLength).fill(1)
@@ -44,9 +58,10 @@ const PlayModePage = () => {
                             thisClass={singleClass}
                             boxTiming={sequencerBeat}
                             id={fromNum + i}
-                            setRythemObj={setRythemObj}
-                            rythemObj={rythemObj}
                             padIndex={padIndex}
+                            currentColor={currentColor}
+                            rythemArr={rythemObj[`${padIndex}`]}
+                            setMyRythemArr={setMyRythemObj}
                         />
                     )
                 }
@@ -58,8 +73,11 @@ const PlayModePage = () => {
                         padIndex={padIndex}
                         setPadIndex={setPadIndex}
                         boxTiming={sequencerBeat}
-                        rythemObj={rythemObj}
+                        rythemObj={rythemObj[`${fromNum + i}`]}
                         so={so[fromNum + i - 1]}
+                        setCurrentColor={setCurrentColor}
+                        padsStatus={rythemObj.padsStatus[fromNum + i - 1]}
+                        setMyPadsStatus={setMyPadsStatus}
                     />
                 )
             })}
@@ -80,14 +98,34 @@ const PlayModePage = () => {
         start()
     }
 
+
+
     const checkIfSoundIsLoaded = () => {
         if (so) {
             if (so[0].myAudio?.HAVE_ENOUGH_DATA &&
                 so[1].myAudio?.HAVE_ENOUGH_DATA &&
                 so[2].myAudio?.HAVE_ENOUGH_DATA &&
                 so[3].myAudio?.HAVE_ENOUGH_DATA &&
-                so[4].myAudio?.HAVE_ENOUGH_DATA&&
-                so[5].myAudio?.HAVE_ENOUGH_DATA
+                so[4].myAudio?.HAVE_ENOUGH_DATA &&
+                so[5].myAudio?.HAVE_ENOUGH_DATA &&
+                so[6].myAudio?.HAVE_ENOUGH_DATA &&
+                so[7].myAudio?.HAVE_ENOUGH_DATA &&
+                so[8].myAudio?.HAVE_ENOUGH_DATA &&
+                so[9].myAudio?.HAVE_ENOUGH_DATA &&
+                so[10].myAudio?.HAVE_ENOUGH_DATA &&
+                so[11].myAudio?.HAVE_ENOUGH_DATA &&
+                so[12].myAudio?.HAVE_ENOUGH_DATA &&
+                so[13].myAudio?.HAVE_ENOUGH_DATA &&
+                so[14].myAudio?.HAVE_ENOUGH_DATA &&
+                so[15].myAudio?.HAVE_ENOUGH_DATA &&
+                so[16].myAudio?.HAVE_ENOUGH_DATA &&
+                so[17].myAudio?.HAVE_ENOUGH_DATA &&
+                so[18].myAudio?.HAVE_ENOUGH_DATA &&
+                so[19].myAudio?.HAVE_ENOUGH_DATA &&
+                so[20].myAudio?.HAVE_ENOUGH_DATA &&
+                so[21].myAudio?.HAVE_ENOUGH_DATA &&
+                so[22].myAudio?.HAVE_ENOUGH_DATA &&
+                so[23].myAudio?.HAVE_ENOUGH_DATA
             ) {
                 return true
             }

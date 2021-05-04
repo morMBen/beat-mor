@@ -1,27 +1,30 @@
 import { useEffect, useState } from 'react'
 
-const BeatBox = ({ boxTiming, id, thisClass, setRythemObj, rythemObj, padIndex }) => {
+const BeatBox = ({ boxTiming, id, thisClass, padIndex, currentColor, rythemArr, setMyRythemArr }) => {
     const [boxIsPressed, setBoxIsPressed] = useState(null)
 
     useEffect(() => {
-        setBoxIsPressed(rythemObj[`${padIndex}`][id - 1])
-    }, [rythemObj, id, padIndex])
-
+        setBoxIsPressed(rythemArr[id - 1])
+    }, [rythemArr, id, padIndex])
     return (
         <div
             className={`${thisClass} ${boxTiming === id && !boxIsPressed ? 'boxIsOn' : ''}
-            ${boxIsPressed && boxTiming !== id && 'box-pressed'}
-            ${boxIsPressed && boxTiming === id && 'box-pressed-and-on'}
+            ${boxIsPressed && boxTiming !== id && `${currentColor} empty-center-of-box`}
+            ${boxIsPressed && boxTiming === id && currentColor}
             `}
             onMouseDown={() => {
+                const tempArr = [...rythemArr]
+                if (!boxIsPressed) {
+                    tempArr[32] = tempArr[32] === false ? 1 : tempArr[32] + 1
+                } else {
+                    tempArr[32] = tempArr[32] === 1 ? false : tempArr[32] - 1
+                }
                 setBoxIsPressed(!boxIsPressed)
-                const tempObj = { ...rythemObj }
-                const tempArr = tempObj[padIndex]
                 tempArr[id - 1] = !tempArr[id - 1]
-                setRythemObj(tempObj)
-
+                setMyRythemArr(tempArr, padIndex)
             }}
         >
+
         </div>
     )
 }
