@@ -3,9 +3,10 @@ import HorizontalRange from '../../components/horizontalRange/HorizontalRange'
 import ReactInterval from 'react-interval';
 import './playModePage.css'
 import BeatBox from '../../components/beatBox/BeatBox'
-import PadBox from '../../components/padBox/padBox'
+import PadBox from '../../components/‏‏padBox/padBox'
 
-import Sounds from '../../components/sounds/Sounds'
+import Sounds2 from '../../components/‏‏sounds/Sounds'
+
 
 
 const PlayModePage = () => {
@@ -18,11 +19,37 @@ const PlayModePage = () => {
 
     const [rythemObj, setRythemObj] = useState({})
     const [padIndex, setPadIndex] = useState(1)
-    const [so, setSo] = useState(null);
     const [currentColor, setCurrentColor] = useState('ligth-blue');
 
+    // const [so, setSo] = useState(null);
+
+    const [isOn, setIsOn] = useState(false)
+    const [ctx, setCtx] = useState(null)
+    const [sounds, setSounds] = useState()
+    const [gainNode, setGainNode] = useState(null)
+    const [gain, setGain] = useState(1)//need to set the gain
+
+    //===AudioApi====////
     useEffect(() => {
-    }, [])
+        if (isOn)
+            setCtx(new AudioContext())
+        setSounds(Sounds2)
+    }, [isOn])
+
+    useEffect(() => {
+        if (ctx && !gainNode) {
+            setGainNode(ctx.createGain())
+            console.log(ctx)
+
+        }
+    }, [ctx, gainNode, gain])
+    useEffect(() => {
+        if (gainNode) {
+            gainNode.gain.value = gain
+            gainNode.connect(ctx.destination)
+        }
+    }, [gainNode, gain, ctx])
+
 
 
     //-----------
@@ -33,13 +60,13 @@ const PlayModePage = () => {
         }
         temp.padsStatus = new Array(24).fill(true)
         setRythemObj(temp)
-        setSo(Sounds())
+
     }, [restart])
 
     useEffect(() => {
         setTimeout(() => {
             setRealBpm(bpm)
-        }, 0)
+        }, 200)
     }, [bpm])
 
     const setMyRythemObj = (arr, index) => {
@@ -80,10 +107,13 @@ const PlayModePage = () => {
                             setPadIndex={setPadIndex}
                             boxTiming={sequencerBeat}
                             rythemObj={rythemObj[`${fromNum + i}`]}
-                            so={so[fromNum + i - 1]}
                             setCurrentColor={setCurrentColor}
                             padsStatus={rythemObj.padsStatus[fromNum + i - 1]}
                             setMyPadsStatus={setMyPadsStatus}
+
+                            ctx={ctx}
+                            gain={gainNode}
+                            so={sounds[fromNum + i - 1]}
                         />
                     )
                 }
@@ -107,49 +137,20 @@ const PlayModePage = () => {
 
 
 
-    const checkIfSoundIsLoaded = () => {
-        if (so) {
-            if (so[0].myAudio?.HAVE_ENOUGH_DATA &&
-                so[1].myAudio?.HAVE_ENOUGH_DATA &&
-                so[2].myAudio?.HAVE_ENOUGH_DATA &&
-                so[3].myAudio?.HAVE_ENOUGH_DATA &&
-                so[4].myAudio?.HAVE_ENOUGH_DATA &&
-                so[5].myAudio?.HAVE_ENOUGH_DATA &&
-                so[6].myAudio?.HAVE_ENOUGH_DATA &&
-                so[7].myAudio?.HAVE_ENOUGH_DATA &&
-                so[8].myAudio?.HAVE_ENOUGH_DATA &&
-                so[9].myAudio?.HAVE_ENOUGH_DATA &&
-                so[10].myAudio?.HAVE_ENOUGH_DATA &&
-                so[11].myAudio?.HAVE_ENOUGH_DATA &&
-                so[12].myAudio?.HAVE_ENOUGH_DATA &&
-                so[13].myAudio?.HAVE_ENOUGH_DATA &&
-                so[14].myAudio?.HAVE_ENOUGH_DATA &&
-                so[15].myAudio?.HAVE_ENOUGH_DATA &&
-                so[16].myAudio?.HAVE_ENOUGH_DATA &&
-                so[17].myAudio?.HAVE_ENOUGH_DATA &&
-                so[18].myAudio?.HAVE_ENOUGH_DATA &&
-                so[19].myAudio?.HAVE_ENOUGH_DATA &&
-                so[20].myAudio?.HAVE_ENOUGH_DATA &&
-                so[21].myAudio?.HAVE_ENOUGH_DATA &&
-                so[22].myAudio?.HAVE_ENOUGH_DATA &&
-                so[23].myAudio?.HAVE_ENOUGH_DATA
-            ) {
-                return true
-            }
-        }
-        return false
-    }
-
     return (
         <>
+            {/* { console.log(gainNode)} */}
             <ReactInterval timeout={60000 / realBpm / 4} enabled={enabled}
                 callback={() => {
                     setBeat((beat + 1))
                     setSequencerBeat(sequencerBeat < 32 ? sequencerBeat + 1 : 1)
                 }}
             />
-
-            {checkIfSoundIsLoaded() &&
+            <button
+                style={{ background: 'white' }}
+                onClick={() => setIsOn(true)}
+            >get ctx</button>
+            {sounds && ctx &&
                 <div className='play-mode-container'>
                     <div className='sequencer-container'>
                         {insertDivs(8, 'sequencer-grid', 'single-sequencer', 1)}
@@ -157,7 +158,20 @@ const PlayModePage = () => {
                         {insertDivs(8, 'sequencer-grid', 'single-sequencer', 17)}
                         {insertDivs(8, 'sequencer-grid', 'single-sequencer', 25)}
                     BPM {bpm}
-                        <HorizontalRange value={bpm} setValue={(e) => { setBpm(e.target.value) }} />
+                        <HorizontalRange
+                            value={bpm}
+                            setValue={(e) => { setBpm(e.target.value) }}
+                            max={'220'}
+                            min={'60'} />
+                        <HorizontalRange
+                            value={gain * 100} setValue={(e) => {
+                                setGain(e.target.value / 100)
+                            }}
+                            max={'100'}
+                            min={'0'}
+                        />
+                         Gain {gain}
+                        <br />
                         {sequencerBeat}
                     </div>
                     <div className='pads-container'>
