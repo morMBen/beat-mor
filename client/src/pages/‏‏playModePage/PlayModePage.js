@@ -8,8 +8,13 @@ import PadBox from '../../components/‏‏padBox/padBox'
 import Sounds2 from '../../components/‏‏sounds/Sounds'
 
 
-
-const PlayModePage = () => {
+const PlayModePage = ({
+    ctx,
+    sounds,
+    setSounds,
+    gainNode,
+    biquadFilter
+}) => {
     const [bpm, setBpm] = useState(120)
     const [realBpm, setRealBpm] = useState(120)
     const [enabled, setEnabled] = useState(false)
@@ -21,35 +26,32 @@ const PlayModePage = () => {
     const [padIndex, setPadIndex] = useState(1)
     const [currentColor, setCurrentColor] = useState('ligth-blue');
 
-    // const [so, setSo] = useState(null);
+    //====AudioApi=====///
+    const [gain, setGain] = useState(0.75)
+    const [frequency, setFrequency] = useState(350)
 
-    const [isOn, setIsOn] = useState(false)
-    const [ctx, setCtx] = useState(null)
-    const [sounds, setSounds] = useState()
-    const [gainNode, setGainNode] = useState(null)
-    const [gain, setGain] = useState(1)//need to set the gain
-
-    //===AudioApi====////
-    useEffect(() => {
-        if (isOn)
-            setCtx(new AudioContext())
-        setSounds(Sounds2)
-    }, [isOn])
-
-    useEffect(() => {
-        if (ctx && !gainNode) {
-            setGainNode(ctx.createGain())
-            console.log(ctx)
-
-        }
-    }, [ctx, gainNode, gain])
     useEffect(() => {
         if (gainNode) {
             gainNode.gain.value = gain
-            gainNode.connect(ctx.destination)
         }
-    }, [gainNode, gain, ctx])
+        if (biquadFilter) {
+            biquadFilter.frequency.value = frequency
+            biquadFilter.type = 'notch'
+        }
+    }, [gainNode, gain, biquadFilter, frequency])
 
+    const setGainInSoundsObject = (e, type) => {
+        const tempSounds = [...sounds]
+        if (type === 'gain') {
+            tempSounds[padIndex - 1][type] = e.target.value / 100
+        } else if (type === 'type') {
+            tempSounds[padIndex - 1][type] = e.target.value
+        } else {
+            tempSounds[padIndex - 1][type] = e.target.value
+        }
+
+        setSounds(tempSounds)
+    }
 
 
     //-----------
@@ -60,13 +62,15 @@ const PlayModePage = () => {
         }
         temp.padsStatus = new Array(24).fill(true)
         setRythemObj(temp)
-
-    }, [restart])
+        setSounds(Sounds2().map(e => {
+            return { ...e, gain: 0.75, frequency: 300 }
+        }))
+    }, [restart, setSounds])
 
     useEffect(() => {
         setTimeout(() => {
             setRealBpm(bpm)
-        }, 200)
+        }, 1000)
     }, [bpm])
 
     const setMyRythemObj = (arr, index) => {
@@ -79,6 +83,7 @@ const PlayModePage = () => {
         const tempObj = { ...rythemObj, padsStatus: tempArr }
         setRythemObj({ ...tempObj })
     }
+
 
     const insertDivs = (rowLength, girdClass, singleClass, fromNum) => {
         const tempMap = new Array(rowLength).fill(1)
@@ -112,17 +117,15 @@ const PlayModePage = () => {
                             setMyPadsStatus={setMyPadsStatus}
 
                             ctx={ctx}
-                            gain={gainNode}
+                            gain={biquadFilter}
                             so={sounds[fromNum + i - 1]}
                         />
                     )
                 }
             })}
         </div>
-
         return temp
     }
-
     const start = () => {
         if (enabled) {
             setBeat(0)
@@ -135,21 +138,14 @@ const PlayModePage = () => {
         start()
     }
 
-
-
     return (
         <>
-            {/* { console.log(gainNode)} */}
             <ReactInterval timeout={60000 / realBpm / 4} enabled={enabled}
                 callback={() => {
                     setBeat((beat + 1))
                     setSequencerBeat(sequencerBeat < 32 ? sequencerBeat + 1 : 1)
                 }}
             />
-            <button
-                style={{ background: 'white' }}
-                onClick={() => setIsOn(true)}
-            >get ctx</button>
             {sounds && ctx &&
                 <div className='play-mode-container'>
                     <div className='sequencer-container'>
@@ -170,7 +166,15 @@ const PlayModePage = () => {
                             max={'100'}
                             min={'0'}
                         />
-                         Gain {gain}
+                                Gain {gain}
+                        <HorizontalRange
+                            value={frequency} setValue={(e) => {
+                                setFrequency(e.target.value)
+                            }}
+                            max={'4000'}
+                            min={'0'}
+                        />
+                            frequency {frequency}
                         <br />
                         {sequencerBeat}
                     </div>
@@ -180,9 +184,51 @@ const PlayModePage = () => {
                         {insertDivs(6, 'sequencer-grid', 'single-pad', 13)}
                         {insertDivs(6, 'sequencer-grid', 'single-pad', 19)}
                         {beat}
-                        <button
-                            onClick={() => start()}>Start</button>
-                        <button onClick={() => stop()}>Clear</button>
+                        <div style={{ display: 'flex', background: 'none' }}>
+                            <HorizontalRange
+                                value={sounds[padIndex - 1].gain * 100} setValue={(e) => {
+                                    setGainInSoundsObject(e, 'gain')
+                                    // setGain(e.target.value / 100)
+                                }}
+                                max={'100'}
+                                min={'0'}
+                            />
+                            <HorizontalRange
+                                value={sounds[padIndex - 1].frequency} setValue={(e) => {
+                                    setGainInSoundsObject(e, 'frequency')
+                                }}
+                                max={'2000'}
+                                min={'0'}
+                            />
+                            <HorizontalRange
+                                value={sounds[padIndex - 1].detune} setValue={(e) => {
+                                    setGainInSoundsObject(e, 'detune')
+                                }}
+                                max={'4000'}
+                                min={'-4000'}
+                            />
+                            <div >
+                                <select
+
+                                    value={sounds[padIndex - 1].type}
+                                    onChange={(e) => {
+                                        setGainInSoundsObject(e, 'type')
+                                    }}>
+                                    <option value='allpass'>Allpass</option>
+                                    <option value='lowpass'>Lowpass</option>
+                                    <option value='highpass'>Highpass</option>
+                                    <option value='bandpass'>Bandpass</option>
+                                    <option value='lowshelf'>Lowshelf</option>
+                                    <option value='highshelf'>Highshelf</option>
+                                    <option value='peaking'>Peaking</option>
+                                    <option value='notch'>Notch</option>
+                                </select>
+
+                                <button
+                                    onClick={() => start()}>Start</button>
+                                <button onClick={() => stop()}>Clear</button>
+                            </div>
+                        </div>
                     </div>
                 </div >}
         </>

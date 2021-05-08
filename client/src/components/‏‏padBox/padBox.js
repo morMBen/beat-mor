@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react"
 import { decode } from 'base64-arraybuffer'
-
 const PadBox = (
     { id,
         thisClass,
@@ -13,43 +12,50 @@ const PadBox = (
         padsStatus,
         setMyPadsStatus,
         ctx,
-        gain,
+        gain
     }) => {
 
     const [offSet1, setOffSet1] = useState(0)
 
     useEffect(() => {
         if (padsStatus && rythemObj[boxTiming - 1] === true) {
-            // so.myAudio.volume = 0.2
-            // so.myAudio.pause()
-            // so.myAudio.currentTime = 0;
-            // so.myAudio.play().catch(e => `error:${e}`)
             const getFile = async (filePath) => {
                 const arrayBuffer = decode(filePath)
                 const audioBuffer = await ctx.decodeAudioData(arrayBuffer)
                 return audioBuffer;
             }
-            const playClip = async (clip, gainValue, outPut) => {
+            const playClip = async (clip, outPut) => {
                 if (ctx.state === 'suspended') {
                     ctx.resume()
                 }
                 const clipAudioBuffer = await getFile(clip)
                 const myGain = await ctx.createGain()
-                myGain.gain.value = gainValue
+                myGain.gain.value = so.gain
                 myGain.connect(outPut)
+
+                let biquadFilter = await ctx.createBiquadFilter();
+                biquadFilter.frequency.value = so.frequency
+                biquadFilter.detune.value = so.detune
+                // biquadFilter.detune.value = 0
+                biquadFilter.type = so.type
+                biquadFilter.connect(myGain)
+                // biquadFilter.type = 'lowpass'
+
                 const clipSource = ctx.createBufferSource()
                 clipSource.buffer = clipAudioBuffer;
-                clipSource.connect(myGain);
+                clipSource.connect(biquadFilter);
+
+                // console.log(clipSource)
                 if (offSet1 === 0) {
                     clipSource.start()
                     // console.log(ctx.currentTime - offSet)
-                    console.log(myGain)
+                    // console.log(myGain)
                     setOffSet1(0)
                 } else {
                     clipSource.start(0, ctx.currentTime - offSet1)
                 }
             }
-            playClip(so.myAudio, 0.2, gain)
+            playClip(so.myAudio, gain)
 
         }
 
@@ -91,14 +97,8 @@ const PadBox = (
                 onMouseDown={userClick}
             >
                 <div className='pad-icon'>{setIcon()}</div>
+
             </div >
-            {/* <button
-                style={{ background: 'white' }}
-                onClick={() => {
-                    // console.log(ctx)
-                    methods.playClip(so.myAudio, 0.2, gain)
-                }}
-            >7.1</button> */}
         </>
     )
 }
