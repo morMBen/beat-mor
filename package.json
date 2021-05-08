@@ -8,9 +8,11 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "audio-buffer-from": "^1.1.1",
+    "axios": "^0.21.1",
+    "base64-arraybuffer": "^0.2.0",
     "react-interval": "^2.1.2"
   },
-  "devDependencies": {},
   "repository": {
     "type": "git",
     "url": "git+https://github.com/morMBen/beat-mor.git"

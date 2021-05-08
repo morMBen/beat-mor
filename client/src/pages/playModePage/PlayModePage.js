@@ -6,6 +6,8 @@ import BeatBox from '../../components/beatBox/BeatBox'
 import PadBox from '../../components/padBox/padBox'
 
 import Sounds from '../../components/sounds/Sounds'
+
+
 const PlayModePage = () => {
     const [bpm, setBpm] = useState(120)
     const [realBpm, setRealBpm] = useState(120)
@@ -16,10 +18,14 @@ const PlayModePage = () => {
 
     const [rythemObj, setRythemObj] = useState({})
     const [padIndex, setPadIndex] = useState(1)
-    const [so, setSo] = useState(null)
-    const [currentColor, setCurrentColor] = useState('ligth-blue')
+    const [so, setSo] = useState(null);
+    const [currentColor, setCurrentColor] = useState('ligth-blue');
+
+    useEffect(() => {
+    }, [])
 
 
+    //-----------
     useEffect(() => {
         let temp = {}
         for (let i = 0; i < 24; i++) {
@@ -64,22 +70,23 @@ const PlayModePage = () => {
                             setMyRythemArr={setMyRythemObj}
                         />
                     )
+                } else {
+                    return (
+                        <PadBox
+                            key={`${singleClass}${fromNum + i}`}
+                            thisClass={singleClass}
+                            id={fromNum + i}
+                            padIndex={padIndex}
+                            setPadIndex={setPadIndex}
+                            boxTiming={sequencerBeat}
+                            rythemObj={rythemObj[`${fromNum + i}`]}
+                            so={so[fromNum + i - 1]}
+                            setCurrentColor={setCurrentColor}
+                            padsStatus={rythemObj.padsStatus[fromNum + i - 1]}
+                            setMyPadsStatus={setMyPadsStatus}
+                        />
+                    )
                 }
-                return (
-                    <PadBox
-                        key={`${singleClass}${fromNum + i}`}
-                        thisClass={singleClass}
-                        id={fromNum + i}
-                        padIndex={padIndex}
-                        setPadIndex={setPadIndex}
-                        boxTiming={sequencerBeat}
-                        rythemObj={rythemObj[`${fromNum + i}`]}
-                        so={so[fromNum + i - 1]}
-                        setCurrentColor={setCurrentColor}
-                        padsStatus={rythemObj.padsStatus[fromNum + i - 1]}
-                        setMyPadsStatus={setMyPadsStatus}
-                    />
-                )
             })}
         </div>
 
@@ -141,8 +148,8 @@ const PlayModePage = () => {
                     setSequencerBeat(sequencerBeat < 32 ? sequencerBeat + 1 : 1)
                 }}
             />
-            {checkIfSoundIsLoaded() &&
 
+            {checkIfSoundIsLoaded() &&
                 <div className='play-mode-container'>
                     <div className='sequencer-container'>
                         {insertDivs(8, 'sequencer-grid', 'single-sequencer', 1)}

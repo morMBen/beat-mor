@@ -1,11 +1,11 @@
-import { useState, useEffect } from "react"
+import { useEffect } from "react"
 
 const PadBox = ({ id, thisClass, padIndex, setPadIndex, so, boxTiming, rythemObj, setCurrentColor, padsStatus, setMyPadsStatus }) => {
-    const [savedAudio, setSavedAduio] = useState(null)
 
 
     useEffect(() => {
         if (padsStatus && rythemObj[boxTiming - 1] === true) {
+            // so.myAudio.volume = 0.2
             so.myAudio.pause()
             so.myAudio.currentTime = 0;
             so.myAudio.play().catch(e => `error:${e}`)
