@@ -3,15 +3,24 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node ./server/index.js",
+    "server": "nodemon ./server/index.js",
+    "client": "npm run start --prefix client",
+    "dev": "concurrently \"npm run server\" \"npm run client\""
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "audio-buffer-from": "^1.1.1",
     "axios": "^0.21.1",
     "base64-arraybuffer": "^0.2.0",
-    "react-interval": "^2.1.2"
+    "concurrently": "^6.1.0",
+    "cors": "^2.8.5",
+    "dotenv": "^9.0.1",
+    "express": "^4.17.1",
+    "mongoose": "^5.12.7",
+    "path": "^0.12.7",
+    "react-interval": "^2.1.2",
+    "validator": "^13.6.0"
   },
   "repository": {
     "type": "git",

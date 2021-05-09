@@ -1,5 +1,5 @@
 import PlayModePage from '../pages/‏‏playModePage/PlayModePage'
-import { useState, useEffect, createElement } from 'react'
+import { useState, useEffect } from 'react'
 import Sounds2 from './‏‏sounds/Sounds'
 const App = () => {
   const [isOn, setIsOn] = useState(false)
@@ -7,8 +7,6 @@ const App = () => {
   const [gainNode, setGainNode] = useState(null)
   const [biquadFilter, setBiquadFilter] = useState(null)
   const [sounds, setSounds] = useState(null)
-  // const recorderElement = document.createElement('audio')
-  const [recorder, setRecorder] = useState(null)
 
   useEffect(() => {
     if (isOn)
@@ -20,8 +18,6 @@ const App = () => {
     if (ctx && !gainNode) {
       setGainNode(ctx.createGain())
       setBiquadFilter(ctx.createBiquadFilter())
-      // console.log(recorderElement)
-      // setRecorder(new MediaRecorder(recorderElement))
     }
   }, [ctx, gainNode])
 
@@ -31,12 +27,18 @@ const App = () => {
     }
     if (biquadFilter) {
       biquadFilter.connect(gainNode)
-      // console.log(biquadFilter)
     }
-  }, [gainNode, ctx, biquadFilter])
+
+  }, [gainNode, ctx, biquadFilter,])
+
 
   return (
     <>
+      {}
+      <button
+        onClick={() => setIsOn(true)}
+      >get ctx</button>
+
       <PlayModePage
         ctx={ctx}
         sounds={sounds}
@@ -44,11 +46,6 @@ const App = () => {
         gainNode={gainNode}
         biquadFilter={biquadFilter}
       />
-      <button
-        style={{ background: 'white' }}
-        onClick={() => setIsOn(true)}
-      >get ctx</button>
-
     </>
   );
 }
