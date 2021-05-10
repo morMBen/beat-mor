@@ -5,6 +5,25 @@
     
 }
 
+:root {
+    --primary: #22D2A0;
+    --secondary: #192824;
+    --background: #192824;
+    --green: #1FC11B;
+    --yellow: #FFD913;
+    --orange: #FF9C55;
+    --red: #FF5555;
+    --led-red:#ff007d;
+    --led-green:#38FF12;
+    --led-blue:#1700ff;
+    --led-yellow:#FFF100;
+    --led-ligth-blue:#87F9FC;
+    --led-purpule:#CC83FF;
+  } 
+  
+
 body{
     background: #001437;
+    font-family: 'Roboto', sans-serif;
+  
 }

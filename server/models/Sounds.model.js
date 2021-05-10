@@ -1,14 +1,31 @@
 const mongoose = require('mongoose');
-const validator = require('validator');
 
-
-const soundsGroup = new mongoose.Schema({
-    sounds: {
-        type: Array,
+const sound = new mongoose.Schema({
+    name: {
+        type: String,
+        require: true,
+        trim: true,
+        unique: true
+    },
+    // color: {
+    //     type: String,
+    //     required: true,
+    // },
+    audio: {
+        type: String,
+        required: true,
+    },
+    tags: {
+        type: [String],
+        required: true,
+        validate(arr) {
+            if (arr.length < 1)
+                throw new Error('You must enter at least one tag')
+        }
     }
 })
 
-const Sounds = mongoose.model('Sounds', soundsGroup)
+const Sounds = mongoose.model('Sounds', sound)
 
 
 module.exports = Sounds;

@@ -1,0 +1,167 @@
+
+
+.add-sound-container {
+    /* color: var(--primary); */
+    z-index:2 ;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    background-color: var(--background);
+    position: absolute;
+    width: 50%;
+    height: 70vh;
+    top:50%;
+    left: 50%; 
+    transform: translate(-50%, -50%);
+    padding: 15px;
+    color: var(--primary);
+    /* margin: calc(50vh - 30px) auto 0 auto; */
+    border: 3px solid var(--primary);
+    border-radius: 25px;
+    padding: 2.5rem;
+  }
+  
+  .add-sound-container:hover {
+    animation: shadow-wave 10s linear infinite;
+  }
+  
+  
+  @keyframes shadow-wave {
+    0% {
+      border: 3px solid var(--primary);
+    }
+    20% {
+      border: 3px solid var(--red);
+    }
+    40% {
+      border: 3px solid var(--orange);
+    }
+    60% {
+      border: 3px solid var(--yellow);
+    }
+     80% {
+      border: 3px solid var(--green);
+    } 
+    100% {
+      border: 3px solid var(--primary);
+    }
+     
+  }
+  
+  
+  
+  
+  
+  
+  
+  
+  :root {
+    --primary: #22D2A0;
+    --secondary: #192824;
+    --background: #192824;
+    --green: #1FC11B;
+    --yellow: #FFD913;
+    --orange: #FF9C55;
+    --red: #FF5555;
+  } 
+
+  
+  .add-sound-container p {
+    font-size: 1rem;
+    font-family: 'Roboto', sans-serif;
+    letter-spacing: 0.5px;
+    margin-bottom: 10px;
+  }
+  
+  .add-sound-container h2 {
+    text-transform: uppercase;
+    font-size: 2rem;
+    font-family: 'Roboto', sans-serif;
+    font-weight: bold;
+  }
+  .add-sound-container h3 {
+    text-transform: uppercase;
+    font-size: 1.25rem;
+    font-family: 'Roboto', sans-serif;
+    /* font-weight: bold; */
+  }
+  
+
+  .add-sound-container .add-sound-input{
+    cursor: pointer;
+    font-family: 'Roboto', sans-serif;
+    color: #333;
+    font-size: 1.2rem;
+      margin: 0 auto;
+    padding: 0.3rem 0.5rem;
+    border-radius: 0.2rem;
+    background-color: rgb(255, 255, 255);
+    border: none;
+    width: 100%;
+    display: block;
+    border-bottom: 0.3rem solid transparent;
+    transition: all 0.3s;
+  }
+  .add-sound-container .selector{
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+    }
+    .add-sound-container .selector .add-sound-input{
+      width: 40%;
+            height: 80%;
+  }
+
+  .add-sound-container label{
+      font-size: 1.25rem;
+      margin-bottom: 5px;
+  }
+  #upload-sound {
+    cursor: pointer;
+    color: #22D2A0;
+    width: 50%;
+    font-size: 1.2rem;
+  }
+
+  .add-sound-container button{
+     font-weight: bold;
+     background: #22D2A0;
+     font-size: 1rem;
+     font-size: 1.2rem;
+      border-radius:5px;
+     font-family: 'Roboto', sans-serif;
+     padding: 0.3rem 0.5rem;
+ }
+
+  @media (max-width: 600px){
+    .add-sound-container{
+        width: 80%;
+        height: 80vh;
+    }
+    .add-sound-container p {
+        font-size: 1rem;
+        font-family: 'Roboto', sans-serif;
+        letter-spacing: 0.5px;
+        margin-bottom: 10px;
+      }
+      
+      .add-sound-container h2 {
+        text-transform: uppercase;
+        font-size: 1.5rem;
+        font-family: 'Roboto', sans-serif;
+        font-weight: bold;
+      }
+      .add-sound-container h3 {
+        text-transform: uppercase;
+        font-size: 1.1rem;
+        font-family: 'Roboto', sans-serif;
+      }
+      .add-sound-container .selector{
+        width: 100%;
+     flex-direction: column;
+        justify-content: space-between;
+      }
+      .add-sound-container .selector .add-sound-input{
+        width: 70%;
+    }
+  }
