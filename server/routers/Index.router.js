@@ -4,6 +4,6 @@ const SoundsRouter = require('./Sounds.router')
 const UserRouter = require('./user.router')
 
 router.use('/sounds/', SoundsRouter)
-router.use('/user/', UserRouter)
+router.use('/users/', UserRouter)
 
 module.exports = router;

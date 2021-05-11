@@ -8,7 +8,7 @@ router
     .get("/", async (req, res) => {
         //get all users
         try {
-            const users = await userController.getUsers(req, res);
+            const users = await userController.getUser(req, res);
             // console.log(users)
             res.send(users)
         } catch (e) {

@@ -1,7 +1,7 @@
 const User = require("../models/user.model");
 
 
-const getUsers = async (req, res) => {
+const getUser = async (req, res) => {
     let result;
     try {
         result = await User.find({});
@@ -14,9 +14,11 @@ const getUsers = async (req, res) => {
 const addUser = async (req, res) => {
     let user = new User(req.body)
     try {
-        await user.save();
+        //to fix
         const token = await user.generateToken()
+        await user.save();
         return { user, token }
+        // return user;
     } catch (e) {
         throw new Error(e)
     }
@@ -55,7 +57,7 @@ const userLogin = async (req, res) => {
 }
 module.exports = {
     addUser,
-    getUsers,
+    getUser,
     updateUser,
     userLogin
 };
