@@ -1,14 +1,16 @@
 import PlayModePage from '../pages/‏‏playModePage/PlayModePage'
 import { useState, useEffect } from 'react'
 import Sounds2 from './‏‏sounds/Sounds'
-import AddSound from '../components/addSound/AddSound'
+import AddSound from '../components/addSound/AddSound';
+
+import Api from '../api/Api'
+
 const App = () => {
   const [isOn, setIsOn] = useState(false)
   const [ctx, setCtx] = useState(null)
   const [gainNode, setGainNode] = useState(null)
   const [biquadFilter, setBiquadFilter] = useState(null)
   const [sounds, setSounds] = useState(null)
-
   const [addSoundCard, setAddSoundCard] = useState(false)
 
   useEffect(() => {
@@ -27,16 +29,15 @@ const App = () => {
   useEffect(() => {
     if (gainNode) {
       gainNode.connect(ctx.destination)
+      // setRecord(new Recorder(gainNode))
     }
     if (biquadFilter) {
       biquadFilter.connect(gainNode)
     }
-
   }, [gainNode, ctx, biquadFilter,])
 
   return (
     <>
-      {}
       <button
         onClick={() => {
           if (!isOn) {
@@ -65,8 +66,15 @@ const App = () => {
         biquadFilter={biquadFilter}
       />
 
+      <button
+        onClick={
+          async () => {
+            const brr = await Api.get('sounds')
+            console.log(brr)
+          }
+        }
+      >get</button>
     </>
-
   );
 }
 
