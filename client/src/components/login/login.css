@@ -1,18 +1,32 @@
+@import url('https://fonts.googleapis.com/css2?family=Kanit:wght@300&display=swap');
 
-
+.log-in-top{
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  background: rgba(0, 0, 0, 0.8);
+  z-index: 123;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  /* flex-direction: column; */
+  overflow: hidden;
+}
 .log-in-container {
     /* color: var(--primary); */
-    z-index:2 ;
-    display: flex;
+    /* z-index:2 ; */
+    /* display: flex; */
     flex-direction: column;
     justify-content: space-around;
     background-color: var(--background);
-    position: absolute;
-    width: 35%;
+    /* position: absolute; */
+    width: 50%;
     height: 50vh;
-    top:50%;
-    left: 50%; 
-    transform: translate(-50%, -50%);
+    /* top:50%; */
+    /* left: 50%;  */
+    /* transform: translate(-50%, -50%); */
     padding: 15px;
     color: var(--primary);
     /* margin: calc(50vh - 30px) auto 0 auto; */
@@ -63,33 +77,51 @@
     --yellow: #FFD913;
     --orange: #FF9C55;
     --red: #FF5555;
+    --led-red:#ff007d;
+    --led-green:#38FF12;
+    --led-blue:#1700ff;
+    --led-yellow:#FFF100;
+    --led-ligth-blue:#87F9FC;
+    --led-purpule:#CC83FF;
+    
+    --primary-font: 'Kanit', sans-serif;
+    --logo-font: 'Audiowide', cursive;
   } 
 
   
-  .log-in-container p {
+  .log-in-container-p {
     font-size: 1rem;
-    font-family: 'Roboto', sans-serif;
+    font-family:  var(--primary-font);
     letter-spacing: 0.5px;
     margin-bottom: 10px;
   }
   
-  .log-in-container h2 {
+  .log-in-container-h1 {
     text-transform: uppercase;
     font-size: 2rem;
-    font-family: 'Roboto', sans-serif;
+    font-family: var(--logo-font);
     font-weight: bold;
   }
-  .log-in-container h3 {
+  .log-in-container-h2 {
+      text-shadow: 0px 0px 20px var(--led-red);
+      text-align: center;
+    /* text-transform: uppercase; */
+    color:var(--red);
+    font-size: 3rem;
+    /* font-family: var(--logo-font); */
+    /* font-weight: bold; */
+  }
+  .log-in-container-h3 {
     text-transform: uppercase;
     font-size: 1.25rem;
-    font-family: 'Roboto', sans-serif;
+    font-family: var(--primary-font);
     /* font-weight: bold; */
   }
   
 
   .log-in-container .log-in-input{
     cursor: pointer;
-    font-family: 'Roboto', sans-serif;
+    font-family: var(--primary-font);
     color: #333;
     font-size: 1.2rem;
       margin: 0 auto;
@@ -112,7 +144,7 @@
             height: 80%;
   }
 
-  .log-in-container label{
+  .log-in-container-label{
       font-size: 1.25rem;
       margin-bottom: 5px;
   }
@@ -123,38 +155,51 @@
     font-size: 1.2rem;
   }
 
-  .log-in-container button{
-     font-weight: bold;
-     background: #22D2A0;
-     font-size: 1rem;
-     font-size: 1.2rem;
-      border-radius:5px;
-     font-family: 'Roboto', sans-serif;
-     padding: 0.3rem 0.5rem;
+  .log-in-container-button{
+     box-shadow: 0px 0px 10px 2px var(--led-blue);
+     text-transform: uppercase;
+      font-weight: bold;
+      background: var(--led-ligth-blue);
+      font-size: 1rem;
+      font-size: 1.2rem;
+     border-radius:5px;
+     font-family: var(--logo-font);
+      padding: 0.3rem 0.5rem;
+      border: none;
+      transition: 0.4s all;
  }
 
-  @media (max-width: 600px){
+ .log-in-container-button:hover{
+  box-shadow: 0px 0px 10px 2px var(--led-ligth-blue);
+  background: var(--led-ligth-blue);
+}
+.log-in-container-button:active{
+  box-shadow: 0px 0px 20px 2px var(--led-ligth-blue);
+  background: #b5fdff;
+}
+
+  @media (max-width: 680px){
     .log-in-container{
-        width: 80%;
-        height: 50vh;
+        width: 90%;
+        height: 70%;
     }
-    .log-in-container p {
+    .log-in-container-p {
         font-size: 1rem;
-        font-family: 'Roboto', sans-serif;
+        font-family: var(--primary-font);
         letter-spacing: 0.5px;
         margin-bottom: 10px;
       }
       
-      .log-in-container h2 {
+      .log-in-container-h2 {
         text-transform: uppercase;
         font-size: 1.5rem;
-        font-family: 'Roboto', sans-serif;
+        font-family: var(--primary-font);
         font-weight: bold;
       }
-      .log-in-container h3 {
+      .log-in-container-h3 {
         text-transform: uppercase;
         font-size: 1.1rem;
-        font-family: 'Roboto', sans-serif;
+        font-family: var(--primary-font);
       }
       .log-in-container .selector{
         width: 100%;

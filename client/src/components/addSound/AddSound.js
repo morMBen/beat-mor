@@ -108,12 +108,14 @@ const AddSound = () => {
                         onChange={getFileFromUser}
                     />
                     {isFilePicked && <button
+                        className='add-sound-button'
                         onClick={() => {
                             const newAudioTest = new Audio(`${selectedFile.result}`)
                             newAudioTest.play()
                         }}
                     >Test</button>}
                     <button
+                        className='add-sound-button'
                         type='button' onClick={handleSubmission}
                     >{buttonText}</button>
                 </div>

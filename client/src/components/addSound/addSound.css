@@ -63,33 +63,34 @@
     --yellow: #FFD913;
     --orange: #FF9C55;
     --red: #FF5555;
+    --primary-font: 'Kanit', sans-serif;
   } 
 
   
-  .add-sound-container p {
+  .add-sound-container-p {
     font-size: 1rem;
-    font-family: 'Roboto', sans-serif;
+    font-family: var(--primary-font);
     letter-spacing: 0.5px;
     margin-bottom: 10px;
   }
   
-  .add-sound-container h2 {
+  .add-sound-container-h2 {
     text-transform: uppercase;
     font-size: 2rem;
-    font-family: 'Roboto', sans-serif;
+    font-family: var(--primary-font);
     font-weight: bold;
   }
-  .add-sound-container h3 {
+  .add-sound-container-h3 {
     text-transform: uppercase;
     font-size: 1.25rem;
-    font-family: 'Roboto', sans-serif;
+    font-family: var(--primary-font);
     /* font-weight: bold; */
   }
   
 
   .add-sound-container .add-sound-input{
     cursor: pointer;
-    font-family: 'Roboto', sans-serif;
+    font-family: var(--primary-font);
     color: #333;
     font-size: 1.2rem;
       margin: 0 auto;
@@ -112,7 +113,7 @@
             height: 80%;
   }
 
-  .add-sound-container label{
+  .add-sound-container-label{
       font-size: 1.25rem;
       margin-bottom: 5px;
   }
@@ -123,13 +124,13 @@
     font-size: 1.2rem;
   }
 
-  .add-sound-container button{
+  .add-sound-container .add-sound-button{
      font-weight: bold;
      background: #22D2A0;
      font-size: 1rem;
      font-size: 1.2rem;
       border-radius:5px;
-     font-family: 'Roboto', sans-serif;
+         font-family: var(--primary-font);
      padding: 0.3rem 0.5rem;
  }
 
@@ -138,23 +139,23 @@
         width: 80%;
         height: 80vh;
     }
-    .add-sound-container p {
+    .add-sound-container-p {
         font-size: 1rem;
-        font-family: 'Roboto', sans-serif;
+            font-family: var(--primary-font);
         letter-spacing: 0.5px;
         margin-bottom: 10px;
       }
       
-      .add-sound-container h2 {
+      .add-sound-container-h2 {
         text-transform: uppercase;
         font-size: 1.5rem;
-        font-family: 'Roboto', sans-serif;
+            font-family: var(--primary-font);
         font-weight: bold;
       }
-      .add-sound-container h3 {
+      .add-sound-container-h3 {
         text-transform: uppercase;
         font-size: 1.1rem;
-        font-family: 'Roboto', sans-serif;
+            font-family: var(--primary-font);
       }
       .add-sound-container .selector{
         width: 100%;

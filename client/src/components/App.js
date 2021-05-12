@@ -5,6 +5,7 @@ import AddSound from '../components/addSound/AddSound';
 
 import Api from '../api/Api'
 
+import OpeningPage from '../pages/openingPage/OpeningPage'
 import Login from '../components/login/Login'
 
 const App = () => {
@@ -77,7 +78,9 @@ const App = () => {
         }
       >get</button>
 
-      <Login />
+
+      <OpeningPage />
+      {/* <Login /> */}
     </>
   );
 }
