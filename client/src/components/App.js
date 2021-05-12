@@ -5,6 +5,8 @@ import AddSound from '../components/addSound/AddSound';
 
 import Api from '../api/Api'
 
+import Login from '../components/login/Login'
+
 const App = () => {
   const [isOn, setIsOn] = useState(false)
   const [ctx, setCtx] = useState(null)
@@ -74,6 +76,8 @@ const App = () => {
           }
         }
       >get</button>
+
+      <Login />
     </>
   );
 }

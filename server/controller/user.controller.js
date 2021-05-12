@@ -14,7 +14,6 @@ const getUser = async (req, res) => {
 const addUser = async (req, res) => {
     let user = new User(req.body)
     try {
-        //to fix
         const token = await user.generateToken()
         await user.save();
         return { user, token }
@@ -33,12 +32,12 @@ const updateUser = async (req, res) => {
         throw new Error("error: Invalid updates")
     }
     try {
-        const user = await User.findById({ _id: req.params.id })
+        // const user = await User.findById({ _id: req.params.id })
         updates.forEach(update => {
-            user[update] = req.body[update]
+            req.user[update] = req.body[update]
         })
-        await user.save()
-        return user;
+        await req.user.save()
+        return req.user.user;
     } catch (e) {
         throw new Error(e)
     }
@@ -55,9 +54,23 @@ const userLogin = async (req, res) => {
         throw new Error(e)
     }
 }
+
+const deleteUser = async (req, res) => {
+    try {
+        // const user = await User.findByIdAndDelete(req.user._id)
+        req.user.remove()
+        res.send(req.user)
+
+
+    } catch (e) {
+        res.status(500).send()
+    }
+}
+
 module.exports = {
     addUser,
     getUser,
     updateUser,
-    userLogin
+    userLogin,
+    deleteUser
 };

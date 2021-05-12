@@ -1,11 +1,16 @@
 const express = require("express")
 const router = express.Router()
+const auth = require('../middeleware/auth')
 const Sounds = require('../models/Sounds.model')
 
 
 router
-    .post('/', async (req, res) => {
-        const sound = new Sounds(req.body)
+    //Add new sound
+    .post('/', auth, async (req, res) => {
+        const sound = new Sounds({
+            ...req.body,
+            owner: req.user._id
+        })
         try {
             await sound.save()
             res.status(201).send(sound)

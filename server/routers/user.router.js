@@ -9,7 +9,6 @@ router
         //get all users
         try {
             const users = await userController.getUser(req, res);
-            // console.log(users)
             res.send(users)
         } catch (e) {
             res.status(400).send(e.message)
@@ -20,7 +19,6 @@ router
     .get("/me", auth, async (req, res) => {
         //get user profile
         try {
-            // console.log(users)
             res.send(req.user)
         } catch (e) {
             res.status(400).send(e.message)
@@ -55,7 +53,7 @@ router
             req.user.tokens = req.user.tokens.filter(token => {
                 return token.token !== req.token
             })
-            console.log(req.user)
+            // console.log(req.user)
             await req.user.save();
 
             res.send()
@@ -63,7 +61,7 @@ router
             res.status(500).send(e.message)
         }
     })
-    .patch('/:id', async (req, res) => {
+    .patch('/me', auth, async (req, res) => {
         //update user
         try {
             const user = await userController.updateUser(req, res);
@@ -72,9 +70,14 @@ router
             res.status(400).send(e.message)
         }
     })
-    .delete("/:id", (req, res) => {
+    .delete("/me", auth, async (req, res) => {
         //delete user
-        userController.deleteUser(req, res);
+        try {
+            const user = await userController.deleteUser(req, res);
+            res.send(user)
+        } catch (e) {
+            res.status(400).send(e.message)
+        }
     })
     .delete("/", (req, res) => {
         //delete all users

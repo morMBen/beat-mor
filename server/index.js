@@ -13,7 +13,10 @@ const PORT = process.env.PORT;
 app.use(express.json({ limit: "50mb" }))
 app.use(cors())
 
-// app.use({ limit: "50mb" })
+
+// app.use((req, res, next) => {
+//     res.status(505).send('The site is currently down try soon!');
+// })
 
 app.use('/api', route);
 

@@ -22,6 +22,10 @@ const sound = new mongoose.Schema({
             if (arr.length < 1)
                 throw new Error('You must enter at least one tag')
         }
+    },
+    owner: {
+        type: mongoose.Schema.Types.ObjectId,
+        required: true
     }
 })
 

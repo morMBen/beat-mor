@@ -4,16 +4,16 @@ const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken')
 
 const userSchema = new mongoose.Schema({
-    first: {
+    userName: {
         type: String,
         required: true,
         trim: true
     },
-    last: {
-        type: String,
-        required: true,
-        trim: true
-    },
+    // last: {
+    //     type: String,
+    //     required: true,
+    //     trim: true
+    // },
     email: {
         type: String,
         unique: true,
@@ -32,17 +32,17 @@ const userSchema = new mongoose.Schema({
         minlength: 8,
         trim: true,
     },
-    phone: {
-        type: String,
-        required: true,
-        minlength: 9,
-        trim: true,
-        validate(value) {
-            if (!value.match(/^0\d([\d]{0,1})([-]{0,1})\d{7}$/)) {
-                throw new Error('Phone number is not valid, please insert israeli number.')
-            }
-        }
-    },
+    // phone: {
+    //     type: String,
+    //     required: true,
+    //     minlength: 9,
+    //     trim: true,
+    //     validate(value) {
+    //         if (!value.match(/^0\d([\d]{0,1})([-]{0,1})\d{7}$/)) {
+    //             throw new Error('Phone number is not valid, please insert israeli number.')
+    //         }
+    //     }
+    // },
     tokens: [{
         token: {
             type: String,
@@ -52,6 +52,7 @@ const userSchema = new mongoose.Schema({
 })
 
 //middleware
+
 
 //function that find the email and then verifiy the password using bcrypt
 userSchema.statics.findByCredentials = async (email, password) => {
@@ -65,6 +66,16 @@ userSchema.statics.findByCredentials = async (email, password) => {
     }
     return user
 }
+
+userSchema.methods.toJSON = function () {
+    const user = this;
+    const userObject = user.toObject();
+
+    delete userObject.password;
+    delete userObject.tokens;
+    return userObject;
+}
+
 
 userSchema.methods.generateToken = async function () {
     const user = this;
