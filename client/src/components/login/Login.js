@@ -3,7 +3,7 @@ import Input from '../input/Input'
 import Api from '../../api/Api'
 import './login.css'
 
-const Login = ({ setLoginCard }) => {
+const Login = ({ setLoginCard, setIsLoged }) => {
     const [password, setPassword] = useState('');
     const [email, setEmail] = useState('');
     const [showMessage, setShowMessage] = useState(false);
@@ -11,12 +11,15 @@ const Login = ({ setLoginCard }) => {
 
     const handleSubmission = async () => {
         try {
+            console.log(password)
             const res = await Api.post('/users/login', {
                 password: password.toString(),
                 email
             })
             localStorage.setItem('name', res.data.user.userName)
             localStorage.setItem('token', res.data.token)
+            setLoginCard(false)
+            setIsLoged(true)
             console.log(localStorage.getItem('name'))
             console.log(localStorage.getItem('token'))
         } catch (e) {
@@ -79,6 +82,7 @@ const Login = ({ setLoginCard }) => {
                     }}
                 >Get me test</button> */}
                 </div>
+                <br />
                 {!showMessage && < br />}
                 {showMessage && <h4>Wrong input please try again</h4>}
             </div>

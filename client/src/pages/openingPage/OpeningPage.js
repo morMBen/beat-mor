@@ -1,11 +1,10 @@
 // import img from '../../img/openBackgound.jpg'
-import { useState } from 'react'
-import './openingPage.css'
-import Login from '../../components/login/Login'
-// import '../../components/login/login.css'
+import { useState } from 'react';
+import './openingPage.css';
+import Login from '../../components/login/Login';
+import Sign from '../../components/sign/sign';
 
-
-const OpeningPage = () => {
+const OpeningPage = ({ setIsLoged }) => {
     const [logOrSingCard, setLogOrSingCard] = useState(false)
     const [singCard, setSingCard] = useState(false)
     const [loginCard, setLoginCard] = useState(false)
@@ -16,7 +15,7 @@ const OpeningPage = () => {
             <div className='opening-page-container'>
                 <h1
                     className='opening-page-container-h1'
-                >Beat Mor</h1>
+                >A Beat Mor</h1>
                 <h2
                     className='opening-page-container-h2'
                 >Tomorrow's sound starts today</h2>
@@ -52,7 +51,15 @@ Save and share and let the world experience your touch.</h3>
                     }
                 </div>
             </div>
-            { loginCard && <Login setLoginCard={setLoginCard} />}
+            { loginCard && <Login
+                setLoginCard={setLoginCard}
+                setIsLoged={setIsLoged}
+            />}
+
+            { singCard && <Sign
+                setLoginCard={setSingCard}
+                setIsLoged={setIsLoged}
+            />}
         </>
     )
 }

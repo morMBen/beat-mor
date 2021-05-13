@@ -1,86 +1,34 @@
-import PlayModePage from '../pages/‏‏playModePage/PlayModePage'
-import { useState, useEffect } from 'react'
-import Sounds2 from './‏‏sounds/Sounds'
-import AddSound from '../components/addSound/AddSound';
-
-import Api from '../api/Api'
-
-import OpeningPage from '../pages/openingPage/OpeningPage'
-import Login from '../components/login/Login'
+import { useEffect, useState } from 'react';
+import { BrowserRouter, Route, Link } from 'react-router-dom'
+import Home from '../pages/home/Home'
 
 const App = () => {
-  const [isOn, setIsOn] = useState(false)
-  const [ctx, setCtx] = useState(null)
-  const [gainNode, setGainNode] = useState(null)
-  const [biquadFilter, setBiquadFilter] = useState(null)
-  const [sounds, setSounds] = useState(null)
-  const [addSoundCard, setAddSoundCard] = useState(false)
-
+  const [isLoged, setIsLoged] = useState(false)
+  const [userName, setUserName] = useState(null)
   useEffect(() => {
-    if (isOn)
-      setCtx(new AudioContext())
-    setSounds(Sounds2())
-  }, [isOn])
-  useEffect(() => {
-
-    if (ctx && !gainNode) {
-      setGainNode(ctx.createGain())
-      setBiquadFilter(ctx.createBiquadFilter())
+    if (localStorage.getItem('token')) {
+      setIsLoged(true)
+      setUserName(localStorage.getItem('name'))
     }
-  }, [ctx, gainNode])
-
-  useEffect(() => {
-    if (gainNode) {
-      gainNode.connect(ctx.destination)
-      // setRecord(new Recorder(gainNode))
-    }
-    if (biquadFilter) {
-      biquadFilter.connect(gainNode)
-    }
-  }, [gainNode, ctx, biquadFilter,])
+  }, [isLoged])
 
   return (
     <>
-      <button
-        onClick={() => {
-          if (!isOn) {
-            setIsOn(true)
-          } else {
-            setCtx(null)
-            setIsOn(false)
-            setGainNode(null)
-            setBiquadFilter(null)
-            setSounds(null)
-          }
-        }
-        }
-      >get ctx</button>
-      <button
-        onClick={() => setAddSoundCard(!addSoundCard)}
-      >
-        Upload Sound
-      </button>
-      {addSoundCard && <AddSound />}
-      <PlayModePage
-        ctx={ctx}
-        sounds={sounds}
-        setSounds={setSounds}
-        gainNode={gainNode}
-        biquadFilter={biquadFilter}
-      />
-
-      <button
-        onClick={
-          async () => {
-            const brr = await Api.get('sounds')
-            console.log(brr)
-          }
-        }
-      >get</button>
-
-
-      <OpeningPage />
-      {/* <Login /> */}
+      <BrowserRouter>
+        <Route path="/" exact component={() =>
+          < Home
+            setIsLoged={setIsLoged}
+            isLoged={isLoged}
+          />}
+        >
+        </Route>
+        < Route path="/home" exact component={() =>
+          <Home
+            setIsLoged={setIsLoged}
+            isLoged={isLoged}
+          />}
+        />
+      </BrowserRouter>
     </>
   );
 }

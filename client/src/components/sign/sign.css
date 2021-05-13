@@ -1,6 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Kanit:wght@300&display=swap');
 
-.log-in-top{
+.signin-top{
   position: absolute;
   top: 0;
   left: 0;
@@ -14,7 +14,7 @@
   /* flex-direction: column; */
   overflow: hidden;
 }
-.log-in-container {
+.signin-container {
     /* color: var(--primary); */
     /* z-index:2 ; */
     /* display: flex; */
@@ -22,8 +22,8 @@
     justify-content: space-around;
     background-color: var(--background);
     /* position: absolute; */
-    width: 50%;
-    height: 70vh;
+    width: 40%;
+    height: 80vh;
     /* top:50%; */
     /* left: 50%;  */
     /* transform: translate(-50%, -50%); */
@@ -35,7 +35,7 @@
     padding: 2.5rem;
   }
   
-  .log-in-container:hover {
+  .signin-container:hover {
     animation: shadow-wave 10s linear infinite;
   }
   
@@ -89,20 +89,20 @@
   } 
 
   
-  .log-in-container-p {
+  .signin-container-p {
     font-size: 1rem;
     font-family:  var(--primary-font);
     letter-spacing: 0.5px;
     margin-bottom: 10px;
   }
   
-  .log-in-container-h1 {
+  .signin-container-h1 {
     text-transform: uppercase;
     font-size: 2rem;
     font-family: var(--logo-font);
     font-weight: bold;
   }
-  .log-in-container-h2 {
+  .signin-container-h2 {
       text-shadow: 0px 0px 20px var(--led-red);
       text-align: center;
     /* text-transform: uppercase; */
@@ -111,21 +111,20 @@
     /* font-family: var(--logo-font); */
     /* font-weight: bold; */
   }
-  .log-in-container-h3 {
-    text-transform: uppercase;
+  .signin-container-h3 {
+    text-shadow: 0px 0px 5px var(--led-green);
+    color: white;
     font-size: 1.25rem;
     font-family: var(--primary-font);
-    color: white;
-    text-shadow: 0px 0px 10px var(--led-green);
     /* font-weight: bold; */
   }
   
 
-  .log-in-container .log-in-input{
+  .signin-container .signin-input{
     cursor: pointer;
     font-family: var(--primary-font);
     color: #333;
-    font-size: 1.2rem;
+    font-size: 1rem;
       margin: 0 auto;
     padding: 0.3rem 0.5rem;
     border-radius: 0.2rem;
@@ -136,17 +135,14 @@
     border-bottom: 0.3rem solid transparent;
     transition: all 0.3s;
   }
-  .log-in-container .selector{
+  .signin-container .selector{
       width: 100%;
       display: flex;
       justify-content: space-between;
     }
-    .log-in-container .selector .log-in-input{
-      width: 40%;
-            height: 80%;
-  }
+    
 
-  .log-in-container-label{
+  .signin-container-label{
       font-size: 1.25rem;
       margin-bottom: 5px;
   }
@@ -157,7 +153,7 @@
     font-size: 1.2rem;
   }
 
-  .log-in-container-button{
+  .signin-container-button{
      box-shadow: 0px 0px 10px 2px var(--led-blue);
      text-transform: uppercase;
       font-weight: bold;
@@ -171,60 +167,64 @@
       transition: 0.4s all;
  }
 
- .log-in-container-button:hover{
+ .signin-container-button:hover{
   box-shadow: 0px 0px 10px 2px var(--led-ligth-blue);
   background: var(--led-ligth-blue);
 }
-.log-in-container-button:active{
+.signin-container-button:active{
   box-shadow: 0px 0px 20px 2px var(--led-ligth-blue);
   background: #b5fdff;
 }
 
+/* .signin-container-button{
+    font-size: 1rem;
+} */
 
   @media (max-width: 680px){
-    
-    .log-in-container{
+    .signin-container{
         width: 90%;
-        height: 70%;
+        height: 80vh;
     }
-    .log-in-container-p {
+    .signin-container-p {
         font-size: 1rem;
         font-family: var(--primary-font);
         letter-spacing: 0.5px;
         margin-bottom: 10px;
       }
       
-      .log-in-container-h2 {
+      .signin-container-h2 {
         text-transform: uppercase;
         font-size: 1.5rem;
         font-family: var(--primary-font);
         font-weight: bold;
       }
-      .log-in-container-h3 {
-        text-transform: uppercase;
+      .signin-container-h3 {
+        /* text-transform: uppercase; */
         font-size: 1.1rem;
+        
         font-family: var(--primary-font);
       }
-      .log-in-container .selector{
+      .signin-container .selector{
         width: 100%;
      flex-direction: column;
         justify-content: space-between;
       }
-      .log-in-container .selector .log-in-input{
+      .signin-container .selector .signin-input{
         width: 70%;
     }
   }
   
   @media (max-height: 600px){
-    .log-in-input{
+    .signin-input{
   height: 25px;
     }
-    .log-in-container{
-      width: 70%;
-      height: 90%;
-      padding: 2rem;
+    .signin-container{
+      width: 60%;
+      height:90vh;
+      padding: 1rem 2rem;
+
   }
-  .log-in-container-button{
-    font-size: 1rem;
+  .signin-container-button{
+    font-size: 0.7rem;
   }
   }

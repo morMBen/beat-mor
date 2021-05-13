@@ -166,12 +166,14 @@
     box-shadow: 0px 0px 20px 2px var(--led-ligth-blue);
     background: #b5fdff;
  }
+ 
  @media (max-width: 1000px){
-    .opening-page-container button{
+    .opening-page-container-button{
         width: 50%;
     }
  }
 
+ 
   @media (max-width: 680px){
     .opening-page-container{
         width: 80%;
@@ -207,3 +209,14 @@
         margin: 0 5px;
     }
   }
+
+  @media (max-height: 600px){
+    .opening-page-container{
+      width: 90%;
+      height: 90%;
+      padding: 2rem;
+  }
+  .opening-page-container-button{
+    font-size: 1rem;
+  }
+}
