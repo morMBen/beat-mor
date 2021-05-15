@@ -10,7 +10,7 @@ require('dotenv').config()
 
 const PORT = process.env.PORT || 8000;
 
-app.use(express.json({ limit: "5mb" }))
+app.use(express.json({ limit: "1mb" }))
 app.use(cors())
 
 
