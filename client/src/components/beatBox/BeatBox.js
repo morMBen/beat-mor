@@ -8,7 +8,7 @@ const BeatBox = ({ boxTiming, id, thisClass, padIndex, currentColor, rythemArr, 
     }, [rythemArr, id, padIndex])
     return (
         <div
-            className={`${thisClass} ${boxTiming === id && !boxIsPressed ? 'boxIsOn' : ''}
+            className={`${thisClass} ${boxTiming === id && !boxIsPressed ? 'play-mode-boxIsOn' : ''}
             ${boxIsPressed && boxTiming !== id && `${currentColor} empty-center-of-box`}
             ${boxIsPressed && boxTiming === id && currentColor}
             `}

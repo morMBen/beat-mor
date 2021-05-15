@@ -1,0 +1,303 @@
+.create-container{
+    padding-top: 90px;
+    width: 100%;
+    height: 100vh;
+    display: flex;
+}
+.create-nav{
+    width: 50%;
+    height: 100%;
+    padding:2rem
+}
+.create-buttons-div{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    margin:  1rem 0;
+}
+.create-file-sound{
+    transition: 0.4s all;
+    cursor: pointer;
+    max-width: 100%;
+    margin: 2rem;
+    box-shadow: 0px 0px 4px inset var(--led-ligth-blue);
+    font-weight:500;
+    font-family: var(--logo-font);
+     padding: 0.4rem 0.5rem;
+     text-shadow: 0px 0px 1px var(--led-purpule);
+     background: none;
+     border-radius:5px;
+     font-size: 1.2rem;
+     color: var(--led-ligth-blue);
+}
+
+/* .create-file-sound span{
+    color: var(--led-purpule);
+} */
+
+.create-file-sound:hover{
+    box-shadow: 0px 0px 6px inset var(--led-ligth-blue);
+    /* background: var(--led-ligth-blue); */
+   }
+.create-file-sound-selected{
+    background:var(--led-ligth-blue);
+    box-shadow: 0px 0px 4px inset var(--led-blue);
+    color: black;
+}
+.create-file-sound-selected:hover{
+    box-shadow: 0px 0px 6px inset var(--led-blue);
+}
+.create-file-sound-selected span{
+    text-shadow: 0px 0px 1.5px black;
+}
+
+.create-button{
+    cursor: pointer;
+    box-shadow: 0px 0px 10px 2px var(--led-blue);
+    text-transform: uppercase;
+     font-weight: bold;
+     background: var(--led-ligth-blue);
+     /* font-size: 1rem; */
+     font-size: 1.2rem;
+    border-radius:5px;
+    font-family: var(--logo-font);
+     padding: 0.3rem 0.5rem;
+     border: none;
+     transition: 0.4s all;
+}
+
+.create-button:hover{
+ box-shadow: 0px 0px 10px 2px var(--led-ligth-blue);
+ background: var(--led-ligth-blue);
+}
+.create-button:active{
+ box-shadow: 0px 0px 20px 2px var(--led-ligth-blue);
+ background: #b5fdff;
+}
+
+.create-h2{
+    text-shadow: 0px 0px 20px var(--led-red);
+    text-align: center;
+    color:var(--red);
+    font-size: 3rem;
+}
+
+.create-h3{
+    /* text-transform: uppercase; */
+    font-size: 1.25rem;
+    font-family: var(--primary-font);
+    color: white;
+    text-shadow: 0px 0px 10px var(--led-green);
+}
+
+.create-selector{
+    cursor: pointer;
+    box-shadow: 0px 0px 10px 2px var(--led-blue);
+    text-transform: uppercase;
+     font-weight: bold;
+     background: var(--led-ligth-blue);
+     /* font-size: 1rem; */
+     font-size: 1.2rem;
+    border-radius:5px;
+    font-family: var(--logo-font);
+     padding: 0.3rem 0.5rem;
+     border: none;
+     transition: 0.4s all;
+     outline: none;
+}
+
+@media (max-width: 680px){
+    .create-container{
+        flex-direction: column;
+        padding-top: 60px;
+    }
+    .create-nav{
+        width: 100%;
+        height: 50%;
+    }
+    .create-h2{
+        margin: 0;
+        font-size: 1.3rem;
+    }
+    .create-h3{
+        margin: 0;
+        font-size: 1rem;
+    }
+    .create-buttons-div{
+        margin: 0.4rem 0;
+    }
+    .create-button{
+        font-size: 0.8rem;
+    }
+    .create-file-sound{
+        font-size: 0.9rem;
+    }
+    .create-selector{
+        font-size: 0.9rem;
+    }
+}
+
+
+
+/* --------------------- */
+
+
+.pads-container{
+    width:50%;
+    min-height: 100%;
+    display: flex;
+    border-left: solid black 1px;
+    /* padding: 1rem auto; */
+    /* border-radius:0  10px  10px 0; */
+    flex-direction: column;
+    justify-content: center;
+    align-items:center ; 
+}
+.pads-container-san{
+    width: 100%;
+    border-radius: 7px;
+    background:#4b4848;
+    padding: 1.5rem 0.7rem ;
+    margin: 0rem 1rem 0.5rem 1rem;
+    padding: 0.8rem;
+    
+    /* border: var(--primary) 1px solid; */
+}
+.pads-grid{
+    display: flex;
+    /* padding: 0 0.5rem; */
+    justify-content: center;
+    background: none;
+}
+.single-pad{
+    position: relative;
+    width: 17%;
+    border-radius: 5px;
+    background: grey;
+    margin: 0.1rem;
+}
+
+.single-pad::after{
+    content: "";
+    display: block;
+    padding-bottom: 100%;
+}
+
+
+/*----------- button colors---------- */
+.green{
+    border:1px solid #84FF6D;
+    box-shadow: inset 0 0 3.5rem #38FF12;
+    background:#CCFFC2;
+    transition-property: box-shadow,border;
+    transition-duration:  250ms
+}
+.green:active{
+    box-shadow: inset 0 0 2.5rem #84FF6D;
+    background:#fff;
+}
+.red{
+    border:0.5px solid #FF81BF;
+    box-shadow: inset 0 0 3.5rem #ff007d;
+    background:#FFC8E3;
+    transition-property: box-shadow,border;
+    transition-duration: 250ms
+}
+.red:active{
+    box-shadow: inset 0 0 2.5rem #FF81BF;
+    background:#fff;
+}
+.blue{
+    border:0.5px solid #8E83FF;
+    box-shadow: inset 0 0 3.5rem #1700ff;
+    background:#C8C2FF;
+    transition-property: box-shadow,border;
+    transition-duration: 250ms
+}
+.blue:active{
+    box-shadow: inset 0 0 2.5rem #8E83FF;
+    background:#fff;
+}
+.yellow{
+    border:0.5px solid #FFF881;
+    box-shadow: inset 0 0 3.5rem #FFF100;
+    background:#FFFCC8;
+    transition-property: box-shadow,border;
+    transition-duration: 250ms
+}
+.yellow:active{
+    box-shadow: inset 0 0 2.5rem #FFF881;
+    background:#fff;
+}
+.ligth-blue{
+    border:0.5px solid #00F5FB;
+    box-shadow: inset 0 0 3.5rem #00F5FB;
+    background:#C8FEFF;
+    transition-property: box-shadow,border;
+    transition-duration: 250ms
+}
+.ligth-blue:active{
+    box-shadow: inset 0 0 2.5rem #87F9FC;
+    background:#fff;
+}
+.purpule{
+    border:0.5px solid #CC83FF;
+    box-shadow: inset 0 0 3.5rem #9600FF;
+    background:#E9C9FF;
+    transition-property: box-shadow,border;
+    transition-duration: 250ms
+}
+.purpule:active{
+    box-shadow: inset 0 0 2.5rem #CC83FF;
+    background:#fff;
+}
+
+.empty-center-of-box{
+    background:none;
+}
+
+ .buttonOff{
+} 
+
+.buttonOn{
+    
+    border:2px solid rgba(255,255,255,0.5)
+    
+} 
+
+
+@media (max-width: 600px){
+    .create-container{
+        flex-direction: column;
+    }
+    .create-nav{
+        width:100%;
+        max-height: 50%;
+        /* border-radius:  10px   10px 0 0 ; */
+    }
+    .pads-container{
+        width:100%;
+        min-height: 50%;
+        border-left: none;
+        border-top: solid black 1px;
+        border-radius:0 0  10px   10px  ;
+    }
+}
+
+@media (max-height: 400px){
+    .create-container{
+        flex-direction: row;
+    }
+    .create-nav{
+        width:50%;
+        max-height: 100%;
+        /* border-radius:  10px   10px 0 0 ; */
+    }
+    .pads-container{
+        width:50%;
+        min-height: 100%;
+    }
+    .pads-container-san{
+        padding: 0.5rem;
+    }
+}

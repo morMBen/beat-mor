@@ -7,10 +7,6 @@ const sound = new mongoose.Schema({
         trim: true,
         unique: true
     },
-    // color: {
-    //     type: String,
-    //     required: true,
-    // },
     audio: {
         type: String,
         required: true,

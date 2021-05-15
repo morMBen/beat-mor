@@ -92,11 +92,11 @@ const PadBox = (
                 className={`${thisClass} 
             ${so.color}
             ${padIndex === id ? `buttonOn` : 'buttonOff'}
-            ${padsStatus && rythemObj[boxTiming - 1] === true ? `boxIsOn` : 'buttonOff'}`
+            ${padsStatus && rythemObj[boxTiming - 1] === true ? `play-mode-boxIsOn` : 'buttonOff'}`
                 }
                 onMouseDown={userClick}
             >
-                <div className='pad-icon'>{setIcon()}</div>
+                <div className='play-mode-pad-icon'>{setIcon()}</div>
 
             </div >
         </>

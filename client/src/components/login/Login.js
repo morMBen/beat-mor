@@ -11,7 +11,7 @@ const Login = ({ setLoginCard, setIsLoged }) => {
 
     const handleSubmission = async () => {
         try {
-            console.log(password)
+            // console.log(password.toString())
             const res = await Api.post('/users/login', {
                 password: password.toString(),
                 email

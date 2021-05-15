@@ -1,10 +1,57 @@
-import OpeningPage from '../openingPage/OpeningPage';
+import React from "react";
+import { useEffect, useState } from "react";
+import Api from '../../api/Api'
+import './home.css'
+import testImg from '../../img/openBackgound.jpg'
+import { Link } from "react-router-dom";
 
-const Home = ({ isLoged, setIsLoged }) => {
+// import OpeningPage from '../openingPage/OpeningPage';
+const Home = ({ setConsoleIsOpen, setCurrentCollection }) => {
+    const [collectionsNames, setCollectionsNames] = useState(null)
+
+    useEffect(() => {
+        const getCollectionsName = async () => {
+            const res = await Api.get('/sound-collection')
+            setCollectionsNames(res.data)
+        }
+        getCollectionsName()
+    }, [])
+
+    const openConsole = () => {
+        setConsoleIsOpen(true)
+
+    }
+
+
+    const insetCollectionsNames = () => {
+        return collectionsNames.map((e, i) => {
+            return <section className='home-section' key={`collection${i}`}
+                onClick={() => {
+                    setCurrentCollection(e._id)
+                    openConsole()
+                }}
+            >
+                <Link
+                    to={'/console'}
+                >
+                    <figure className='home-figure-img'>
+                        <img src={testImg} alt='fasd' />
+                    </figure>
+                    <figure className='home-figure-text'>
+                        <article className='home-article'>
+                            <span >{e.ownerName}</span>
+                            <h3 className='home-h3'>{e.name} {e._id}</h3>
+                        </article>
+                    </figure>
+                </Link>
+            </section >
+        })
+    }
     return (
-        <div style={{ color: 'white' }}>
-            Home Page
-            {!isLoged && <OpeningPage />}
+        <div style={{ paddingTop: '5rem' }}>
+            <div className='home-main'>
+                {collectionsNames && insetCollectionsNames()}
+            </div>
         </div>
     )
 }

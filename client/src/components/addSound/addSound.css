@@ -1,5 +1,18 @@
 
-
+.add-sound-top{
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  background: rgba(0, 0, 0, 0.8);
+  z-index: 123;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  /* flex-direction: column; */
+  overflow: hidden;
+}
 .add-sound-container {
     /* color: var(--primary); */
     z-index:2 ;
@@ -9,15 +22,15 @@
     background-color: var(--background);
     position: absolute;
     width: 50%;
-    height: 70vh;
+    height: 80vh;
     top:50%;
     left: 50%; 
     transform: translate(-50%, -50%);
-    padding: 15px;
+    padding:0 15px 15px 15px;
     color: var(--primary);
     /* margin: calc(50vh - 30px) auto 0 auto; */
     border: 3px solid var(--primary);
-    border-radius: 25px;
+    border-radius: 10px;
     padding: 2.5rem;
   }
   
@@ -75,15 +88,17 @@
   }
   
   .add-sound-container-h2 {
-    text-transform: uppercase;
-    font-size: 2rem;
-    font-family: var(--primary-font);
-    font-weight: bold;
+    text-shadow: 0px 0px 20px var(--led-red);
+      text-align: center;
+      color:var(--red);
+      font-size: 3rem;
   }
   .add-sound-container-h3 {
     text-transform: uppercase;
     font-size: 1.25rem;
     font-family: var(--primary-font);
+    color: white;
+    text-shadow: 0px 0px 10px var(--led-green);
     /* font-weight: bold; */
   }
   
@@ -92,9 +107,9 @@
     cursor: pointer;
     font-family: var(--primary-font);
     color: #333;
-    font-size: 1.2rem;
+    font-size: 1.1rem;
       margin: 0 auto;
-    padding: 0.3rem 0.5rem;
+    padding: 0.1rem 0.3rem;
     border-radius: 0.2rem;
     background-color: rgb(255, 255, 255);
     border: none;
@@ -108,10 +123,6 @@
       display: flex;
       justify-content: space-between;
     }
-    .add-sound-container .selector .add-sound-input{
-      width: 40%;
-            height: 80%;
-  }
 
   .add-sound-container-label{
       font-size: 1.25rem;
@@ -124,15 +135,63 @@
     font-size: 1.2rem;
   }
 
-  .add-sound-container .add-sound-button{
+  .add-sound-button{
+    box-shadow: 0px 0px 10px 2px var(--led-blue);
+    text-transform: uppercase;
      font-weight: bold;
-     background: #22D2A0;
+     background: var(--led-ligth-blue);
+     /* font-size: 1rem; */
      font-size: 1rem;
-     font-size: 1.2rem;
-      border-radius:5px;
-         font-family: var(--primary-font);
+    border-radius:5px;
+    font-family: var(--logo-font);
      padding: 0.3rem 0.5rem;
- }
+     border: none;
+     transition: 0.4s all;
+     margin-left: 1rem;
+}
+
+.add-sound-button:hover{
+ box-shadow: 0px 0px 10px 2px var(--led-ligth-blue);
+ background: var(--led-ligth-blue);
+}
+.add-sound-button:active{
+ box-shadow: 0px 0px 20px 2px var(--led-ligth-blue);
+ background: #b5fdff;
+}
+
+.add-sound-button-div{
+  display: flex;
+  justify-content: space-between;
+}
+
+.add-sound-exit{
+  position: absolute;
+  top: 10px;
+  left:10px;
+  /* border: 2px solid var(--primary); */
+  color: #192824;
+  /* margin-bottom: -10; */
+  /* padding: 0.1rem; */
+  cursor: pointer;
+  width: 25px;
+  height: 25px;
+  text-align: center;
+  border-radius: 4px;
+  box-shadow: 0px 0px 10px 2px var(--led-blue);
+  text-transform: uppercase;
+   font-weight: bold;
+   background: var(--led-ligth-blue);
+}
+
+.add-sound-exit:hover{
+  box-shadow: 0px 0px 10px 2px var(--led-ligth-blue);
+  background: var(--led-ligth-blue);
+}
+.add-sound-exit:active{
+  box-shadow: 0px 0px 20px 2px var(--led-ligth-blue);
+  background: #b5fdff;
+}
+
 
   @media (max-width: 600px){
     .add-sound-container{
@@ -148,7 +207,7 @@
       
       .add-sound-container-h2 {
         text-transform: uppercase;
-        font-size: 1.5rem;
+        font-size: 1.4rem;
             font-family: var(--primary-font);
         font-weight: bold;
       }
@@ -164,5 +223,73 @@
       }
       .add-sound-container .selector .add-sound-input{
         width: 70%;
+        
+      }
+      .add-sound-button-div{
+        flex-direction: column;
+        align-items: center;
+        justify-content: space-between;
+        cursor: pointer;
+      }
+      .add-sound-button{
+        margin-top:  1rem;
+        margin: 1rem  1rem 0 1rem;
+      }
+      .add-sound-button div{
+        display: flex;
+        flex-direction: row;
+        width: 100%;
+        justify-content: space-between;
+      }
+    }
+    @media (max-height: 500px){
+      .add-sound-container{
+        width: 80%;
+        height: 95vh;
+      }
+      .add-sound-container-p {
+        font-size: 0.8rem;
+        font-family: var(--primary-font);
+        letter-spacing: 0.5px;
+        margin-bottom: 10px;
+        padding: 0;
+        margin: 0;
+      }
+      
+      .add-sound-container-h2 {
+        text-transform: uppercase;
+        font-size: 1.2rem;
+        font-family: var(--primary-font);
+        font-weight: bold;
+        padding: 0;
+        margin: 0;
+
+      }
+      .add-sound-container-h3 {
+        text-transform: uppercase;
+        font-size: 1.1rem;
+            font-family: var(--primary-font);
+          }
+          
+          .add-sound-container .selector .add-sound-input{
+            width: 70%;
+            /* padding: 0;
+            margin: 0; */
+          }
+          .add-sound-button-div{
+            flex-direction: column;
+            align-items: center;
+            justify-content: space-between;
+          }
+          .add-sound-button{
+      margin-top:  1rem;
+      margin: 1rem  1rem 0 1rem;
+    }
+    .add-sound-button div{
+        display: inherit;
+  /* justify-content: space-between; */
+    }
+    .add-sound-br{
+      display: none;
     }
   }
