@@ -15,7 +15,7 @@ const App = () => {
   const [isLoged, setIsLoged] = useState(false)
   const [userName, setUserName] = useState(null)
   useEffect(() => {
-    if (localStorage.getItem('token')) {
+    if (localStorage.token) {
       setIsLoged(true)
       setUserName(localStorage.getItem('name'))
     }
