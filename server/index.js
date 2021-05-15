@@ -17,10 +17,16 @@ app.use((req, res) => {
     res.status(404).send('Error: Something went wrong... try again')
 })
 
-app.use(express.static(path.join(__dirname, './build')));
+// app.use(express.static(path.join(__dirname, 'build')));
+// app.get('/*', (req, res) => {
+//     res.sendFile(path.join(__dirname, 'build', 'index.html'));
+// });
 
-app.get('/', (req, res) => {
-    res.sendFile(path.join(__dirname, './build', 'index.html'));
+
+const pubDir = path.join(__dirname, "./build");
+app.use(express.static(pubDir));
+app.use("/", (req, res) => {
+    res.sendFile(path.join(pubDir, "index.html"));
 });
 
 app.listen(PORT, () => {
