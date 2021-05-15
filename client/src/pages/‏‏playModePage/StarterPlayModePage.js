@@ -95,7 +95,7 @@ const App = ({ consoleIsOpen, setConsoleIsOpen, currentCollection }) => {
         <>
             {!currentCollection && <Redirect to='/'></Redirect >}
             {/* {console.log(isLoading)} */}
-            {/* {isLoading && <h1 style={{ color: 'white' }}>fasfsdfsddf</h1>} */}
+
             {currentCollection &&
                 <>
                     <button
