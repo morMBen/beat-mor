@@ -23,6 +23,7 @@ const App = () => {
 
   return (
     <>
+      {/* {isLoged<h1></h1>} */}
       {console.log(consoleIsOpen)}
       {!isLoged && <OpeningPage setIsLoged={setIsLoged} />}
       <BrowserRouter>
