@@ -23,7 +23,7 @@ app.use((req, res) => {
 // });
 
 
-const pubDir = path.join(__dirname, "./build");
+const pubDir = path.join(__dirname, "build");
 app.use(express.static(pubDir));
 app.use("/", (req, res) => {
     res.sendFile(path.join(pubDir, "index.html"));
