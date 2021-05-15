@@ -8,6 +8,9 @@ import StarterPlayModePage from '../pages/‏‏playModePage/StarterPlayModePage
 
 
 const App = () => {
+  const [openPage, setOpenPage] = useState(false)
+
+
   const [consoleIsOpen, setConsoleIsOpen] = useState(false)
 
   const [currentCollection, setCurrentCollection] = useState(null)
@@ -23,44 +26,47 @@ const App = () => {
 
   return (
     <>
-      {/* {isLoged<h1></h1>} */}
-      {console.log(consoleIsOpen)}
-      {!isLoged && <OpeningPage setIsLoged={setIsLoged} />}
-      <BrowserRouter>
-        {isLoged && <>
-          {!consoleIsOpen && <Navbar userName={userName} />}
-          <Route path="/" exact
-            component={() =>
+      {!openPage && <button
+        style={{ background: 'white' }}
+        onClick={() => setOpenPage(true)}>open</button>}
+      {openPage && <>
+        {!isLoged && <OpeningPage setIsLoged={setIsLoged} />}
+        <BrowserRouter>
+          {isLoged && <>
+            {!consoleIsOpen && <Navbar userName={userName} />}
+            <Route path="/" exact
+              component={() =>
+                <Home
+                  setConsoleIsOpen={setConsoleIsOpen}
+                  consoleIsOpen={consoleIsOpen}
+                  setCurrentCollection={setCurrentCollection}
+                />
+              }
+            >
+            </Route>
+            < Route path="/home" exact component={() =>
               <Home
                 setConsoleIsOpen={setConsoleIsOpen}
                 consoleIsOpen={consoleIsOpen}
                 setCurrentCollection={setCurrentCollection}
               />
             }
-          >
-          </Route>
-          < Route path="/home" exact component={() =>
-            <Home
-              setConsoleIsOpen={setConsoleIsOpen}
-              consoleIsOpen={consoleIsOpen}
-              setCurrentCollection={setCurrentCollection}
             />
-          }
-          />
-          < Route path="/create" exact component={() =>
-            <Create />
-          }
-          />
-          < Route path="/console" exact component={() =>
-            <StarterPlayModePage
-              consoleIsOpen={consoleIsOpen}
-              setConsoleIsOpen={setConsoleIsOpen}
-              currentCollection={currentCollection}
+            < Route path="/create" exact component={() =>
+              <Create />
+            }
             />
-          }
-          />
-        </>}
-      </BrowserRouter>
+            < Route path="/console" exact component={() =>
+              <StarterPlayModePage
+                consoleIsOpen={consoleIsOpen}
+                setConsoleIsOpen={setConsoleIsOpen}
+                currentCollection={currentCollection}
+              />
+            }
+            />
+          </>}
+        </BrowserRouter>
+      </>}
     </>
   );
 }
