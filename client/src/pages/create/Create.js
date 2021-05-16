@@ -73,7 +73,7 @@ const Create = () => {
                 })
                 console.log(tempArr2)
                 const save = await Api.post('/sound-collection', {
-                    name: 'noare',
+                    name: 'Local tempo',
                     sounds: tempArr2
                 },
                     {

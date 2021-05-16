@@ -8,7 +8,6 @@ import StarterPlayModePage from '../pages/‏‏playModePage/StarterPlayModePage
 
 
 const App = () => {
-  const [openPage, setOpenPage] = useState(false)
 
 
   const [consoleIsOpen, setConsoleIsOpen] = useState(false)
@@ -26,10 +25,7 @@ const App = () => {
 
   return (
     <>
-      {!openPage && <button
-        style={{ background: 'white' }}
-        onClick={() => setOpenPage(true)}>open</button>}
-      {openPage && <>
+      <>
         {!isLoged && <OpeningPage setIsLoged={setIsLoged} />}
         <BrowserRouter>
           {isLoged && <>
@@ -66,7 +62,7 @@ const App = () => {
             />
           </>}
         </BrowserRouter>
-      </>}
+      </>
     </>
   );
 }

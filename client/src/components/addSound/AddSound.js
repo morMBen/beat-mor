@@ -21,14 +21,14 @@ const AddSound = ({ setAddSoundIsOpen, setSelectedSound }) => {
             reader.readAsDataURL(event.target.files[0])
             setSelectedFile(reader);
             setIsFilePicked(true);
-            if (fileName === '') {
-                if (event.target.files[0].name.match(/\.wav$/)) {
-                    setFileName(event.target.files[0].name.split('.wav')[0])
-                }
-                if (event.target.files[0].name.match(/\.mp3$/)) {
-                    setFileName(event.target.files[0].name.split('.mp3')[0])
-                }
+
+            if (event.target.files[0].name.match(/\.wav$/)) {
+                setFileName(event.target.files[0].name.split('.wav')[0])
             }
+            if (event.target.files[0].name.match(/\.mp3$/)) {
+                setFileName(event.target.files[0].name.split('.mp3')[0])
+            }
+
             setButtonText('Submit')
         } else {
             setIsFilePicked(false);

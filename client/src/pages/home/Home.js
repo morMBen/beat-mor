@@ -40,7 +40,7 @@ const Home = ({ setConsoleIsOpen, setCurrentCollection }) => {
                     <figure className='home-figure-text'>
                         <article className='home-article'>
                             <span >{e.ownerName}</span>
-                            <h3 className='home-h3'>{e.name} {e._id}</h3>
+                            <h3 className='home-h3'>{e.name}</h3>
                         </article>
                     </figure>
                 </Link>
