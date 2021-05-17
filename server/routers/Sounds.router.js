@@ -31,15 +31,15 @@ router
     })
     .get('/tags/:name', async (req, res) => {
         try {
-            const sound = await Sounds.find({ tags: { "$in": [req.params.name] } });
-            res.status(200).send(sound.map(e => { return { id: e._id, name: e.name, tags: e.tags } }))
+            const sound = await Sounds.find({ tags: { "$in": [req.params.name] } }).select('name tags');
+            res.status(200).send(sound)
         } catch (e) {
             res.status(400).send(e.message)
         }
     })
     .get('/tags', async (req, res) => {
         try {
-            const sound = await Sounds.find({});
+            const sound = await Sounds.find({}).select('tags');
             const tags = [];
             sound.forEach(e => {
                 e.tags.forEach(tag => {
@@ -64,6 +64,15 @@ router
     .get('/', async (req, res) => {
         try {
             const sound = await Sounds.find();
+            res.status(200).send(sound)
+        } catch (e) {
+            res.status(400).send(e.message)
+        }
+    })
+    .get('/search/:string', async (req, res) => {
+        try {
+            // req.params.string
+            const sound = await Sounds.find({ "name": { $regex: req.params.string, "$options": 'i' } }).select('name tags');
             res.status(200).send(sound)
         } catch (e) {
             res.status(400).send(e.message)

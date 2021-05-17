@@ -3,9 +3,11 @@ import AddSound from '../../components/addSound/AddSound'
 import { useEffect, useState } from 'react'
 import Selector from '../../components/selector/Selector'
 import Api from '../../api/Api'
+import SearchSound from '../../components/searchSound/SearchSound'
 
 const Create = () => {
     const [addSoundIsOpen, setAddSoundIsOpen] = useState(false)
+    const [searchSoundIsOpen, setSearchSoundIsOpen] = useState(false)
 
     const [fileIsSelected, setFileIsSelected] = useState(false)
     const [selectedSound, setSelectedSound] = useState(null)
@@ -90,6 +92,10 @@ const Create = () => {
     }
     return (
         <>
+            {searchSoundIsOpen && <SearchSound
+                setSearchSoundIsOpen={setSearchSoundIsOpen}
+                setSelectedSound={setSelectedSound}
+            />}
             {addSoundIsOpen && <AddSound
                 setAddSoundIsOpen={setAddSoundIsOpen}
                 setSelectedSound={setSelectedSound}
@@ -110,6 +116,7 @@ const Create = () => {
                         <button
                             className='create-button'
                             type='button'
+                            onClick={() => setSearchSoundIsOpen(true)}
                         >Search sound</button>
 
                     </div>
