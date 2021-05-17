@@ -1,6 +1,7 @@
 {
   "name": "folder",
   "version": "1.0.0",
+  "description": "",
   "main": "index.js",
   "scripts": {
     "start": "node ./server/index.js",
@@ -28,14 +29,5 @@
     "react-router-dom": "^5.2.0",
     "react-useanimations": "^2.0.6",
     "validator": "^13.6.0"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/morMBen/beat-mor.git"
-  },
-  "bugs": {
-    "url": "https://github.com/morMBen/beat-mor/issues"
-  },
-  "homepage": "https://github.com/morMBen/beat-mor#readme",
-  "description": ""
+  }
 }
