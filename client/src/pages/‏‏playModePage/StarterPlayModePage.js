@@ -33,13 +33,12 @@ const App = ({ consoleIsOpen, setConsoleIsOpen, currentCollection }) => {
             const fetchSounds = async () => {
                 const arrRes = await Api.get(`/sound-collection/${currentCollection}`)
                 const arrData = arrRes.data[0].sounds
-                // const collectionData = {
-                //     collectionName: arrRes.data[0].name,
-                //     collectionId: arrRes.data[0]._id
-                // }
                 const arrDataLinks = arrData.map(async (e) => {
                     return await Api.get(`/sounds/${e.id}`)
                 })
+
+
+
                 let arrDataSounds = null;
                 await axios.all(arrDataLinks)
                     .then(axios.spread((...responses) => {

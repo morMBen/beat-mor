@@ -15,4 +15,3 @@ mongoose.connect(`mongodb+srv://${user}:${pass}@cluster0.sibae.mongodb.net/${'my
         useFindAndModify: false,
         useUnifiedTopology: true
     })
-

@@ -18,10 +18,10 @@ const Login = ({ setLoginCard, setIsLoged }) => {
             })
             localStorage.setItem('name', res.data.user.userName)
             localStorage.setItem('token', res.data.token)
-            setLoginCard(false)
             setIsLoged(true)
-            console.log(localStorage.getItem('name'))
-            console.log(localStorage.getItem('token'))
+            setLoginCard(false)
+            // console.log(localStorage.getItem('name'))
+            // console.log(localStorage.getItem('token'))
         } catch (e) {
             setShowMessage(true)
             setTimeout(() => {
