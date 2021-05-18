@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react'
 import Selector from '../../components/selector/Selector'
 import Api from '../../api/Api'
 import SearchSound from '../../components/searchSound/SearchSound'
+import Input from '../../components/input/Input'
 
 const Create = () => {
     const [addSoundIsOpen, setAddSoundIsOpen] = useState(false)
@@ -17,6 +18,7 @@ const Create = () => {
 
     const [selectorVal, setSelectorVal] = useState('purpule')
     const selectorOps = ['ligth-blue', 'purpule', 'red', 'yellow', 'blue', 'green',];
+    const [collectionName, setCollectionName] = useState('')
 
 
     useEffect(() => {
@@ -66,7 +68,7 @@ const Create = () => {
 
     const saveCollection = async () => {
         const tempArr = arr.filter(e => e.id)
-        if (tempArr.length === 24) {
+        if (tempArr.length === 24 && collectionName.length > 0) {
             try {
                 const token = localStorage.getItem('token')
                 // console.log(token)
@@ -75,7 +77,7 @@ const Create = () => {
                 })
                 console.log(tempArr2)
                 const save = await Api.post('/sound-collection', {
-                    name: 'Ocean kit',
+                    name: collectionName,
                     sounds: tempArr2
                 },
                     {
@@ -94,7 +96,7 @@ const Create = () => {
         <>
             {searchSoundIsOpen && <SearchSound
                 setSearchSoundIsOpen={setSearchSoundIsOpen}
-                setSelectedSound={setSelectedSound}
+                setSelected={setSelectedSound}
             />}
             {addSoundIsOpen && <AddSound
                 setAddSoundIsOpen={setAddSoundIsOpen}
@@ -150,11 +152,23 @@ const Create = () => {
                         {insertPads(13)}
                         {insertPads(19)}
                     </div>
-                    <button
-                        className='create-button'
-                        onClick={() => saveCollection()}
+                    <div
+                        style={{ display: 'flex', justifyContent: 'space-around', width: '100%', padding: '0 1rem' }}
+                    >
+                        <h3
+                            className='create-h3'
+                        >Collection Name:</h3>
+                        <Input
+                            className={"create-selector-input"}
+                            value={collectionName}
+                            onChange={(e) => setCollectionName(e.target.value)}
+                        />
+                        <button
+                            className='create-button'
+                            onClick={() => saveCollection()}
 
-                    >Save</button>
+                        >Save</button>
+                    </div>
                 </div>
             </div>
         </>

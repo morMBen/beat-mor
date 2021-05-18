@@ -106,6 +106,22 @@
      outline: none;
 }
 
+.create-selector-input{
+    cursor: pointer;
+    font-family: var(--primary-font);
+    color: #333;
+    font-size: 1.1rem;
+      margin: 0 auto;
+    padding: 0.1rem 0.3rem;
+    border-radius: 0.2rem;
+    background-color: rgb(255, 255, 255);
+    border: none;
+    /* width: 50%; */
+    display: block;
+    border-bottom: 0.3rem solid transparent;
+    transition: all 0.3s;
+  }
+
 @media (max-width: 680px){
     .create-container{
         flex-direction: column;
