@@ -8,8 +8,6 @@ import StarterPlayModePage from '../pages/‏‏playModePage/StarterPlayModePage
 
 
 const App = () => {
-
-
   const [consoleIsOpen, setConsoleIsOpen] = useState(false)
 
   const [currentCollection, setCurrentCollection] = useState(null)
@@ -26,6 +24,7 @@ const App = () => {
   return (
     <>
       <>
+        {/* { console.log(window.location.href)} */}
         {!isLoged && <OpeningPage setIsLoged={setIsLoged} />}
         <BrowserRouter>
           {isLoged && <>

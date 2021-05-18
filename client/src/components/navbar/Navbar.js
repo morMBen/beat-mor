@@ -6,6 +6,7 @@ import './navbar.css';
 const Navbar = ({ openCloseLogMenu, userlog, userDetails }) => {
     const [isNavOpen, setIsNavOpen] = useState(false);
 
+
     const menuOpen = () => {
         if (isNavOpen) {
             return '300px'
@@ -14,23 +15,23 @@ const Navbar = ({ openCloseLogMenu, userlog, userDetails }) => {
         }
     }
 
-
     return (
-
-        <div className="my-nav" style={{ fontSize: '17px' }}>
-            <Link to='/' className="menu-logo">
-                A Beat Mor
+        <>
+            <div className="my-nav" style={{ fontSize: '17px' }}>
+                <Link to='/' className="menu-logo">
+                    A Beat Mor
             </Link>
-            <div className="hamburger" onClick={() => { setIsNavOpen(!isNavOpen) }}>
-                {/* nav here */}
+                <div className="hamburger" onClick={() => { setIsNavOpen(!isNavOpen) }}>
+                    {/* nav here */}
                 dads
             </div>
-            <div className="nav-menu" style={{ maxHeight: menuOpen() }}>
-                <Link to='/search' className="menu-link">Search</Link>
-                <Link to='/create' className="menu-link">Create</Link>
-                <Link to={`/`} className="menu-link">Home</Link>
-            </div>
-        </div >
+                <div className="nav-menu" style={{ maxHeight: menuOpen() }}>
+                    <Link to='/search' className="menu-link">Search</Link>
+                    <Link to='/create' className="menu-link">Create</Link>
+                    <Link to={`/`} className="menu-link">Home</Link>
+                </div>
+            </div >
+        </>
     )
 }
 

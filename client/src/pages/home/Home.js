@@ -6,7 +6,7 @@ import testImg from '../../img/openBackgound.jpg'
 import { Link } from "react-router-dom";
 
 // import OpeningPage from '../openingPage/OpeningPage';
-const Home = ({ setConsoleIsOpen, setCurrentCollection }) => {
+const Home = ({ setConsoleIsOpen, setCurrentCollection, consoleIsOpen }) => {
     const [collectionsNames, setCollectionsNames] = useState(null)
 
     useEffect(() => {
@@ -15,11 +15,13 @@ const Home = ({ setConsoleIsOpen, setCurrentCollection }) => {
             setCollectionsNames(res.data)
         }
         getCollectionsName()
-    }, [])
+        if (consoleIsOpen) {
+            setConsoleIsOpen(false)
+        }
+    }, [consoleIsOpen, setConsoleIsOpen])
 
     const openConsole = () => {
         setConsoleIsOpen(true)
-
     }
 
 
