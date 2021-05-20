@@ -2,12 +2,12 @@ const express = require("express")
 const router = express.Router()
 const auth = require('../middeleware/auth')
 const SoundCollection = require('../models/SoundCollection.model')
+const Patterns = require('../models/Patterns.model')
 
 
 router
-    //Add new sound
+    //Add new sound-collection
     .post('/', auth, async (req, res) => {
-
         const sC = new SoundCollection({
             ...req.body,
             owner: req.user._id,
@@ -35,6 +35,17 @@ router
         try {
             const sound = await SoundCollection.find({ '_id': req.params.id });
             res.status(200).send(sound)
+        } catch (e) {
+            res.status(400).send(e.message)
+        }
+    })
+    .patch('/update/:id', auth, async (req, res) => {
+        try {
+            const pattern = new Patterns({ ...req.body, owner: req.user._id })
+            await pattern.save()
+            const sound = await SoundCollection.findByIdAndUpdate({ '_id': req.params.id }, { $push: { patterns: { userName: req.user.userName, patternOwner: req.user._id, name: req.body.name, _id: pattern._id } } });
+            res.status(200).send(pattern)
+            // res.status(200).send(sound)
         } catch (e) {
             res.status(400).send(e.message)
         }

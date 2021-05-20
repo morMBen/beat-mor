@@ -5,7 +5,7 @@ import Api from '../../api/Api'
 import Input from '../input/Input'
 
 
-const SearchSound = ({ setSearchSoundIsOpen, setSelected }) => {
+const ChoosePattern = ({ setSearchSoundIsOpen, setSelected }) => {
     const [isLoading, setIsLoading] = useState(true);
     const [isLoadingOnPage, setIsLoadingOnPage] = useState(false);
 
@@ -175,4 +175,4 @@ const SearchSound = ({ setSearchSoundIsOpen, setSelected }) => {
     )
 }
 
-export default SearchSound;
+export default ChoosePattern;

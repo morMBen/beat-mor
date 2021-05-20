@@ -14,21 +14,33 @@ const App = ({ consoleIsOpen, setConsoleIsOpen, currentCollection }) => {
     const [biquadFilter, setBiquadFilter] = useState(null)
     const [sounds, setSounds] = useState(null)
 
-
+    const [savedObj, setSavedObj] = useState(null)
 
 
     useEffect(() => {
         if (currentCollection) {
-
             if (isOn)
                 setCtx(new AudioContext())
-
-            const tempEffectsArr = new Array(24).fill({
+            let tempEffectsArr;
+            console.log(currentCollection)
+            // if (!savedObj) {
+            tempEffectsArr = new Array(24).fill({
                 frequency: 350,
                 detune: 0,
                 type: 'notch',
                 gain: 0.75
             })
+            // } else {
+            //     tempEffectsArr = savedObj.map(e => {
+            //         return {
+            //             frequency: e.frequency,
+            //             detune: e.detune,
+            //             type: e.type,
+            //             gain: e.gain
+            //         }
+            //     })
+            // }
+
             //fetch sounds 
             const fetchSounds = async () => {
                 const arrRes = await Api.get(`/sound-collection/${currentCollection}`)
@@ -36,8 +48,6 @@ const App = ({ consoleIsOpen, setConsoleIsOpen, currentCollection }) => {
                 const arrDataLinks = arrData.map(async (e) => {
                     return await Api.get(`/sounds/${e.id}`)
                 })
-
-
 
                 let arrDataSounds = null;
                 await axios.all(arrDataLinks)
@@ -54,8 +64,6 @@ const App = ({ consoleIsOpen, setConsoleIsOpen, currentCollection }) => {
                     })).catch(errors => {
                     })
                 //------------------------
-                // console.log(arrDataSounds)
-                console.log(arrRes)
                 // return arrDataSounds
                 setSounds(arrDataSounds)
             }
@@ -90,6 +98,8 @@ const App = ({ consoleIsOpen, setConsoleIsOpen, currentCollection }) => {
         }
     }, [gainNode, ctx, biquadFilter,])
 
+
+
     return (
         <>
             {!currentCollection && <Redirect to='/'></Redirect >}
@@ -117,6 +127,9 @@ const App = ({ consoleIsOpen, setConsoleIsOpen, currentCollection }) => {
                         setSounds={setSounds}
                         gainNode={gainNode}
                         biquadFilter={biquadFilter}
+                        savedObj={savedObj}
+                        setSavedObj={setSavedObj}
+                        currentCollection={currentCollection}
                     />
                 </>}
         </>

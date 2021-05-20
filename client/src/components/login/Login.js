@@ -18,8 +18,9 @@ const Login = ({ setLoginCard, setIsLoged }) => {
             })
             localStorage.setItem('name', res.data.user.userName)
             localStorage.setItem('token', res.data.token)
-            setIsLoged(true)
+            localStorage.setItem('id', res.data.user._id)
             setLoginCard(false)
+            setIsLoged(true)
             // console.log(localStorage.getItem('name'))
             // console.log(localStorage.getItem('token'))
         } catch (e) {

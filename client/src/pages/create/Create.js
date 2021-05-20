@@ -1,10 +1,12 @@
+
 import './create.css'
 import AddSound from '../../components/addSound/AddSound'
-import { useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import Selector from '../../components/selector/Selector'
 import Api from '../../api/Api'
 import SearchSound from '../../components/searchSound/SearchSound'
 import Input from '../../components/input/Input'
+import { Route } from "react-router-dom";
 
 const Create = () => {
     const [addSoundIsOpen, setAddSoundIsOpen] = useState(false)
@@ -19,6 +21,7 @@ const Create = () => {
     const [selectorVal, setSelectorVal] = useState('purpule')
     const selectorOps = ['ligth-blue', 'purpule', 'red', 'yellow', 'blue', 'green',];
     const [collectionName, setCollectionName] = useState('')
+
 
 
     useEffect(() => {
@@ -66,7 +69,7 @@ const Create = () => {
         </div>
     }
 
-    const saveCollection = async () => {
+    const saveCollection = async (history) => {
         const tempArr = arr.filter(e => e.id)
         if (tempArr.length === 24 && collectionName.length > 0) {
             try {
@@ -86,6 +89,8 @@ const Create = () => {
                         }
                     }
                 )
+
+                await history.push("/home");
                 console.log(save)
             } catch (e) {
                 console.log('the name is in use choose a differnt collection name')
@@ -163,11 +168,15 @@ const Create = () => {
                             value={collectionName}
                             onChange={(e) => setCollectionName(e.target.value)}
                         />
-                        <button
-                            className='create-button'
-                            onClick={() => saveCollection()}
 
-                        >Save</button>
+
+                        <Route render={({ history }) => (
+                            <button
+                                className='create-button'
+                                onClick={() => saveCollection(history)}
+
+                            >Save</button>
+                        )} />
                     </div>
                 </div>
             </div>

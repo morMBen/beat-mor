@@ -1,6 +1,23 @@
 const mongoose = require('mongoose');
 var uniqueValidator = require('mongoose-unique-validator');
 
+
+
+const patterns = new mongoose.Schema({
+    name: {
+        type: String,
+        required: true
+    },
+    patternOwner: {
+        type: String,
+        required: true,
+    },
+    userName: {
+        type: String,
+        required: true,
+    }
+})
+
 const soundCollection = new mongoose.Schema({
     name: {
         type: String,
@@ -17,6 +34,11 @@ const soundCollection = new mongoose.Schema({
     ownerName: {
         type: String,
         required: true
+    },
+    patterns: {
+        type: [patterns],
+        required: false,
+        default: []
     }
 
 })
