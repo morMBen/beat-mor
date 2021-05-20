@@ -39,6 +39,7 @@ router
             res.status(400).send(e.message)
         }
     })
+
     .patch('/update/:id', auth, async (req, res) => {
         try {
             const pattern = new Patterns({ ...req.body, owner: req.user._id })
