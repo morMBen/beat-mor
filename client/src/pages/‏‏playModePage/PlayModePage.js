@@ -187,7 +187,7 @@ const PlayModePage = ({
                 name: patternName
             }
             //=====
-            const savedObj = await Api.patch(`sound-collection/update/${currentCollection}`, tempObj,
+            await Api.patch(`sound-collection/update/${currentCollection}`, tempObj,
                 {
                     headers: {
                         "Authorization": `Bearer ${token}`
