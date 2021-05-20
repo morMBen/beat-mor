@@ -56,6 +56,7 @@ const App = () => {
                 consoleIsOpen={consoleIsOpen}
                 setConsoleIsOpen={setConsoleIsOpen}
                 currentCollection={currentCollection}
+                setcurrentCollection={setCurrentCollection}
               />
             }
             />

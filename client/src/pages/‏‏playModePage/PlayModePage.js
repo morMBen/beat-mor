@@ -4,7 +4,7 @@ import ReactInterval from 'react-interval';
 import './playModePage.css'
 import BeatBox from '../../components/beatBox/BeatBox'
 import PadBox from '../../components/‏‏padBox/padBox'
-
+import Spinner from '../../components/spinner/Spinner'
 import Api from '../../api/Api'
 // import Sounds2 from '../../components/‏‏sounds/Sounds'
 
@@ -15,7 +15,8 @@ const PlayModePage = ({
     setSounds,
     gainNode,
     biquadFilter,
-    currentCollection
+    currentCollection,
+    patternArr
 }) => {
     const [isLoading, setIsLoading] = useState(false)
 
@@ -36,12 +37,12 @@ const PlayModePage = ({
 
     //---Is Loading------///
     useEffect(() => {
-        if (sounds) {
+        if (sounds && patternArr) {
             setIsLoading(false)
         } else {
             setIsLoading(true)
         }
-    }, [sounds])
+    }, [sounds, patternArr])
 
 
     //====AudioApi=====///
@@ -74,15 +75,24 @@ const PlayModePage = ({
 
     //-----------
     useEffect(() => {
+        console.log(patternArr)
+        // if (patternArr) {
         let temp = {}
-        for (let i = 0; i < 24; i++) {
-            temp[i + 1] = new Array(33).fill(false)
+        if (patternArr === 'empty') {
+            for (let i = 0; i < 24; i++) {
+                temp[i + 1] = new Array(33).fill(false)
+            }
+        } else {
+            for (let i = 0; i < 24; i++) {
+                temp[i + 1] = patternArr[i].sequencer
+            }
         }
         temp.padsStatus = new Array(24).fill(true)
         setRythemObj(temp)
         // console.log(temp)
         // console.log(sounds)
-    }, [restart, setSounds])
+        // }
+    }, [restart, setSounds, patternArr])
 
     useEffect(() => {
         setTimeout(() => {
@@ -194,7 +204,7 @@ const PlayModePage = ({
 
     return (
         <>
-            {isLoading && <h1 style={{ color: 'white' }}>Loading Spinner</h1>}
+            {isLoading && <Spinner />}
             {!isLoading && <>
                 <ReactInterval timeout={60000 / realBpm / 4} enabled={enabled}
                     callback={() => {
@@ -335,19 +345,26 @@ const PlayModePage = ({
                                     </div>
                                 </>}
                             {saveIsOpen &&
-                                <div>
-                                    <h3>{message}</h3>
-                                    <input
-                                        onChange={(e) => setPatternName(e.target.value)}
-                                        value={patternName}
-                                    ></input>
-                                    <button onClick={() => save(patternName)}>Save</button>
-                                    <button onClick={() => {
-                                        setSaveIsOpen(false)
-                                        setPatternName('')
-                                    }
-                                    }>Cansel</button>
-                                </div>
+                                <>
+                                    <div className='play-mode-toggle-h2'>{message}</div>
+                                    <div style={{ display: 'flex', margin: '1rem', justifyContent: 'space-between', transition: 'all 1s' }}>
+                                        <input
+                                            style={{ fontSize: '1rem', borderRadius: '5px' }}
+                                            onChange={(e) => setPatternName(e.target.value)}
+                                            value={patternName}
+                                        ></input>
+                                        <button
+                                            className='play-mode-button'
+                                            onClick={() => save(patternName)}>Save</button>
+                                        <button
+                                            className='play-mode-button'
+                                            onClick={() => {
+                                                setSaveIsOpen(false)
+                                                setPatternName('')
+                                            }
+                                            }>Cansel</button>
+                                    </div>
+                                </>
                             }
                         </div>
                     </div >}

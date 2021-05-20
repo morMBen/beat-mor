@@ -24,12 +24,19 @@ const Home = ({ setConsoleIsOpen, setCurrentCollection, consoleIsOpen }) => {
         setConsoleIsOpen(true)
     }
 
+    // const choosePattern = async (id) => {
+    //     const tempRes = await Api.get(`/patterns/all/${id}`)
+    //     console.log(tempRes)
+    // }
+
 
     const insetCollectionsNames = () => {
         return collectionsNames.map((e, i) => {
             return <section className='home-section' key={`collection${i}`}
                 onClick={() => {
                     setCurrentCollection(e._id)
+                    // choosePattern(e.id)
+
                     openConsole()
                 }}
             >
