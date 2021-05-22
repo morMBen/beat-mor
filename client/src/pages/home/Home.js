@@ -5,7 +5,6 @@ import './home.css'
 import testImg from '../../img/openBackgound.jpg'
 import { Link } from "react-router-dom";
 
-// import OpeningPage from '../openingPage/OpeningPage';
 const Home = ({ setConsoleIsOpen, setCurrentCollection, consoleIsOpen }) => {
     const [collectionsNames, setCollectionsNames] = useState(null)
 
@@ -24,10 +23,6 @@ const Home = ({ setConsoleIsOpen, setCurrentCollection, consoleIsOpen }) => {
         setConsoleIsOpen(true)
     }
 
-    // const choosePattern = async (id) => {
-    //     const tempRes = await Api.get(`/patterns/all/${id}`)
-    //     console.log(tempRes)
-    // }
 
 
     const insetCollectionsNames = () => {
@@ -35,8 +30,6 @@ const Home = ({ setConsoleIsOpen, setCurrentCollection, consoleIsOpen }) => {
             return <section className='home-section' key={`collection${i}`}
                 onClick={() => {
                     setCurrentCollection(e._id)
-                    // choosePattern(e.id)
-
                     openConsole()
                 }}
             >
