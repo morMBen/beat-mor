@@ -1,7 +1,6 @@
 import PlayModePage from './PlayModePage'
 import { useState, useEffect } from 'react'
 import ChoosePattern from '../../components/choosePattern/ChoosePattern'
-
 import axios from 'axios'
 import Api from '../../api/Api'
 import { Redirect } from 'react-router-dom'
@@ -125,22 +124,6 @@ const App = ({ consoleIsOpen, setConsoleIsOpen, currentCollection, setcurrentCol
 
             {currentCollection && patternArr &&
                 <>
-                    <button
-                        style={{ position: 'absolute', padding: '2px 4px', background: 'var(--led-red)', borderRadius: '4px', fontSize: '1.2rem', border: 'none', bottom: '2rem', left: '2rem', cursor: 'pointer' }}
-                        onClick={() => {
-                            if (!isOn) {
-                                setIsOn(true)
-                            } else {
-                                setCtx(null)
-                                setIsOn(false)
-                                setGainNode(null)
-                                setBiquadFilter(null)
-                                setSounds(null)
-                                setcurrentCollection(null)
-                            }
-                        }
-                        }
-                    >X</button>
                     <PlayModePage
                         ctx={ctx}
                         sounds={sounds}

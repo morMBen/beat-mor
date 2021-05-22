@@ -6,7 +6,6 @@ import BeatBox from '../../components/beatBox/BeatBox'
 import PadBox from '../../components/‏‏padBox/padBox'
 import Spinner from '../../components/spinner/Spinner'
 import Api from '../../api/Api'
-// import Sounds2 from '../../components/‏‏sounds/Sounds'
 
 
 const PlayModePage = ({
@@ -205,7 +204,18 @@ const PlayModePage = ({
     return (
         <>
             {isLoading && <Spinner />}
+
             {!isLoading && <>
+
+
+                <button
+                    style={{ position: 'absolute', padding: '2px 4px', background: 'var(--led-red)', borderRadius: '4px', fontSize: '1.2rem', border: 'none', bottom: '2rem', left: '2rem', cursor: 'pointer' }}
+                    onClick={() => {
+
+                        window.location.reload()
+                    }
+                    }
+                >X</button>
                 <ReactInterval timeout={60000 / realBpm / 4} enabled={enabled}
                     callback={() => {
                         setBeat((beat + 1))

@@ -19,6 +19,7 @@ const App = () => {
       setIsLoged(true)
       setUserName(localStorage.getItem('name'))
     }
+    // setCurrentCollection(null)
   }, [isLoged])
 
   return (
