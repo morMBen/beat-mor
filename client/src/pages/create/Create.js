@@ -4,7 +4,7 @@ import AddSound from '../../components/addSound/AddSound'
 import React, { useEffect, useState } from 'react'
 import Selector from '../../components/selector/Selector'
 import Api from '../../api/Api'
-// import SearchSound from '../../components/searchSound/SearchSound'
+import SearchSound from '../../components/searchSound/SearchSound'
 import Input from '../../components/input/Input'
 import { Route } from "react-router-dom";
 
@@ -32,7 +32,7 @@ const Create = () => {
 
 
     const padHandler = (e) => {
-        console.log(searchSoundIsOpen)///////////
+        // console.log(searchSoundIsOpen)///////////
         const index = e.target.id.replace('pad-num-', '')
         if (fileIsSelected && selectedSound) {
             const tempArr = arr;
@@ -100,10 +100,10 @@ const Create = () => {
     }
     return (
         <>
-            {/* {searchSoundIsOpen && <SearchSound
+            {searchSoundIsOpen && <SearchSound
                 setSearchSoundIsOpen={setSearchSoundIsOpen}
                 setSelected={setSelectedSound}
-            />} */}
+            />}
             {addSoundIsOpen && <AddSound
                 setAddSoundIsOpen={setAddSoundIsOpen}
                 setSelectedSound={setSelectedSound}
