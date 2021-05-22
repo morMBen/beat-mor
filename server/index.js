@@ -14,9 +14,9 @@ app.use(express.json({ limit: "5mb" }))
 app.use('/api', route);
 
 
-// app.use('/', (req, res) => {
-//     res.sendFile(path.join(pubDir, 'index.html'));
-// });
+app.use('/', (req, res) => {
+    res.sendFile(path.join(pubDir, 'index.html'));
+});
 
 const PORT = process.env.PORT || 5000;
 
