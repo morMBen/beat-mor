@@ -1,7 +1,7 @@
 import './choosePattern.css'
 import { useEffect, useState } from 'react'
 import Api from '../../api/Api'
-// import { Link } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 
 const ChoosePattern = ({ setChoosePatternIsOpen, setSelected, tempCurrentCollection, setIsOn }) => {
     const [isLoading, setIsLoading] = useState(true);
@@ -79,12 +79,12 @@ const ChoosePattern = ({ setChoosePatternIsOpen, setSelected, tempCurrentCollect
                 <div className="search-sound-container">
 
                     {!isLoading && <>
-                        {/* <Link to='/'> */}
-                        <div className='add-sound-exit'
-                            onClick={() => setChoosePatternIsOpen(false)}
-                        >
-                            X</div>
-                        {/* </Link> */}
+                        <Link to='/'>
+                            <div className='add-sound-exit'
+                                onClick={() => setChoosePatternIsOpen(false)}
+                            >
+                                X</div>
+                        </Link>
                         <h2 className="search-sound-container-h2">Choose Pattern</h2>
 
                         <div className='search-sound-results'>

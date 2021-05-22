@@ -39,18 +39,21 @@ const App = ({ consoleIsOpen, setConsoleIsOpen, currentCollection, setcurrentCol
                         })
                         setPatternArr('empty')
                     } else {
-
-                        const res = await Api.get(`/patterns/${pattern}`)
-                        console.log(await res.data[0].pattern)
-                        setPatternArr(await res.data[0].pattern)
-                        tempEffectsArr = await res.data[0].pattern.map(e => {
-                            return ({
-                                frequency: Number(e.frequency),
-                                detune: Number(e.detune),
-                                type: e.type,
-                                gain: Number(e.gacurrentCollectionin)
+                        try {
+                            const res = await Api.get(`/patterns/${pattern}`)
+                            console.log(await res.data[0].pattern)
+                            setPatternArr(await res.data[0].pattern)
+                            tempEffectsArr = await res.data[0].pattern.map(e => {
+                                return ({
+                                    frequency: Number(e.frequency),
+                                    detune: Number(e.detune),
+                                    type: e.type,
+                                    gain: Number(e.gacurrentCollectionin)
+                                })
                             })
-                        })
+                        } catch (e) {
+                            console.log(e)
+                        }
                     }
                     const arrRes = await Api.get(`/sound-collection/${currentCollection}`)
                     const arrData = await arrRes.data[0].sounds
