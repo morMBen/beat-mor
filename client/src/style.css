@@ -1,4 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Kanit:wght@300&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Audiowide&display=swap');
 *{
     padding: 0;
     margin: 0;
@@ -9,7 +10,8 @@
 :root {
     --primary: #22D2A0;
     --secondary: #192824;
-    --background: #192824;
+    --primary-background: #001437;
+    --green-background: #192824;
     --green: #1FC11B;
     --yellow: #FFD913;
     --orange: #FF9C55;
@@ -27,7 +29,174 @@
   
 
 body{
-    background: #001437;
-    font-family: 'Kanit', sans-serif;
-  
+    background: var(--primary-background);
+    /* font-family: var(--primary-font); */
 }
+
+.glow-card-container{
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
+        background-color: var(--green-background);
+        position: absolute;
+        /* top:50%;
+        left: 50%; 
+        transform: translate(-50%, -50%); */
+        color:var(--led-ligth-blue);
+        border: 3px solid var(--primary);
+        border-radius: 20px;
+        padding: 5rem;
+    }
+.glow-card-container:hover {
+  animation: shadow-wave 10s linear infinite;
+}
+.glow-card-background{
+    position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  background: rgba(0, 0, 0, 0.8);
+  z-index: 123;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  /* flex-direction: column; */
+  overflow: hidden;
+}
+
+.glow-card-h1{
+    text-align: center;
+  font-size: 3rem;
+  font-family: var(--logo-font);
+  font-weight: bold;
+}
+.glow-card-h2{
+    font-size: 2rem;
+    font-family: var(--logo-font);
+}
+.glow-card-h4{
+    font-size: 1.5rem;
+    font-family: var(--primary-font);
+}
+.glow-card-h3{
+    font-size: 1.25rem;
+    font-family: var(--primary-font);
+}
+
+.glow-card-input{
+    cursor: pointer;
+    color: var(--secondary);
+      margin: 0.2rem auto;
+    padding: 0rem 0.5rem;
+    border-radius: 0.2rem;
+    background-color: rgb(255, 255, 255);
+    border: none;
+    width: 100%;
+    display: block;
+    border-bottom: 0.3rem solid transparent;
+    transition: all 0.3s;
+    outline: none;
+}
+.upprcase{
+    text-transform: uppercase;
+}
+.glow-card-button{
+    cursor: pointer;
+    box-shadow: 0px 0px 10px 2px var(--led-blue);
+     font-weight: bold;
+     background: var(--led-ligth-blue);
+     font-size: 1rem;
+     font-size: 1.2rem;
+    border-radius:7px;
+    font-family: var(--logo-font);
+     padding: 0.3rem 0.5rem;
+     width: 30%;
+     border: none;
+     transition: 0.4s all;
+}
+.glow-card-button:hover{
+    box-shadow: 0px 0px 10px 2px var(--led-ligth-blue);
+    background: var(--led-ligth-blue);
+}
+.glow-card-button:active{
+    box-shadow: 0px 0px 20px 2px var(--led-ligth-blue);
+    background: #b5fdff;
+}
+
+.font-color-red{
+    color:var(--red);
+}
+.font-red-shadow-red{
+    color:var(--red);
+    text-shadow: 0px 0px 20px var(--led-red);
+}
+.font-orange-shadow-red{
+    color:var(--orange);
+    text-shadow: 0px 0px 20px var(--led-red);
+}
+.font-white-shadow-green{
+    color:white;
+    text-shadow: 0px 0px 2px var(--led-green);
+}
+
+.flex-space-between{
+    display: flex;
+    justify-content: space-between;
+}
+.margin-top-1r{
+    margin-top: 1rem;
+}
+.margin-top-2r{
+    margin-top: 2rem;
+}
+
+ @media (max-width: 680px){
+    .glow-card-container{
+        width: 80%;
+        height: 80vh;
+        padding: 2rem;
+    }
+    .glow-card-h1{
+        font-size: 2rem;
+    }
+    .glow-card-h2{
+        font-size: 1.2rem;
+    }
+    .glow-card-h3{
+        font-size: 1rem;
+    }
+    .glow-card-button{
+        width: 100%;
+        margin: 0 5px;
+    }
+    .glow-card-h4{
+        font-size: 1.3rem;
+    }
+ }
+
+ @media (max-height: 600px){
+    .glow-card-container{
+        width: 90%;
+        height: 90%;
+        padding: 2rem;
+    }
+    .glow-card-button{
+      font-size: 1rem;
+    }
+    .glow-card-input{
+        height: 25px;
+    }
+    .glow-card-h1{
+        font-size: 1.5rem;
+    }
+    .glow-card-h2{
+        font-size: 1rem;
+    }
+    .glow-card-h3{
+        font-size: 0.8rem;
+    }
+    .glow-card-h4{
+        font-size: 1.1rem;
+    }
+ }

@@ -1,7 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Audiowide&display=swap');
 
 
-:root {
+/* :root {
     --primary: #22D2A0;
     --secondary: #192824;
     --background: #192824;
@@ -18,11 +18,10 @@
     
     --primary-font: 'Kanit', sans-serif;
     --logo-font: 'Audiowide', cursive;
-  } 
+  }  */
 
 
 .opening-page-container {
-    /* color: var(--primary); */
     z-index:2 ;
     display: flex;
     flex-direction: column;
