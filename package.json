@@ -8,7 +8,7 @@
     "client": "npm run start --prefix client",
     "dev": "concurrently \"npm run server\" \"npm run client\"",
     "start": "node ./server/index.js",
-    "togit": "git add . && git commit -m 'npm_config_first' && git push --all"
+    "togit": "git add . && git commit -m %npm_config_first% && git push origin HEAD:master"
   },
   "author": "",
   "license": "ISC",
