@@ -36,7 +36,7 @@ const App = () => {
         <BrowserRouter>
           {isUserLogedIn && <>
             {!consoleIsOpen && <Navbar userName={userName} />}
-            {/* <Route path="/" exact
+            <Route path="/" exact
               component={() =>
                 <Home
                   setConsoleIsOpen={setConsoleIsOpen}
@@ -66,7 +66,7 @@ const App = () => {
                 setcurrentCollection={setCurrentCollection}
               />
             }
-            /> */}
+            />
           </>}
         </BrowserRouter>
       </>
