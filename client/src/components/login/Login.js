@@ -20,10 +20,9 @@ const Login = ({ isloginCardOpen, setIsloginCardOpen, setIsUserLogedIn }) => {
             localStorage.setItem('id', res.data.user._id)
             setIsloginCardOpen(false);
             setIsUserLogedIn(true);
-            // }
         } catch (e) {
             if (!showMessage) {
-                setShowMessage(true)
+                setShowMessage(true);
                 setTimeout(() => {
                     setShowMessage(false)
                 }, 2000)
@@ -65,7 +64,6 @@ const Login = ({ isloginCardOpen, setIsloginCardOpen, setIsUserLogedIn }) => {
                             setPassword('')
                             setEmail('')
                             setIsloginCardOpen(false)
-
                         }}
                     >Cancel</button>
                 </div>
