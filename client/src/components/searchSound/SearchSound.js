@@ -33,7 +33,6 @@ const SearchSound = ({ setSearchSoundIsOpen, setSelected }) => {
             } catch (e) {
                 console.log(e)
             }
-
         }
         tagsRes()
     }, [])

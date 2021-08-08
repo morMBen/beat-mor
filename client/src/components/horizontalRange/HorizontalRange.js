@@ -2,7 +2,7 @@ import './horizontalRange.css'
 const HorizontalRange = ({ value, setValue
     , max, min }) => {
     return (
-        <div style={{ padding: '0.3rem 1rem', background: 'none', width: '100%' }}>
+        <div style={{ padding: '0.3rem 1rem', background: 'none', width: '50%' }}>
             <input
                 min={min}
                 max={max}

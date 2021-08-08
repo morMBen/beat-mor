@@ -1,9 +1,9 @@
 import { useState } from 'react';
 import Input from '../input/Input'
 import Api from '../../api/Api'
-// import './sign.css'
+import './sign.css'
 
-const Sign = ({ setIsSingCardOpen, setIsUserLogedIn }) => {
+const Sign = ({ setLoginCard, setIsLoged }) => {
     const [password, setPassword] = useState('');
     const [passwordConfirm, setPasswordConfirm] = useState('');
     const [userName, setUserName] = useState('');
@@ -15,15 +15,15 @@ const Sign = ({ setIsSingCardOpen, setIsUserLogedIn }) => {
     const handleSubmission = async () => {
         if (passwordConfirm !== password) {
             setShowMessage(true)
-            setMessage('Your password conformation is in currect')
             setTimeout(() => {
                 setShowMessage(false)
+                setMessage('Your password conformation is in currect')
             }, 2000)
         } else if (password.length < 8) {
             setShowMessage(true)
-            setMessage('Your password must be at least 8 digits')
             setTimeout(() => {
                 setShowMessage(false)
+                setMessage('Your password must be at least 8 digits')
             }, 2000)
         } else {
             try {
@@ -35,15 +35,15 @@ const Sign = ({ setIsSingCardOpen, setIsUserLogedIn }) => {
                 localStorage.clear()
                 localStorage.setItem('name', res.data.user.userName)
                 localStorage.setItem('token', res.data.token)
-                setIsSingCardOpen(false)
-                setIsUserLogedIn(true)
+                setLoginCard(false)
+                setIsLoged(true)
                 console.log(localStorage.getItem('name'))
                 console.log(localStorage.getItem('token'))
             } catch (e) {
-                setMessage('Error in email Check the spelling and make sure you are not already registered')
                 setShowMessage(true)
                 setTimeout(() => {
                     setShowMessage(false)
+                    setMessage('Error in email Check the spelling and make sure you are not already registered')
                 }, 2000)
             }
         }
@@ -51,66 +51,65 @@ const Sign = ({ setIsSingCardOpen, setIsUserLogedIn }) => {
 
 
     return (
-        <div className='glow-card-background'>
-            <div className='glow-card-container'>
+        <div className='signin-top'>
+            <div className='signin-container'>
                 <h2
-                    className='glow-card-h1 font-red-shadow-red'
+                    className='signin-container-h2'
                 >Ready to get started</h2>
                 <h3
-                    className='glow-card-h4 font-white-shadow-green'
+                    className='signin-container-h3'
                 >Write your user name</h3>
                 {/* <p>A space must be left between each tag</p> */}
                 <Input
-                    className={'glow-card-input glow-card-h4'}
+                    className={'signin-input'}
                     value={userName}
                     onChange={(e) => setUserName(e.target.value)}
                 />
                 <h3
-                    className='glow-card-h4 font-white-shadow-green'
+                    className='signin-container-h3'
                 // className='signin-container-h3'
                 >Enter your Email</h3>
                 {/* <p>A space must be left between each tag</p> */}
                 <Input
-                    className={'glow-card-input glow-card-h4'}
+                    className={'signin-input'}
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                 />
                 <h3
-                    className='glow-card-h4 font-white-shadow-green'
+                    className='signin-container-h3'
                 >Choose password</h3>
                 <Input
-                    className={'glow-card-input glow-card-h4'}
+                    className={'signin-input'}
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
                 />
                 <h3
-                    className='glow-card-h4 font-white-shadow-green'
+                    className='signin-container-h3'
                 >Confirm your password</h3>
                 <Input
-                    className={'glow-card-input glow-card-h4'}
+                    className={'signin-input'}
                     value={passwordConfirm}
                     onChange={(e) => setPasswordConfirm(e.target.value)}
 
                 />
                 <br></br>
-                {!showMessage && <div className='flex-space-between'>
+                <div style={{ display: 'flex', justifyContent: 'space-between' }}>
                     <button
-                        className='glow-card-button'
-                        type='button' onClick={() => handleSubmission()}
+                        className='signin-container-button'
+                        type='button' onClick={handleSubmission}
                     >Submit</button>
                     <button
-                        className='glow-card-button'
+                        className='signin-container-button'
                         type='button' onClick={() => {
                             setPassword('')
                             setEmail('')
-                            setIsSingCardOpen(false)
+                            setLoginCard(false)
                         }}
                     >Cancel</button>
-                </div>}
-
-                {showMessage &&
-                    <h4 className='glow-card-h3 font-orange-shadow-red'>{message}</h4>
-                }
+                </div>
+                <br />
+                {!showMessage && < br />}
+                {showMessage && <h4>{message}</h4>}
             </div>
         </div >
     )

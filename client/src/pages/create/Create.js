@@ -1,12 +1,10 @@
-
 import './create.css'
 import AddSound from '../../components/addSound/AddSound'
-import React, { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import Selector from '../../components/selector/Selector'
 import Api from '../../api/Api'
 import SearchSound from '../../components/searchSound/SearchSound'
 import Input from '../../components/input/Input'
-import { Route } from "react-router-dom";
 
 const Create = () => {
     const [addSoundIsOpen, setAddSoundIsOpen] = useState(false)
@@ -23,7 +21,6 @@ const Create = () => {
     const [collectionName, setCollectionName] = useState('')
 
 
-
     useEffect(() => {
         if (selectedSound) {
             setFileSelectedName(selectedSound.name)
@@ -32,7 +29,6 @@ const Create = () => {
 
 
     const padHandler = (e) => {
-        // console.log(searchSoundIsOpen)///////////
         const index = e.target.id.replace('pad-num-', '')
         if (fileIsSelected && selectedSound) {
             const tempArr = arr;
@@ -70,7 +66,7 @@ const Create = () => {
         </div>
     }
 
-    const saveCollection = async (history) => {
+    const saveCollection = async () => {
         const tempArr = arr.filter(e => e.id)
         if (tempArr.length === 24 && collectionName.length > 0) {
             try {
@@ -90,8 +86,6 @@ const Create = () => {
                         }
                     }
                 )
-
-                await history.push("/home");
                 console.log(save)
             } catch (e) {
                 console.log('the name is in use choose a differnt collection name')
@@ -169,15 +163,11 @@ const Create = () => {
                             value={collectionName}
                             onChange={(e) => setCollectionName(e.target.value)}
                         />
+                        <button
+                            className='create-button'
+                            onClick={() => saveCollection()}
 
-
-                        <Route render={({ history }) => (
-                            <button
-                                className='create-button'
-                                onClick={() => saveCollection(history)}
-
-                            >Save</button>
-                        )} />
+                        >Save</button>
                     </div>
                 </div>
             </div>

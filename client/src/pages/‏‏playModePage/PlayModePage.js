@@ -4,8 +4,8 @@ import ReactInterval from 'react-interval';
 import './playModePage.css'
 import BeatBox from '../../components/beatBox/BeatBox'
 import PadBox from '../../components/‏‏padBox/padBox'
-import Spinner from '../../components/spinner/Spinner'
-import Api from '../../api/Api'
+
+// import Sounds2 from '../../components/‏‏sounds/Sounds'
 
 
 const PlayModePage = ({
@@ -13,9 +13,7 @@ const PlayModePage = ({
     sounds,
     setSounds,
     gainNode,
-    biquadFilter,
-    currentCollection,
-    patternArr
+    biquadFilter
 }) => {
     const [isLoading, setIsLoading] = useState(false)
 
@@ -30,18 +28,14 @@ const PlayModePage = ({
     const [padIndex, setPadIndex] = useState(1)
     const [currentColor, setCurrentColor] = useState('ligth-blue');
 
-    const [saveIsOpen, setSaveIsOpen] = useState(false)
-    const [patternName, setPatternName] = useState('')
-    const [message, setMessage] = useState('Choose pattern name')
-
     //---Is Loading------///
     useEffect(() => {
-        if (sounds && patternArr) {
+        if (sounds) {
             setIsLoading(false)
         } else {
             setIsLoading(true)
         }
-    }, [sounds, patternArr])
+    }, [sounds])
 
 
     //====AudioApi=====///
@@ -74,24 +68,16 @@ const PlayModePage = ({
 
     //-----------
     useEffect(() => {
-        console.log(patternArr)
-        // if (patternArr) {
         let temp = {}
-        if (patternArr === 'empty') {
-            for (let i = 0; i < 24; i++) {
-                temp[i + 1] = new Array(33).fill(false)
-            }
-        } else {
-            for (let i = 0; i < 24; i++) {
-                temp[i + 1] = patternArr[i].sequencer
-            }
+        for (let i = 0; i < 24; i++) {
+            temp[i + 1] = new Array(33).fill(false)
         }
         temp.padsStatus = new Array(24).fill(true)
         setRythemObj(temp)
-        // console.log(temp)
-        // console.log(sounds)
-        // }
-    }, [restart, setSounds, patternArr])
+        // setSounds(Sounds2().map(e => {
+        //     return { ...e, gain: 0.75, frequency: 300 }
+        // }))
+    }, [restart, setSounds])
 
     useEffect(() => {
         setTimeout(() => {
@@ -161,61 +147,13 @@ const PlayModePage = ({
     }
     const stop = () => {
         setRestart(!restart)
-        setBeat(0)
-        setSequencerBeat(0)
-        setEnabled(false)
-    }
-
-    const save = async () => {
-        try {
-            setIsLoading(true)
-            const token = localStorage.getItem('token')
-            const pattern = sounds.map((e, i) => {
-                return {
-                    frequency: e.frequency,
-                    detune: e.detune,
-                    gacurrentCollectionin: e.gain,
-                    type: e.type,
-                    sequencer: rythemObj[i + 1]
-                }
-            })
-            //====
-            const tempObj = {
-                pattern: pattern,
-                collectionId: currentCollection,
-                name: patternName
-            }
-            //=====
-            await Api.patch(`sound-collection/update/${currentCollection}`, tempObj,
-                {
-                    headers: {
-                        "Authorization": `Bearer ${token}`
-                    }
-                })
-            setIsLoading(false)
-            setSaveIsOpen(false)
-            setPatternName('')
-        } catch (e) {
-            setMessage('The name is not available')
-            setIsLoading(false)
-        }
+        start()
     }
 
     return (
         <>
-            {isLoading && <Spinner />}
-
+            {isLoading && <h1 style={{ color: 'white' }}>Loading Spinner</h1>}
             {!isLoading && <>
-
-
-                <button
-                    style={{ position: 'absolute', padding: '2px 4px', background: 'var(--led-red)', borderRadius: '4px', fontSize: '1.2rem', border: 'none', bottom: '2rem', left: '2rem', cursor: 'pointer' }}
-                    onClick={() => {
-
-                        window.location.reload()
-                    }
-                    }
-                >X</button>
                 <ReactInterval timeout={60000 / realBpm / 4} enabled={enabled}
                     callback={() => {
                         setBeat((beat + 1))
@@ -229,153 +167,82 @@ const PlayModePage = ({
                             {insertDivs(8, 'play-mode-sequencer-grid', 'play-mode-single-sequencer', 9)}
                             {insertDivs(8, 'play-mode-sequencer-grid', 'play-mode-single-sequencer', 17)}
                             {insertDivs(8, 'play-mode-sequencer-grid', 'play-mode-single-sequencer', 25)}
-                            <div className='play-mode-toggle-h2'>Control All</div>
-                            <div className='toggle'>
-                                <div className='toggle-div'>
-                                    <div className='toggle-div-text'>
-                                        <p>BPM</p>
-                                        <p>{bpm}</p>
-                                    </div>
-                                    <HorizontalRange
-                                        value={bpm}
-                                        setValue={(e) => { setBpm(e.target.value) }}
-                                        max={'220'}
-                                        min={'60'} />
-                                </div>
-                                <div className='toggle-div'>
-                                    <div className='toggle-div-text'>
-                                        <p>Gain</p>
-                                        <p>{Math.round(gain * 100)}</p>
-                                    </div>
-                                    <HorizontalRange
-                                        value={gain * 100} setValue={(e) => {
-                                            setGain(e.target.value / 100)
-                                        }}
-                                        max={'100'}
-                                        min={'0'}
-                                    />
-                                </div>
-                                <div className='toggle-div'>
-                                    <div className='toggle-div-text'>
-                                        <p>Frequency</p>
-                                        <p>{frequency}</p>
-                                    </div>
-                                    <HorizontalRange
-                                        value={frequency} setValue={(e) => {
-                                            setFrequency(e.target.value)
-                                        }}
-                                        max={'4000'}
-                                        min={'0'}
-                                    />
-                                </div>
-                            </div>
+                    BPM {bpm}
+                            <HorizontalRange
+                                value={bpm}
+                                setValue={(e) => { setBpm(e.target.value) }}
+                                max={'220'}
+                                min={'60'} />
+                            <HorizontalRange
+                                value={gain * 100} setValue={(e) => {
+                                    setGain(e.target.value / 100)
+                                }}
+                                max={'100'}
+                                min={'0'}
+                            />
+                                Gain {gain}
+                            <HorizontalRange
+                                value={frequency} setValue={(e) => {
+                                    setFrequency(e.target.value)
+                                }}
+                                max={'4000'}
+                                min={'0'}
+                            />
+                            frequency {frequency}
+                            <br />
+                            {sequencerBeat}
                         </div>
                         <div className='play-mode-pads-container'>
                             {insertDivs(6, 'play-mode-sequencer-grid', 'play-mode-single-pad', 1)}
                             {insertDivs(6, 'play-mode-sequencer-grid', 'play-mode-single-pad', 7)}
                             {insertDivs(6, 'play-mode-sequencer-grid', 'play-mode-single-pad', 13)}
                             {insertDivs(6, 'play-mode-sequencer-grid', 'play-mode-single-pad', 19)}
-                            {!saveIsOpen &&
-                                <>
+                            {beat}
+                            <div style={{ display: 'flex', background: 'none' }}>
+                                <HorizontalRange
+                                    value={sounds[padIndex - 1].gain * 100} setValue={(e) => {
+                                        setGainInSoundsObject(e, 'gain')
+                                        // setGain(e.target.value / 100)
+                                    }}
+                                    max={'100'}
+                                    min={'0'}
+                                />
+                                <HorizontalRange
+                                    value={sounds[padIndex - 1].frequency} setValue={(e) => {
+                                        setGainInSoundsObject(e, 'frequency')
+                                    }}
+                                    max={'2000'}
+                                    min={'0'}
+                                />
+                                <HorizontalRange
+                                    value={sounds[padIndex - 1].detune} setValue={(e) => {
+                                        setGainInSoundsObject(e, 'detune')
+                                    }}
+                                    max={'4000'}
+                                    min={'-4000'}
+                                />
+                                <div >
+                                    <select
 
-                                    <div
-                                        style={{ display: 'flex', justifyContent: 'space-between' }}
-                                        className='play-mode-toggle-h2'>
-                                        <button
-                                            style={{ color: enabled ? 'var(--red)' : 'var(--green)' }}
-                                            className='play-mode-button'
-                                            onClick={() => start()}>{enabled ? 'Stop' : 'Play'}</button>
+                                        value={sounds[padIndex - 1].type}
+                                        onChange={(e) => {
+                                            setGainInSoundsObject(e, 'type')
+                                        }}>
+                                        <option value='allpass'>Allpass</option>
+                                        <option value='lowpass'>Lowpass</option>
+                                        <option value='highpass'>Highpass</option>
+                                        <option value='bandpass'>Bandpass</option>
+                                        <option value='lowshelf'>Lowshelf</option>
+                                        <option value='highshelf'>Highshelf</option>
+                                        <option value='peaking'>Peaking</option>
+                                        <option value='notch'>Notch</option>
+                                    </select>
 
-                                        <select
-                                            className='play-mode-selector'
-                                            value={sounds[padIndex - 1].type}
-                                            onChange={(e) => {
-                                                setGainInSoundsObject(e, 'type')
-                                            }}>
-                                            <option value='allpass'>Allpass</option>
-                                            <option value='lowpass'>Lowpass</option>
-                                            <option value='highpass'>Highpass</option>
-                                            <option value='bandpass'>Bandpass</option>
-                                            <option value='lowshelf'>Lowshelf</option>
-                                            <option value='highshelf'>Highshelf</option>
-                                            <option value='peaking'>Peaking</option>
-                                            <option value='notch'>Notch</option>
-                                        </select>
-                                        <button className='play-mode-button'
-                                            onClick={() => stop()}>Clear</button>
-
-                                        <button className='play-mode-button'
-
-                                            onClick={() => setSaveIsOpen(true)}>Save</button>
-
-                                    </div>
-
-
-                                    <div className='toggle'>
-                                        <div className='toggle-div'>
-                                            <div className='toggle-div-text'>
-                                                <p>Gain</p>
-                                                <p>{Math.round(sounds[padIndex - 1].gain * 100)}</p>
-                                            </div>
-                                            <HorizontalRange
-                                                value={sounds[padIndex - 1].gain * 100} setValue={(e) => {
-                                                    setGainInSoundsObject(e, 'gain')
-                                                }}
-                                                max={'100'}
-                                                min={'0'}
-                                            />
-                                        </div>
-                                        <div className='toggle-div'>
-                                            <div className='toggle-div-text'>
-                                                <p>Frequency</p>
-                                                <p>{Math.round(sounds[padIndex - 1].frequency)}</p>
-                                            </div>
-                                            <HorizontalRange
-                                                value={sounds[padIndex - 1].frequency} setValue={(e) => {
-                                                    setGainInSoundsObject(e, 'frequency')
-                                                }}
-                                                max={'2000'}
-                                                min={'0'}
-                                            />
-                                        </div>
-                                        <div className='toggle-div'>
-                                            <div className='toggle-div-text'>
-                                                <p>Detune</p>
-                                                <p>{sounds[padIndex - 1].detune}</p>
-                                            </div>
-                                            <HorizontalRange
-                                                value={sounds[padIndex - 1].detune} setValue={(e) => {
-                                                    setGainInSoundsObject(e, 'detune')
-                                                }}
-                                                max={'4000'}
-                                                min={'-4000'}
-                                            />
-                                        </div>
-
-                                    </div>
-                                </>}
-                            {saveIsOpen &&
-                                <>
-                                    <div className='play-mode-toggle-h2'>{message}</div>
-                                    <div style={{ display: 'flex', margin: '1rem', justifyContent: 'space-between', transition: 'all 1s' }}>
-                                        <input
-                                            style={{ fontSize: '1rem', borderRadius: '5px' }}
-                                            onChange={(e) => setPatternName(e.target.value)}
-                                            value={patternName}
-                                        ></input>
-                                        <button
-                                            className='play-mode-button'
-                                            onClick={() => save(patternName)}>Save</button>
-                                        <button
-                                            className='play-mode-button'
-                                            onClick={() => {
-                                                setSaveIsOpen(false)
-                                                setPatternName('')
-                                            }
-                                            }>Cansel</button>
-                                    </div>
-                                </>
-                            }
+                                    <button
+                                        onClick={() => start()}>Start</button>
+                                    <button onClick={() => stop()}>Clear</button>
+                                </div>
+                            </div>
                         </div>
                     </div >}
             </>}

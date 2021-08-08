@@ -8,33 +8,27 @@ import StarterPlayModePage from '../pages/‏‏playModePage/StarterPlayModePage
 
 
 const App = () => {
-  //Cheack if the playing console is open.
-  const [consoleIsOpen, setConsoleIsOpen] = useState(false);
-  //Current collection selected.
-  const [currentCollection, setCurrentCollection] = useState(null);
 
-  //check if the user is loged.
-  const [isUserLogedIn, setIsUserLogedIn] = useState(false);
 
-  //set the user name.
+  const [consoleIsOpen, setConsoleIsOpen] = useState(false)
+
+  const [currentCollection, setCurrentCollection] = useState(null)
+
+  const [isLoged, setIsLoged] = useState(false)
   const [userName, setUserName] = useState(null)
   useEffect(() => {
-    //if token is saved in the local storage:
-    // - set the state isLoged to true.
-    // - set the state userName to the name from local storage.
-    if (localStorage.token && !isUserLogedIn) {
-      setIsUserLogedIn(true)
+    if (localStorage.token) {
+      setIsLoged(true)
       setUserName(localStorage.getItem('name'))
     }
-  }, [isUserLogedIn])
+  }, [isLoged])
 
   return (
     <>
       <>
-        {/* { console.log(window.location.href)} */}
-        {!isUserLogedIn && <OpeningPage setIsUserLogedIn={setIsUserLogedIn} />}
+        {!isLoged && <OpeningPage setIsLoged={setIsLoged} />}
         <BrowserRouter>
-          {isUserLogedIn && <>
+          {isLoged && <>
             {!consoleIsOpen && <Navbar userName={userName} />}
             <Route path="/" exact
               component={() =>
@@ -63,7 +57,6 @@ const App = () => {
                 consoleIsOpen={consoleIsOpen}
                 setConsoleIsOpen={setConsoleIsOpen}
                 currentCollection={currentCollection}
-                setcurrentCollection={setCurrentCollection}
               />
             }
             />
