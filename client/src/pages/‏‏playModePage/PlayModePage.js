@@ -4,6 +4,7 @@ import ReactInterval from 'react-interval';
 import './playModePage.css'
 import BeatBox from '../../components/beatBox/BeatBox'
 import PadBox from '../../components/‏‏padBox/padBox'
+import Spinner from '../../components/spinner/Spinner';
 
 // import Sounds2 from '../../components/‏‏sounds/Sounds'
 
@@ -13,13 +14,15 @@ const PlayModePage = ({
     sounds,
     setSounds,
     gainNode,
-    biquadFilter
+    biquadFilter,
+    patternArr
 }) => {
     const [isLoading, setIsLoading] = useState(false)
 
     const [bpm, setBpm] = useState(120)
     const [realBpm, setRealBpm] = useState(120)
     const [enabled, setEnabled] = useState(false)
+
     const [beat, setBeat] = useState(0)
     const [sequencerBeat, setSequencerBeat] = useState(0)
     const [restart, setRestart] = useState(false)
@@ -52,33 +55,15 @@ const PlayModePage = ({
         }
     }, [gainNode, gain, biquadFilter, frequency])
 
-    const setGainInSoundsObject = (e, type) => {
-        const tempSounds = [...sounds]
-        if (type === 'gain') {
-            tempSounds[padIndex - 1][type] = e.target.value / 100
-        } else if (type === 'type') {
-            tempSounds[padIndex - 1][type] = e.target.value
-        } else {
-            tempSounds[padIndex - 1][type] = e.target.value
-        }
-
-        setSounds(tempSounds)
-    }
 
 
-    //-----------
+
+    // Set rithem Obj 
     useEffect(() => {
-        let temp = {}
-        for (let i = 0; i < 24; i++) {
-            temp[i + 1] = new Array(33).fill(false)
-        }
-        temp.padsStatus = new Array(24).fill(true)
-        setRythemObj(temp)
-        // setSounds(Sounds2().map(e => {
-        //     return { ...e, gain: 0.75, frequency: 300 }
-        // }))
-    }, [restart, setSounds])
+        setRythemObjStateHelperFunc(patternArr, setRythemObj)
+    }, [restart, setSounds, patternArr])
 
+    // Set Bpm state
     useEffect(() => {
         setTimeout(() => {
             setRealBpm(bpm)
@@ -147,13 +132,58 @@ const PlayModePage = ({
     }
     const stop = () => {
         setRestart(!restart)
-        start()
+        setBeat(0)
+        setSequencerBeat(0)
+        setEnabled(false)
     }
+
+    // const save = async () => {
+    //     try {
+    //         setIsLoading(true)
+    //         const token = localStorage.getItem('token')
+    //         const pattern = sounds.map((e, i) => {
+    //             return {
+    //                 frequency: e.frequency,
+    //                 detune: e.detune,
+    //                 gacurrentCollectionin: e.gain,
+    //                 type: e.type,
+    //                 sequencer: rythemObj[i + 1]
+    //             }
+    //         })
+    //         //====
+    //         const tempObj = {
+    //             pattern: pattern,
+    //             collectionId: currentCollection,
+    //             name: patternName
+    //         }
+    //         //=====
+    //         await Api.patch(`sound-collection/update/${currentCollection}`, tempObj,
+    //             {
+    //                 headers: {
+    //                     "Authorization": `Bearer ${token}`
+    //                 }
+    //             })
+    //         setIsLoading(false)
+    //         setSaveIsOpen(false)
+    //         setPatternName('')
+    //     } catch (e) {
+    //         setMessage('The name is not available')
+    //         setIsLoading(false)
+    //     }
+    // }
 
     return (
         <>
-            {isLoading && <h1 style={{ color: 'white' }}>Loading Spinner</h1>}
+            {isLoading && <Spinner />}
             {!isLoading && <>
+                <button
+                    style={{ position: 'absolute', padding: '2px 4px', background: 'var(--led-red)', borderRadius: '4px', fontSize: '1.2rem', border: 'none', bottom: '2rem', left: '2rem', cursor: 'pointer' }}
+                    onClick={() => {
+
+                        window.location.reload()
+                    }
+                    }
+                >X</button>
                 <ReactInterval timeout={60000 / realBpm / 4} enabled={enabled}
                     callback={() => {
                         setBeat((beat + 1))
@@ -167,7 +197,7 @@ const PlayModePage = ({
                             {insertDivs(8, 'play-mode-sequencer-grid', 'play-mode-single-sequencer', 9)}
                             {insertDivs(8, 'play-mode-sequencer-grid', 'play-mode-single-sequencer', 17)}
                             {insertDivs(8, 'play-mode-sequencer-grid', 'play-mode-single-sequencer', 25)}
-                    BPM {bpm}
+                            BPM {bpm}
                             <HorizontalRange
                                 value={bpm}
                                 setValue={(e) => { setBpm(e.target.value) }}
@@ -180,7 +210,7 @@ const PlayModePage = ({
                                 max={'100'}
                                 min={'0'}
                             />
-                                Gain {gain}
+                            Gain {gain}
                             <HorizontalRange
                                 value={frequency} setValue={(e) => {
                                     setFrequency(e.target.value)
@@ -201,7 +231,7 @@ const PlayModePage = ({
                             <div style={{ display: 'flex', background: 'none' }}>
                                 <HorizontalRange
                                     value={sounds[padIndex - 1].gain * 100} setValue={(e) => {
-                                        setGainInSoundsObject(e, 'gain')
+                                        setGainInSoundsObject(e, 'gain', sounds, setSounds, padIndex)
                                         // setGain(e.target.value / 100)
                                     }}
                                     max={'100'}
@@ -209,14 +239,14 @@ const PlayModePage = ({
                                 />
                                 <HorizontalRange
                                     value={sounds[padIndex - 1].frequency} setValue={(e) => {
-                                        setGainInSoundsObject(e, 'frequency')
+                                        setGainInSoundsObject(e, 'frequency', sounds, setSounds, padIndex)
                                     }}
                                     max={'2000'}
                                     min={'0'}
                                 />
                                 <HorizontalRange
                                     value={sounds[padIndex - 1].detune} setValue={(e) => {
-                                        setGainInSoundsObject(e, 'detune')
+                                        setGainInSoundsObject(e, 'detune', sounds, setSounds, padIndex)
                                     }}
                                     max={'4000'}
                                     min={'-4000'}
@@ -226,7 +256,7 @@ const PlayModePage = ({
 
                                         value={sounds[padIndex - 1].type}
                                         onChange={(e) => {
-                                            setGainInSoundsObject(e, 'type')
+                                            setGainInSoundsObject(e, 'type', sounds, setSounds, padIndex)
                                         }}>
                                         <option value='allpass'>Allpass</option>
                                         <option value='lowpass'>Lowpass</option>
@@ -251,3 +281,34 @@ const PlayModePage = ({
 }
 
 export default PlayModePage;
+
+const setGainInSoundsObject = (e, type, sounds, setSounds, padIndex) => {
+    const tempSounds = [...sounds]
+    if (type === 'gain') {
+        tempSounds[padIndex - 1][type] = e.target.value / 100
+    } else if (type === 'type') {
+        tempSounds[padIndex - 1][type] = e.target.value
+    } else {
+        tempSounds[padIndex - 1][type] = e.target.value
+    }
+
+    setSounds(tempSounds)
+}
+
+const setRythemObjStateHelperFunc = (patternArr, setRythemObj) => {
+    let tempObj = {};
+    if (patternArr) {
+        if (patternArr === 'empty') {
+            for (let i = 0; i < 24; i++) {
+                tempObj[i + 1] = new Array(33).fill(false)
+            }
+        } else {
+            if (patternArr)
+                for (let i = 0; i < 24; i++) {
+                    tempObj[i + 1] = patternArr[i].sequencer
+                }
+        }
+        tempObj.padsStatus = new Array(24).fill(true)
+        setRythemObj(tempObj)
+    }
+};

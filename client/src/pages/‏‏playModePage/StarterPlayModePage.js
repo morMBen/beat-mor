@@ -14,6 +14,8 @@ const StarterPlayModePage = ({ consoleIsOpen, setConsoleIsOpen, currentCollectio
     const [biquadFilter, setBiquadFilter] = useState(null);
     const [sounds, setSounds] = useState(null);
 
+    const [savedObj, setSavedObj] = useState(null)
+
     const [patternArr, setPatternArr] = useState(null);
 
 
@@ -49,6 +51,7 @@ const StarterPlayModePage = ({ consoleIsOpen, setConsoleIsOpen, currentCollectio
 
     return (
         <>
+            {console.log(patternArr)}
             {!currentCollection && <Redirect to='/'></Redirect >}
             {/* {console.log(isLoading)} */}
 
@@ -60,6 +63,9 @@ const StarterPlayModePage = ({ consoleIsOpen, setConsoleIsOpen, currentCollectio
                         setSounds={setSounds}
                         gainNode={gainNode}
                         biquadFilter={biquadFilter}
+                        savedObj={savedObj}
+                        setSavedObj={setSavedObj}
+                        currentCollection={currentCollection}
                         patternArr={patternArr}
                     />
                 </>}
@@ -107,7 +113,7 @@ const fetchCurrentPatternById = async (currentPattern, setPatternArr) => {
             type: 'notch',
             gain: 0.75
         })
-        setPatternArr('empty')
+        await setPatternArr('empty')
     } else {
         try {
             const res = await Api.get(`/patterns/${currentPattern}`)
