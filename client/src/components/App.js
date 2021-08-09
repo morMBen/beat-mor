@@ -14,6 +14,9 @@ const App = () => {
   //Current collection selected.
   const [currentCollection, setCurrentCollection] = useState(null);
 
+  //
+  const [currentPattern, setCurrentPattern] = useState(null);
+
   //check if the user is loged.
   const [isUserLogedIn, setIsUserLogedIn] = useState(false);
 
@@ -53,6 +56,7 @@ const App = () => {
                   setCurrentCollection={setCurrentCollection}
                   setIsLoading={setIsLoading}
                   isLoading={isLoading}
+                  setCurrentPattern={setCurrentPattern}
                 />
               }
             >
@@ -64,6 +68,7 @@ const App = () => {
                 setCurrentCollection={setCurrentCollection}
                 setIsLoading={setIsLoading}
                 isLoading={isLoading}
+                setCurrentPattern={setCurrentPattern}
               />
             }
             />
@@ -77,6 +82,7 @@ const App = () => {
                 setConsoleIsOpen={setConsoleIsOpen}
                 currentCollection={currentCollection}
                 setcurrentCollection={setCurrentCollection}
+                currentPattern={currentPattern}
               />
             }
             />

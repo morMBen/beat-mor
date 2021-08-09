@@ -8,7 +8,7 @@ import './home.css';
 import homePageSectionImage from '../../img/openBackgound.jpg';
 import ChoosePattern from "./choosePattern/ChoosePattern";
 
-const Home = ({ setConsoleIsOpen, setCurrentCollection, consoleIsOpen }) => {
+const Home = ({ setConsoleIsOpen, setCurrentCollection, consoleIsOpen, setCurrentPattern }) => {
     // Loding spinner bool
     // const [isLoading, setIsLoading] = useState(true);
 
@@ -78,6 +78,7 @@ const Home = ({ setConsoleIsOpen, setCurrentCollection, consoleIsOpen }) => {
                     setChoosePatternMenuIsOpen={setChoosePatternMenuIsOpen}
                     setCurrentCollection={setCurrentCollection}
                     setConsoleIsOpen={setConsoleIsOpen}
+                    setCurrentPattern={setCurrentPattern}
                 />}
             </div>
         </div>

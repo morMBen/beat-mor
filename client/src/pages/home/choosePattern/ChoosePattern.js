@@ -5,7 +5,13 @@ import { Link, useHistory } from 'react-router-dom'
 import Spinner from '../../../components/spinner/Spinner'
 
 //{ setChoosePatternMenuIsOpen, tempCurrentCollection, setCurrentCollection, setIsOn }
-const ChoosePattern = ({ setChoosePatternMenuIsOpen, tempCurrentCollection, setCurrentCollection, setConsoleIsOpen }) => {
+const ChoosePattern = ({
+    setChoosePatternMenuIsOpen,
+    tempCurrentCollection,
+    setCurrentCollection,
+    setConsoleIsOpen,
+    setCurrentPattern
+}) => {
     // Is the component loading.
     const [isLoading, setIsLoading] = useState(true);
     // Is the page events are currently active.
@@ -115,6 +121,7 @@ const ChoosePattern = ({ setChoosePatternMenuIsOpen, tempCurrentCollection, setC
                                 setCurrentCollection(tempCurrentCollection ? tempCurrentCollection : 'empty')
                                 // setIsOn(true)
                                 setConsoleIsOpen(true)
+                                setCurrentPattern(currentSelectedPatternId ? currentSelectedPatternId : 'empty');
                                 console.log(history)
                                 history.push('/console');
                             }
