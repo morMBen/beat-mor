@@ -1,10 +1,11 @@
 import './choosePattern.css'
 import { useEffect, useState } from 'react'
 import Api from '../../../api/Api'
-import { Link } from 'react-router-dom'
+import { Link, useHistory } from 'react-router-dom'
 import Spinner from '../../../components/spinner/Spinner'
 
-const ChoosePattern = ({ setChoosePatternMenuIsOpen, tempCurrentCollection, setCurrentCollection, setIsOn }) => {
+//{ setChoosePatternMenuIsOpen, tempCurrentCollection, setCurrentCollection, setIsOn }
+const ChoosePattern = ({ setChoosePatternMenuIsOpen, tempCurrentCollection, setCurrentCollection, setConsoleIsOpen }) => {
     // Is the component loading.
     const [isLoading, setIsLoading] = useState(true);
     // Is the page events are currently active.
@@ -13,7 +14,9 @@ const ChoosePattern = ({ setChoosePatternMenuIsOpen, tempCurrentCollection, setC
     //@Object - id: String , userName: String, patternOwner: String, name(pattern name): String
     const [patternOps, setPatternOps] = useState(null)
 
-    const [current, setCurrent] = useState(null)
+    const [currentSelectedPatternId, setCurrentSelectedPatternId] = useState(null)
+
+    const history = useHistory();
 
     useEffect(() => {
         setIsPageActive(false);
@@ -43,10 +46,10 @@ const ChoosePattern = ({ setChoosePatternMenuIsOpen, tempCurrentCollection, setC
                 return (
                     <div
                         onClick={(e) => {
-                            if (current === e.target.id) {
-                                setCurrent(null)
+                            if (currentSelectedPatternId === e.target.id) {
+                                setCurrentSelectedPatternId(null)
                             } else {
-                                setCurrent(e.target.id)
+                                setCurrentSelectedPatternId(e.target.id)
                             }
                         }}
                         id={e._id}
@@ -55,7 +58,7 @@ const ChoosePattern = ({ setChoosePatternMenuIsOpen, tempCurrentCollection, setC
                     >
                         <div
                             id={e._id}
-                            className={`search-sound-file-sound ${current === e._id ? 'search-sound-file-sound-selected' : ''}`}
+                            className={`search-sound-file-sound ${currentSelectedPatternId === e._id ? 'search-sound-file-sound-selected' : ''}`}
                         >
                             <div
                                 className='flex glow-card-h3'
@@ -109,8 +112,11 @@ const ChoosePattern = ({ setChoosePatternMenuIsOpen, tempCurrentCollection, setC
                             className='glow-card-button'
                             onClick={() => {
                                 setChoosePatternMenuIsOpen(false)
-                                setCurrentCollection(current ? current : 'empty')
-                                setIsOn(true)
+                                setCurrentCollection(tempCurrentCollection ? tempCurrentCollection : 'empty')
+                                // setIsOn(true)
+                                setConsoleIsOpen(true)
+                                console.log(history)
+                                history.push('/console');
                             }
                             }
                         >

@@ -77,7 +77,7 @@ const Home = ({ setConsoleIsOpen, setCurrentCollection, consoleIsOpen }) => {
                     tempCurrentCollection={tempCurrentCollection}
                     setChoosePatternMenuIsOpen={setChoosePatternMenuIsOpen}
                     setCurrentCollection={setCurrentCollection}
-
+                    setConsoleIsOpen={setConsoleIsOpen}
                 />}
             </div>
         </div>

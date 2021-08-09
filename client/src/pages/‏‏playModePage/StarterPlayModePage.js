@@ -7,7 +7,7 @@ import Api from '../../api/Api'
 import { Redirect } from 'react-router-dom'
 
 
-const App = ({ consoleIsOpen, setConsoleIsOpen, currentCollection }) => {
+const StarterPlayModePage = ({ consoleIsOpen, setConsoleIsOpen, currentCollection }) => {
     const [isOn, setIsOn] = useState(consoleIsOpen)
     const [ctx, setCtx] = useState(null)
     const [gainNode, setGainNode] = useState(null)
@@ -123,5 +123,5 @@ const App = ({ consoleIsOpen, setConsoleIsOpen, currentCollection }) => {
     );
 }
 
-export default App;
+export default StarterPlayModePage;
 
