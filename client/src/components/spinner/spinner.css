@@ -11,8 +11,8 @@
 
 .loader {
     position: relative;
-    width: 350px;
-    height: 350px;
+    width: 300px;
+    height: 300px;
     border-radius: 50%;
     background: linear-gradient(#f07e6e, #84cdfa, #5ad1cd);
     animation: animate 1.2s linear infinite;
@@ -61,4 +61,10 @@
     /* background: #f1f1f1; */
     border: solid white 10px;
     border-radius: 50%;
+}
+@media (max-width: 680px){
+    .loader{
+        width: 200px;
+        height: 200px;
+    }
 }

@@ -43,9 +43,10 @@ body{
         left: 50%; 
         transform: translate(-50%, -50%); */
         color:var(--led-ligth-blue);
-        border: 3px solid var(--primary);
+        border: 1px solid var(--primary);
         border-radius: 20px;
         padding: 5rem;
+        /* box-shadow: 0px 0px 8px var(--led-ligth-blue); */
     }
 .glow-card-container:hover {
   animation: shadow-wave 10s linear infinite;
@@ -150,6 +151,37 @@ body{
     background: #b5fdff;
 }
 
+
+.exit-button{
+    position: absolute;
+    top: 15px;
+    left:15px;
+    /* border: 2px solid var(--primary); */
+    color: #192824;
+    /* margin-bottom: -10; */
+    font-family: var(--primary-font);
+    /* padding: 0.1rem; */
+    cursor: pointer;
+    width: 25px;
+    height: 25px;
+    text-align: center;
+    border-radius: 5px;
+    box-shadow: 0px 0px 10px 2px var(--led-blue);
+    text-transform: uppercase;
+    font-weight: bold;
+    background: var(--led-ligth-blue);
+    transition: 0.3s all;
+}
+.exit-button:hover{
+    box-shadow: 0px 0px 10px 2px var(--red);
+    background: var(--red);
+    color: white;
+}
+.exit-button:active{
+    box-shadow: 0px 0px 20px 2px var(--led-ligth-blue);
+    background: #b5fdff;
+}
+  
 .font-color-red{
     color:var(--red);
 }
@@ -175,6 +207,15 @@ body{
 }
 .margin-top-2r{
     margin-top: 2rem;
+}
+.margin-left-05r{
+    margin-left: 0.5rem;
+}
+.flex{
+    display: flex;
+}
+.align-center{
+    align-items: center;
 }
 
  @media (max-width: 680px){

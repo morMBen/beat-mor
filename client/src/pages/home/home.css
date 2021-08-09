@@ -20,7 +20,7 @@
 
   .home-section:hover {
     animation: shadow-wave 10s linear infinite;
-    /* box-shadow: 0px 0px 10px var(--led-ligth-blue); */
+    box-shadow: 0px 0px 8px var(--led-ligth-blue);
   }
 
   .home-figure-img{
