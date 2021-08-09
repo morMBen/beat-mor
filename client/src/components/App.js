@@ -5,6 +5,7 @@ import Navbar from '../components/navbar/Navbar'
 import OpeningPage from '../pages/openingPage/OpeningPage'
 import Create from '../pages/create/Create'
 import StarterPlayModePage from '../pages/‏‏playModePage/StarterPlayModePage'
+import Spinner from './spinner/Spinner';
 
 
 const App = () => {
@@ -16,9 +17,14 @@ const App = () => {
   //check if the user is loged.
   const [isUserLogedIn, setIsUserLogedIn] = useState(false);
 
-  //set the user name.
+  //Set the user name.
   const [userName, setUserName] = useState(null)
+
+  // Loding spinner bool
+  const [isLoading, setIsLoading] = useState(true);
   useEffect(() => {
+    //Set loading spinner to true
+    setIsLoading(true);
     //if token is saved in the local storage:
     // - set the state isLoged to true.
     // - set the state userName to the name from local storage.
@@ -26,15 +32,18 @@ const App = () => {
       setIsUserLogedIn(true)
       setUserName(localStorage.getItem('name'))
     }
+    //Set loading spinner to false
+    setIsLoading(false);
   }, [isUserLogedIn])
 
   return (
     <>
       <>
+        {isLoading && <Spinner />}
         {/* { console.log(window.location.href)} */}
-        {!isUserLogedIn && <OpeningPage setIsUserLogedIn={setIsUserLogedIn} />}
+        {!isLoading && !isUserLogedIn && <OpeningPage setIsUserLogedIn={setIsUserLogedIn} />}
         <BrowserRouter>
-          {isUserLogedIn && <>
+          {!isLoading && isUserLogedIn && <>
             {!consoleIsOpen && <Navbar userName={userName} />}
             <Route path="/" exact
               component={() =>
@@ -42,6 +51,8 @@ const App = () => {
                   setConsoleIsOpen={setConsoleIsOpen}
                   consoleIsOpen={consoleIsOpen}
                   setCurrentCollection={setCurrentCollection}
+                  setIsLoading={setIsLoading}
+                  isLoading={isLoading}
                 />
               }
             >
@@ -51,6 +62,8 @@ const App = () => {
                 setConsoleIsOpen={setConsoleIsOpen}
                 consoleIsOpen={consoleIsOpen}
                 setCurrentCollection={setCurrentCollection}
+                setIsLoading={setIsLoading}
+                isLoading={isLoading}
               />
             }
             />

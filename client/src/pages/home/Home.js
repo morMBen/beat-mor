@@ -4,9 +4,13 @@ import Api from '../../api/Api'
 import './home.css'
 import testImg from '../../img/openBackgound.jpg'
 import { Link } from "react-router-dom";
+// import Spinner from "../../components/spinner/Spinner";
 
 // import OpeningPage from '../openingPage/OpeningPage';
-const Home = ({ setConsoleIsOpen, setCurrentCollection }) => {
+const Home = ({ setConsoleIsOpen, setCurrentCollection, consoleIsOpen }) => {
+    // // Loding spinner bool
+    // const [isLoading, setIsLoading] = useState(true);
+
     const [collectionsNames, setCollectionsNames] = useState(null)
 
     useEffect(() => {
@@ -15,12 +19,30 @@ const Home = ({ setConsoleIsOpen, setCurrentCollection }) => {
             setCollectionsNames(res.data)
         }
         getCollectionsName()
-    }, [])
+        if (consoleIsOpen) {
+            setConsoleIsOpen(false)
+        }
+    }, [consoleIsOpen, setConsoleIsOpen])
 
     const openConsole = () => {
         setConsoleIsOpen(true)
+        // useEffect(() => {
+        //     collectionsNames && setIsLoading(false);
+        // }, [collectionsNames, setIsLoading])
 
     }
+    // useEffect(() => {
+    //     const getCollectionsName = async () => {
+    //         const res = await Api.get('/sound-collection')
+    //         setCollectionsNames(res.data)
+    //     }
+    //     getCollectionsName()
+    // }, [])
+
+    // const openConsole = () => {
+    //     setConsoleIsOpen(true)
+
+    // }
 
 
     const insetCollectionsNames = () => {
