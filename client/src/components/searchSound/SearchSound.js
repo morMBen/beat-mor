@@ -119,12 +119,12 @@ const SearchSound = ({ setSearchSoundIsOpen, setSelected }) => {
             <div className='search-sound-top'>
                 <div className="search-sound-container">
                     {!isLoading && <>
-                        <div className='add-sound-exit'
+                        <div className='exit-button'
                             onClick={() => setSearchSoundIsOpen(false)}
                         >X</div>
                         <h2 className="search-sound-container-h2">Search sound</h2>
                         <div className='search-sound-button-div'>
-                            <h3 className="search-sound-container-h3">Search by tag name:</h3>
+                            <h3 className="search-sound-container-h3">By tag name:</h3>
                             <Selector
                                 value={selectorVal}
                                 options={tagsOptions}
@@ -137,7 +137,7 @@ const SearchSound = ({ setSearchSoundIsOpen, setSelected }) => {
                             >Search</button>
                         </div>
                         <div className='search-sound-button-div'>
-                            <h3 className="search-sound-container-h3">Search by sound name:</h3>
+                            <h3 className="search-sound-container-h3">By sound name:</h3>
                             <Input
                                 className={'search-sound-input'}
                                 value={inputVal}
@@ -154,19 +154,20 @@ const SearchSound = ({ setSearchSoundIsOpen, setSelected }) => {
                         <button
                             className='search-sound-button'
                             onClick={() => {
-                                setSearchSoundIsOpen(false)
-                                setSelected(
-                                    {
-                                        name: selectedSoundAudioDetails.name,
-                                        id: selectedSoundAudioDetails._id,
-                                        audio: selectedSoundAudioDetails.audio
-
-                                    })
+                                if (selectedSound) {
+                                    setSearchSoundIsOpen(false)
+                                    setSelected(
+                                        {
+                                            name: selectedSoundAudioDetails.name,
+                                            id: selectedSoundAudioDetails._id,
+                                            audio: selectedSoundAudioDetails.audio
+                                        })
+                                }
                             }
                             }
                         >
                             Submit
-                    </button>
+                        </button>
                     </>}
                 </div>
             </div >

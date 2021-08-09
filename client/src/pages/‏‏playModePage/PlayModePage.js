@@ -159,6 +159,7 @@ const PlayModePage = ({
                 collectionId: currentCollection,
                 name: patternName
             }
+            console.log(`my save ${tempObj}`);
             //=====
             await Api.patch(`sound-collection/update/${currentCollection}`, tempObj,
                 {
@@ -166,9 +167,9 @@ const PlayModePage = ({
                         "Authorization": `Bearer ${token}`
                     }
                 })
+            setPatternName('')
             setIsLoading(false)
             setSaveIsOpen(false)
-            setPatternName('')
         } catch (e) {
             setMessage('The name is not available')
             setIsLoading(false)
@@ -179,14 +180,7 @@ const PlayModePage = ({
         <>
             {isLoading && <Spinner />}
             {!isLoading && <>
-                <button
-                    style={{ position: 'absolute', padding: '2px 4px', background: 'var(--led-red)', borderRadius: '4px', fontSize: '1.2rem', border: 'none', bottom: '2rem', left: '2rem', cursor: 'pointer' }}
-                    onClick={() => {
 
-                        window.location.reload()
-                    }
-                    }
-                >X</button>
                 <ReactInterval timeout={60000 / realBpm / 4} enabled={enabled}
                     callback={() => {
                         setBeat((beat + 1))
@@ -200,7 +194,16 @@ const PlayModePage = ({
                             {insertDivs(8, 'play-mode-sequencer-grid', 'play-mode-single-sequencer', 9)}
                             {insertDivs(8, 'play-mode-sequencer-grid', 'play-mode-single-sequencer', 17)}
                             {insertDivs(8, 'play-mode-sequencer-grid', 'play-mode-single-sequencer', 25)}
-                            <div className='play-mode-toggle-h2'>Control All</div>
+                            <div className='play-mode-toggle-h2'>
+                                <button
+                                    className='exit-play-mode'
+
+                                    onClick={() => {
+                                        window.location.reload()
+                                    }
+                                    }
+                                >X</button>
+                                Control All</div>
                             <div className='toggle'>
                                 <div className='toggle-div'>
                                     <div className='toggle-div-text'>
@@ -335,6 +338,7 @@ const PlayModePage = ({
                                             value={patternName}
                                         ></input>
                                         <button
+
                                             className='play-mode-button'
                                             onClick={() => save(patternName)}>Save</button>
                                         <button
@@ -350,107 +354,6 @@ const PlayModePage = ({
                         </div>
                     </div >}
             </>}
-            {/* {!isLoading && <>
-                <button
-                    style={{ position: 'absolute', padding: '2px 4px', background: 'var(--led-red)', borderRadius: '4px', fontSize: '1.2rem', border: 'none', bottom: '2rem', left: '2rem', cursor: 'pointer' }}
-                    onClick={() => {
-
-                        window.location.reload()
-                    }
-                    }
-                >X</button>
-                <ReactInterval timeout={60000 / realBpm / 4} enabled={enabled}
-                    callback={() => {
-                        setBeat((beat + 1))
-                        setSequencerBeat(sequencerBeat < 32 ? sequencerBeat + 1 : 1)
-                    }}
-                />
-                {sounds && ctx &&
-                    <div className='play-mode-container'>
-                        <div className='play-mode-sequencer-container'>
-                            {insertDivs(8, 'play-mode-sequencer-grid', 'play-mode-single-sequencer', 1)}
-                            {insertDivs(8, 'play-mode-sequencer-grid', 'play-mode-single-sequencer', 9)}
-                            {insertDivs(8, 'play-mode-sequencer-grid', 'play-mode-single-sequencer', 17)}
-                            {insertDivs(8, 'play-mode-sequencer-grid', 'play-mode-single-sequencer', 25)}
-                            BPM {bpm}
-                            <HorizontalRange
-                                value={bpm}
-                                setValue={(e) => { setBpm(e.target.value) }}
-                                max={'220'}
-                                min={'60'} />
-                            <HorizontalRange
-                                value={gain * 100} setValue={(e) => {
-                                    setGain(e.target.value / 100)
-                                }}
-                                max={'100'}
-                                min={'0'}
-                            />
-                            Gain {gain}
-                            <HorizontalRange
-                                value={frequency} setValue={(e) => {
-                                    setFrequency(e.target.value)
-                                }}
-                                max={'4000'}
-                                min={'0'}
-                            />
-                            frequency {frequency}
-                            <br />
-                            {sequencerBeat}
-                        </div>
-                        <div className='play-mode-pads-container'>
-                            {insertDivs(6, 'play-mode-sequencer-grid', 'play-mode-single-pad', 1)}
-                            {insertDivs(6, 'play-mode-sequencer-grid', 'play-mode-single-pad', 7)}
-                            {insertDivs(6, 'play-mode-sequencer-grid', 'play-mode-single-pad', 13)}
-                            {insertDivs(6, 'play-mode-sequencer-grid', 'play-mode-single-pad', 19)}
-                            {beat}
-                            <div style={{ display: 'flex', background: 'none' }}>
-                                <HorizontalRange
-                                    value={sounds[padIndex - 1].gain * 100} setValue={(e) => {
-                                        setGainInSoundsObject(e, 'gain', sounds, setSounds, padIndex)
-                                        // setGain(e.target.value / 100)
-                                    }}
-                                    max={'100'}
-                                    min={'0'}
-                                />
-                                <HorizontalRange
-                                    value={sounds[padIndex - 1].frequency} setValue={(e) => {
-                                        setGainInSoundsObject(e, 'frequency', sounds, setSounds, padIndex)
-                                    }}
-                                    max={'2000'}
-                                    min={'0'}
-                                />
-                                <HorizontalRange
-                                    value={sounds[padIndex - 1].detune} setValue={(e) => {
-                                        setGainInSoundsObject(e, 'detune', sounds, setSounds, padIndex)
-                                    }}
-                                    max={'4000'}
-                                    min={'-4000'}
-                                />
-                                <div >
-                                    <select
-
-                                        value={sounds[padIndex - 1].type}
-                                        onChange={(e) => {
-                                            setGainInSoundsObject(e, 'type', sounds, setSounds, padIndex)
-                                        }}>
-                                        <option value='allpass'>Allpass</option>
-                                        <option value='lowpass'>Lowpass</option>
-                                        <option value='highpass'>Highpass</option>
-                                        <option value='bandpass'>Bandpass</option>
-                                        <option value='lowshelf'>Lowshelf</option>
-                                        <option value='highshelf'>Highshelf</option>
-                                        <option value='peaking'>Peaking</option>
-                                        <option value='notch'>Notch</option>
-                                    </select>
-
-                                    <button
-                                        onClick={() => start()}>Start</button>
-                                    <button onClick={() => stop()}>Clear</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div >}
-            </>} */}
         </>
     )
 }

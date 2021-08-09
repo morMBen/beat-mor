@@ -29,7 +29,7 @@
       padding:0 15px 15px 15px;
       color: var(--primary);
       /* margin: calc(50vh - 30px) auto 0 auto; */
-      border: 3px solid var(--primary);
+      border: 1px solid var(--primary);
       border-radius: 10px;
       padding: 2.5rem;
     }
@@ -96,7 +96,7 @@
     
     .search-sound-container-p {
       font-size: 1rem;
-      font-family: var(--primary-font);
+     font-family:  var(--logo-font);
       letter-spacing: 0.5px;
       margin-bottom: 10px;
     }
@@ -106,11 +106,12 @@
         text-align: center;
         color:var(--red);
         font-size: 3rem;
+        font-family:  var(--logo-font);
     }
     .search-sound-container-h3 {
-      text-transform: uppercase;
+      /* text-transform: uppercase; */
       font-size: 1.25rem;
-      font-family: var(--primary-font);
+     font-family:  var(--logo-font);
       color: white;
       text-shadow: 0px 0px 10px var(--led-green);
       /* font-weight: bold; */
@@ -119,7 +120,7 @@
   
     .search-sound-container .search-sound-input{
       cursor: pointer;
-      font-family: var(--primary-font);
+     font-family:  var(--logo-font);
       color: #333;
       font-size: 1.1rem;
         margin: 0 auto;
@@ -231,7 +232,7 @@
     margin: 0.5rem 0.3rem;
     box-shadow: 0px 0px 4px inset var(--led-ligth-blue);
     font-weight:500;
-    font-family: var(--primery-font);
+    font-family: var(--logo-font);
     padding: 0.2rem 0 0 0.7rem;
     text-shadow: 0px 0px 1px var(--led-purpule);
     background: none;
@@ -242,7 +243,8 @@
 
 .search-sound-file-sound span{
     /* color: var(--led-purpule); */
-    font-family: var(--primery-font);
+    
+    font-family: var(--logo-font);
     font-size: 0.9rem;
     padding: 0 0 0.4rem  0;
 }
@@ -298,21 +300,23 @@
       }
       .search-sound-container-p {
           font-size: 1rem;
-              font-family: var(--primary-font);
+             font-family:  var(--logo-font);
           letter-spacing: 0.5px;
           margin-bottom: 10px;
         }
         
         .search-sound-container-h2 {
           text-transform: uppercase;
-          font-size: 1.4rem;
-              font-family: var(--primary-font);
+          font-size: 1.2rem;
+             font-family:  var(--logo-font);
           font-weight: bold;
+          margin: 0.2rem 0;
         }
         .search-sound-container-h3 {
-          text-transform: uppercase;
-          font-size: 1.1rem;
-              font-family: var(--primary-font);
+          /* text-transform: uppercase; */
+          margin: 0.2rem 0;
+          font-size: 1rem;
+             font-family:  var(--logo-font);
         }
         .search-sound-container .selector{
           width: 100%;
@@ -358,7 +362,7 @@
         }
         .search-sound-container-p {
           font-size: 0.8rem;
-          font-family: var(--primary-font);
+          font-family:  var(--logo-font);
           letter-spacing: 0.5px;
           margin-bottom: 10px;
           padding: 0;
@@ -368,7 +372,7 @@
         .search-sound-container-h2 {
           text-transform: uppercase;
           font-size: 1.2rem;
-          font-family: var(--primary-font);
+          font-family:  var(--logo-font);
           font-weight: bold;
           padding: 0;
           margin: 0;
@@ -377,7 +381,7 @@
         .search-sound-container-h3 {
           text-transform: uppercase;
           font-size: 1.1rem;
-              font-family: var(--primary-font);
+              font-family:  var(--logo-font);;
             }
             
             .search-sound-container .selector .search-sound-input{

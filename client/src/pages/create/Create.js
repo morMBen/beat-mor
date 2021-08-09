@@ -153,21 +153,27 @@ const Create = () => {
                         {insertPads(19)}
                     </div>
                     <div
-                        style={{ display: 'flex', justifyContent: 'space-around', width: '100%', padding: '0 1rem' }}
+                        className='create-wrapper'
                     >
                         <h3
                             className='create-h3'
-                        >Collection Name:</h3>
+                        >Collection Name</h3>
+                        {/* <div
+                        style={{ margin: 'auto', padding: '1rem' }}
+                        > */}
                         <Input
                             className={"create-selector-input"}
                             value={collectionName}
                             onChange={(e) => setCollectionName(e.target.value)}
                         />
+                        {/* </div> */}
+
                         <button
+                            style={{ background: 'var(--green)' }}
                             className='create-button'
                             onClick={() => saveCollection()}
-
                         >Save</button>
+
                     </div>
                 </div>
             </div>
