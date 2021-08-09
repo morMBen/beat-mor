@@ -45,14 +45,16 @@
     line-height: 1;
     margin: 0.1em 0;
     text-shadow: 0px 0px 1px var(--led-green);
-    color: white;
     font-family: var(--primary-font);
+    color: var(--led-ligth-blue);
   }
   .home-span{
-    color: var(--primary);
+    /* text-transform: uppercase; */
+    color: var(--led-purpule);
     font-size: 0.75em;
-    text-transform: uppercase;
+    font-family: var(--logo-font);
   }
+  
   
   @supports (display: grid){
     @media only screen and (min-width: 768px){

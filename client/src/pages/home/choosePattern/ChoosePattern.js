@@ -15,10 +15,6 @@ const ChoosePattern = ({ setChoosePatternMenuIsOpen, tempCurrentCollection, setC
 
     const [current, setCurrent] = useState(null)
 
-
-
-
-
     useEffect(() => {
         setIsPageActive(false);
         const patternRes = async () => {
@@ -33,7 +29,6 @@ const ChoosePattern = ({ setChoosePatternMenuIsOpen, tempCurrentCollection, setC
                 setPatternOps([])
                 console.log(e);
             }
-
         };
         // Invoke @patternRes.
         patternRes();
@@ -115,7 +110,7 @@ const ChoosePattern = ({ setChoosePatternMenuIsOpen, tempCurrentCollection, setC
                             onClick={() => {
                                 setChoosePatternMenuIsOpen(false)
                                 setCurrentCollection(current ? current : 'empty')
-                                // setIsOn(true)
+                                setIsOn(true)
                             }
                             }
                         >
