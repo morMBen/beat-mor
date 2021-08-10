@@ -21,14 +21,16 @@ const Navbar = ({ openCloseLogMenu, userlog, userDetails }) => {
             <Link to='/' className="menu-logo">
                 A Beat Mor
             </Link>
-            <div className="hamburger" onClick={() => { setIsNavOpen(!isNavOpen) }}>
+            <div className="hamburger" onClick={() => { setIsNavOpen(!isNavOpen) }}
+                style={{ color: 'white', textShadow: 'var(--led-green)' }}
+            >
                 {/* nav here */}
-                dads
+                <i className="fas fa-bars"></i>
             </div>
             <div className="nav-menu" style={{ maxHeight: menuOpen() }}>
-                <Link to='/search' className="menu-link">Search</Link>
                 <Link to='/create' className="menu-link">Create</Link>
                 <Link to={`/`} className="menu-link">Home</Link>
+                <div className='font-color-red glow-card-h3'>{localStorage.name}</div>
             </div>
         </div >
     )

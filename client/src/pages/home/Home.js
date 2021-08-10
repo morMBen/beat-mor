@@ -70,18 +70,37 @@ const Home = ({ setConsoleIsOpen, setCurrentCollection, consoleIsOpen, setCurren
     }
     return (
         <div>
-            <div className='home-main'>
-                {/* Check if collectionName state is initilaized and if it dose invoke the insertCollectionsName func */}
-                {collectionsNames && insetCollectionsNames()}
-                {choosePatternMenuIsOpen && tempCurrentCollection && <ChoosePattern
-                    tempCurrentCollection={tempCurrentCollection}
-                    setChoosePatternMenuIsOpen={setChoosePatternMenuIsOpen}
-                    setCurrentCollection={setCurrentCollection}
-                    setConsoleIsOpen={setConsoleIsOpen}
-                    setCurrentPattern={setCurrentPattern}
-                />}
+            <div
+                style={{ paddingTop: '6rem' }}
+
+            ><div
+                style={{ padding: '0 2rem' }}
+            >
+                    <h1 className='glow-card-h2 font-orange-shadow-red'
+                    >
+                        Let's Play To The Beat...
+                    </h1>
+                    <h1 className='glow-card-h4 font-white-shadow-green'
+                        style={{ marginTop: '1rem' }}
+                    >
+                        Choose one of the existing sound collections:
+                    </h1>
+                </div>
+
+                <div className='home-main'>
+
+                    {/* Check if collectionName state is initilaized and if it dose invoke the insertCollectionsName func */}
+                    {collectionsNames && insetCollectionsNames()}
+                    {choosePatternMenuIsOpen && tempCurrentCollection && <ChoosePattern
+                        tempCurrentCollection={tempCurrentCollection}
+                        setChoosePatternMenuIsOpen={setChoosePatternMenuIsOpen}
+                        setCurrentCollection={setCurrentCollection}
+                        setConsoleIsOpen={setConsoleIsOpen}
+                        setCurrentPattern={setCurrentPattern}
+                    />}
+                </div>
             </div>
-        </div>
+        </div >
     )
 }
 export default Home;

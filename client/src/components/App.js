@@ -31,12 +31,20 @@ const App = () => {
     //if token is saved in the local storage:
     // - set the state isLoged to true.
     // - set the state userName to the name from local storage.
-    if (localStorage.token && !isUserLogedIn) {
-      setIsUserLogedIn(true)
-      setUserName(localStorage.getItem('name'))
+
+    if (typeof (localStorage.name) === 'string' && !isUserLogedIn) {
+      console.log(localStorage.name.includes('Guest'))
+      if (!localStorage.name.includes('Guest')) {
+        setIsUserLogedIn(true)
+        setUserName(localStorage.getItem('name'))
+      } else {
+        localStorage.clear()
+        setIsUserLogedIn(false)
+      }
     }
     //Set loading spinner to false
     setIsLoading(false);
+
   }, [isUserLogedIn])
 
   return (

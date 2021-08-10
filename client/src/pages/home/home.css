@@ -4,7 +4,7 @@
     grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
     /* margin-top:5rem;  */
     padding: 1em;
-    padding-top: 5rem;
+    /* padding-top: 5rem; */
 }
 .home-section{
     cursor: pointer;

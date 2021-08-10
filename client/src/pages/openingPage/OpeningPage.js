@@ -1,7 +1,8 @@
 import { useState } from 'react';
 import Login from '../../components/login/Login';
 import Sign from '../../components/sign/sign';
-
+import Api from '../../api/Api'
+import randomstring from 'randomstring'
 const OpeningPage = ({ setIsUserLogedIn }) => {
     //User press the Get Started button.
     const [logOrSingCard, setLogOrSingCard] = useState(false)
@@ -10,6 +11,37 @@ const OpeningPage = ({ setIsUserLogedIn }) => {
     //Log In button is pressed.
     const [isloginCardOpen, setIsloginCardOpen] = useState(false)
 
+    const handelGuest = async () => {
+        try {
+            // console.log(res);
+            const res = await Api.post('/users/', {
+                password: randomstring.generate({
+                    length: 8,
+                    charset: 'alphanumeric'
+                }),
+                email: `${randomstring.generate({
+                    length: 7,
+                    charset: 'alphanumeric'
+                })}@gmail.com`,
+                userName: `Guest-${randomstring.generate({
+                    length: 7,
+                    charset: 'alphabetic'
+                })}`
+            })
+            localStorage.clear()
+            localStorage.setItem('name', res.data.user.userName)
+            localStorage.setItem('token', res.data.token)
+            // setIsSingCardOpen(false)
+            setIsUserLogedIn(true)
+            // setLogOrSingCard(false)
+        } catch (e) {
+            // setMessage('Error in email Check the spelling and make sure you are not already registered')
+            // setShowMessage(true)
+            // setTimeout(() => {
+            //     setShowMessage(false)
+            // }, 2000)
+        }
+    }
 
     return (
         <>
@@ -48,6 +80,11 @@ const OpeningPage = ({ setIsUserLogedIn }) => {
                                 <button
                                     className='glow-card-button'
                                     onClick={() => setIsSingCardOpen(true)}>Sing</button>
+                                <button
+                                    className='glow-card-button'
+                                    onClick={() => handelGuest()
+
+                                    }>Guest</button>
                                 {/* <button
                                     className='glow-card-button'
                                     onClick={() => setIsloginCardOpen(true)}>Guest</button> */}
