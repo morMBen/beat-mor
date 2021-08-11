@@ -7,6 +7,4 @@
 - Links
 
 ### About the project:
-- Proplem:
-The idea behind the project is to help music makers who play drum machines share drum machines they have built themselves. 
-
+- Proplem - Music composers who play drum machines encounter the problem that each drum machine comes with built-in sounds, in cases where there is an option to change the sounds the choice is from existing sounds and not the personal sounds of the composers themselves.
