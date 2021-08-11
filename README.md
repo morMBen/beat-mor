@@ -23,6 +23,10 @@
 
 - Main Page - 
     - Select one of the existing collections.
-    - Choose one of the exsiting beats by highlight and press submit to go to the playing console, by not highlight anything you'll move to the playing console while no beat is fill yet.
+    - Choose one of the exsiting beats by highlight and press submit to go to the playing console, by not highlight anything you'll move to the playing console while no beat is filled yet.
+- Playing Console - 
+    - At the top left is the sequencer that runs according to the beat (when turned on). In each line there are eight boxes that can be filled with sounds.
+!! It is important to note that each sound can be anywhere on the sequencer even several in parallel.
+    -  At the top right are the 24 sounds from which you can choose, as soon as you press one pad it will be highlighted. If the current pad has already been injected into the sequencer a gift mark will appear indicating that this pad is running. If we press the pad in this position the stop sign will appear again and the sounds of the current pad will remain on the sequencer but will not be heard.
 
 
