@@ -32,3 +32,9 @@
     - At the bottom right, turn on, off, keep pace, clear the sequencer, and reset the knobs. The novices on this side only affect one sound, the sound that is currently highlighted.
     - On the bottom left, an exit button and novices that control all the sounds together.
 
+### Database Model:
+##### Models:
+- Users
+- Sound Collections
+- Sounds
+- Beat Patterns
