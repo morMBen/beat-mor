@@ -28,5 +28,6 @@
     - At the top left is the sequencer that runs according to the beat (when turned on). In each line there are eight boxes that can be filled with sounds.
 !! It is important to note that each sound can be anywhere on the sequencer even several in parallel.
     -  At the top right are the 24 sounds from which you can choose, as soon as you press one pad it will be highlighted. If the current pad has already been injected into the sequencer a gift mark will appear indicating that this pad is running. If we press the pad in this position the stop sign will appear again and the sounds of the current pad will remain on the sequencer but will not be heard.
-
+    - At the bottom right, turn on, off, keep pace, clear the sequencer, and reset the knobs. The novices on this side only affect one sound, the sound that is currently highlighted.
+    - On the bottom left, an exit button and novices that control all the sounds together.
 
