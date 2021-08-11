@@ -23,7 +23,5 @@
     - Select one of the existing collections.
     - Choose one of the exsiting beats by highlight and press submit to go to the playing console, by not highlight anything you'll move to the playing console while no beat is fill yet.
 
-<!-- ![alt text](homepage.png?raw=true "Optional Title")
-
 
 ![alt text](homepage2.png?raw=true "Optional Title") -->
