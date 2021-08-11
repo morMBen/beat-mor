@@ -33,7 +33,6 @@
     - On the bottom left, an exit button and novices that control all the sounds together.
 
 ### Database Model:
-##### Models:
 - Users
 - Sound Collections
 - Sounds
