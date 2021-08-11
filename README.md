@@ -12,11 +12,12 @@
 - Solution:
      * A simple-to-play music creation system that creators can build their own drum machine, select sounds (from the computer or sounds saved by other creators) and the colors of the pads and share with everyone. This way any user who logs in can play on everyone's machines and hear their tunes easily and also save and share tunes by one creator on another creator's machine.
 
-### Flow:
-- Links: 
+### Links: 
     - Project https://a-beat-mor.herokuapp.com/
     - Linkedin https://www.linkedin.com/in/mormben/
 ![alt text](playmode.png?raw=true "Optional Title")
+
+### Flow:
 
 - Opening Screen - The user can log in to the system or log in with the username and password if already registered. If there is no desire to register, you can enter as a guest under a temporary username.
 
