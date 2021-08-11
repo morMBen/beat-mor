@@ -6,5 +6,5 @@
 - Database Model
 - Links
 
-About the project:
+### About the project:
 The idea behind the project is to help music makers who play drum machines share drum machines they have built themselves.
