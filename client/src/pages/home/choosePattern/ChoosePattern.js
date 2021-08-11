@@ -109,7 +109,7 @@ const ChoosePattern = ({
                                 X</div>
                         </Link>
                         <div className="glow-card-h2 font-red-shadow-red">Choose Pattern :</div>
-                        <div className="glow-card-h3 font-orange-shadow-red">- Highlight by click the pattern name you want and press submit to open the console.  </div>
+                        <div className="glow-card-h3 font-orange-shadow-red">- Click the pattern name you want and press submit to open the console.  </div>
                         <div className="glow-card-h3 font-orange-shadow-red">- Wanna start from no pattern? just press submit and start play.</div>
                         <div className='search-sound-results'>
                             {patternOps && setList()}

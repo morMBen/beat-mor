@@ -106,7 +106,7 @@ const Create = () => {
                 <div className='create-nav'>
                     <h2 className=' create-h2'>Fill the board with sound</h2>
                     <div className='create-buttons-div'>
-                        <h3 className='create-h3'>Upload or choose other sound, than fill the pad board as your wish</h3>
+                        <h3 className='create-h3'>Upload or choose other sounds, than fill the pad board as your wish</h3>
                     </div>
                     <div className='create-buttons-div'>
                         <button

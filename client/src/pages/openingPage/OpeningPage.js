@@ -62,8 +62,8 @@ const OpeningPage = ({ setIsUserLogedIn }) => {
                     >Come and share...</h2>
                     <h3
                         className='glow-card-h3 font-white-shadow-green'
-                    >Upload your own unique sounds or use existing sounds Create the rhythm Add audio effects.
-                        Save and share and let the world experience your touch.</h3>
+                    >Upload your own unique sounds or use existing sounds create the rhythm Add audio effects.
+                        Save share and let the world experience your touch.</h3>
                     <br />
                     <div style={{ display: 'flex', justifyContent: !logOrSingCard ? 'center' : 'space-around ' }}>
                         {!logOrSingCard && <button
