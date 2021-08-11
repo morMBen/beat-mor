@@ -16,9 +16,9 @@
 - Links: 
     - Project https://a-beat-mor.herokuapp.com/
     - Linkedin https://www.linkedin.com/in/mormben/
-![alt text](homepage2.png?raw=true "Optional Title")
 
 - Opening Screen - The user can log in to the system or log in with the username and password if already registered. If there is no desire to register, you can enter as a guest under a temporary username.
+![alt text](homepage2.png?raw=true "Optional Title")
 ![alt text](opening_page.png?raw=true "Optional Title")
 
 - Main Page - 
