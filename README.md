@@ -12,4 +12,4 @@
 
 ### Flow:
 - Opening screen - The user can log in to the system or log in with the username and password if already registered. If there is no desire to register, you can enter as a guest under a temporary username.
-![alt text](https://github.com/[morMBen]/[beat-mor]/blob/[main]/opening_page.png)
+![alt text](https://github.com/[morMBen]/[beat-mor]/blob/[master]/opening_page.png)
