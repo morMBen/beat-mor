@@ -5,7 +5,7 @@ import './navbar.css';
 
 const Navbar = ({ openCloseLogMenu, userlog, userDetails }) => {
     const [isNavOpen, setIsNavOpen] = useState(false);
-
+////
     const menuOpen = () => {
         if (isNavOpen) {
             return '300px'

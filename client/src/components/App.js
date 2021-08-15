@@ -6,6 +6,7 @@ import OpeningPage from '../pages/openingPage/OpeningPage'
 import Create from '../pages/create/Create'
 import StarterPlayModePage from '../pages/‏‏playModePage/StarterPlayModePage'
 import Spinner from './spinner/Spinner';
+import HelpMessage from './helpMessage/HelpMessage';
 
 
 const App = () => {
@@ -49,9 +50,14 @@ const App = () => {
 
   return (
     <>
+      {/* <HelpMessage
+        breadCrumb='Usage information'
+        title='Playing Console'
+        content='sfjalsjf lasnf lnfsfn afnasn asfndfn asnfdja nsjngaojwork r24 nkjassdjf nwswrfj askjfs kjdgkajs nagajsngj sgnajgnsaj gjagrjb akjksja jn'
+        closeButton={() => console.log('Close button is working')}
+      /> */}
       <>
         {isLoading && <Spinner />}
-        {/* { console.log(window.location.href)} */}
         {!isLoading && !isUserLogedIn && <OpeningPage setIsUserLogedIn={setIsUserLogedIn} />}
         <BrowserRouter>
           {!isLoading && isUserLogedIn && <>

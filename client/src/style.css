@@ -150,8 +150,9 @@ body{
     box-shadow: 0px 0px 20px 2px var(--led-ligth-blue);
     background: #b5fdff;
 }
-
-
+.uppercase{
+text-transform: uppercase;
+}
 .exit-button{
     position: absolute;
     top: 15px;
