@@ -4,8 +4,8 @@ const HelpMessage = ({ title, breadCrumb, content, closeButton }) => {
             <div className='glow-card-background'>
                 <div
                     style={{
-                        // width: '80%',
-                        // height: '80%',
+                        width: '80%',
+                        height: '80%',
                         justifyContent: 'flex-start',
                         padding: '3rem',
                         margin: '1rem'
@@ -17,6 +17,10 @@ const HelpMessage = ({ title, breadCrumb, content, closeButton }) => {
                     >{title}:</h1>
                     <div className='glow-card-h3 '>{content}</div>
                     <div className='glow-card-h3 font-orange-shadow-red '>{title}</div>
+                    <button
+                        className='exit-button'
+                        onClick={() => { closeButton() }}
+                    >x</button>
                     <button
                         className='exit-button'
                         onClick={() => { closeButton() }}
