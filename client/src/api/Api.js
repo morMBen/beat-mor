@@ -2,13 +2,13 @@ import axios from 'axios';
 
 let url;
 if (process.env.NODE_ENV === 'development') {
-    url = 'http://localhost:5000/api'
+  url = 'http://localhost:5000/api';
 }
 if (process.env.NODE_ENV === 'production') {
-    url = 'api'
+  url = 'api';
 }
 const api = axios.create({
-    baseURL: url,
-})
+  baseURL: url,
+});
 
 export default api;

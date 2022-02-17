@@ -9,7 +9,9 @@
     "dev": "concurrently \"npm run server\" \"npm run client\"",
     "start": "node ./server/index.js",
     "client-build": "npm run build --prefix client",
-    "togit": "git add . && git commit -m %npm_config_first% && git push"
+    "togit": "git add . && git commit -m %npm_config_first% && git push",
+    "copy": "cp -r client/build server/",
+    "heroku-postbuild": "npm install --prefix client && npm run build --prefix client && npm run copy"
   },
   "author": "",
   "license": "ISC",
